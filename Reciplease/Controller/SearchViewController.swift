@@ -19,7 +19,7 @@ class SearchViewController: UIViewController {
     @IBOutlet var searchRecipesButton: UIButton!
     
     @IBAction func addIngredientButtonTapped(_ sender: Any) {
-        updateIngredientsTextViewWithIngredientTextFieldContent()
+        transferIngredientTextFieldContentToIngredientsTextView()
     }
     
     @IBAction func clearAllButtonTapped(_ sender: Any) {
@@ -36,7 +36,7 @@ class SearchViewController: UIViewController {
         view.endEditing(true)
     }
     
-    func updateIngredientsTextViewWithIngredientTextFieldContent() {
+    func transferIngredientTextFieldContentToIngredientsTextView() {
         guard let ingredientText = ingredientTextField.text?.trimmingCharacters(in: .whitespaces),
               !ingredientText.isEmpty
         else { return }
@@ -45,11 +45,16 @@ class SearchViewController: UIViewController {
         ingredientsTableView.reloadData()
         ingredientTextField.text = ""
         updateButtonsState()
+        updateIngredientAddButtonState()
     }
     
     func updateButtonsState() {
         clearAllButton.isEnabled = !search.isEmpty
         searchRecipesButton.isEnabled = !search.isEmpty
+    }
+    
+    func updateIngredientAddButtonState() {
+        addIngredientButton.isEnabled = !(ingredientTextField.text?.isEmpty ?? true)
     }
     
     
@@ -64,11 +69,17 @@ class SearchViewController: UIViewController {
         view.addGestureRecognizer(UITapGestureRecognizer(target: "#hideKeyboard", action: nil))
         
         ingredientsTableView.dataSource = self
+        
         ingredientTextField.delegate = self
+       
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ingredientTextField, queue: nil) {_ in
+            self.updateIngredientAddButtonState()
+        }
         
         search = Search.initTest()
         
         updateButtonsState()
+        updateIngredientAddButtonState()
     }
 }
 
@@ -90,7 +101,7 @@ extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == ingredientTextField {
 //            textField.resignFirstResponder()
-            updateIngredientsTextViewWithIngredientTextFieldContent()
+            transferIngredientTextFieldContentToIngredientsTextView()
             return false
         }
         return true

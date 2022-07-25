@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		DC27F9C328838835000A5504 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27F9C228838835000A5504 /* AppDelegate.swift */; };
 		DC27F9C528838835000A5504 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27F9C428838835000A5504 /* SceneDelegate.swift */; };
-		DC27F9C728838835000A5504 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27F9C628838835000A5504 /* ViewController.swift */; };
+		DC27F9C728838835000A5504 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27F9C628838835000A5504 /* SearchViewController.swift */; };
 		DC27F9CA28838835000A5504 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC27F9C828838835000A5504 /* Main.storyboard */; };
 		DC27F9CC28838839000A5504 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC27F9CB28838839000A5504 /* Assets.xcassets */; };
 		DC27F9CF28838839000A5504 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC27F9CD28838839000A5504 /* LaunchScreen.storyboard */; };
@@ -20,6 +20,8 @@
 		DC803674288AF9C100AC678D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC803673288AF9C100AC678D /* GoogleService-Info.plist */; };
 		DC803676288B0E7F00AC678D /* Alamofire-Info.template.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC803675288B0E7F00AC678D /* Alamofire-Info.template.plist */; };
 		DC803678288B0FC200AC678D /* Alamofire-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC803677288B0FC200AC678D /* Alamofire-Info.plist */; };
+		DC80367A288E0FE000AC678D /* RecipesTableViewController in Sources */ = {isa = PBXBuildFile; fileRef = DC803679288E0FE000AC678D /* RecipesTableViewController */; };
+		DC80367C288E12AF00AC678D /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80367B288E12AF00AC678D /* Search.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +38,7 @@
 		DC27F9BF28838835000A5504 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC27F9C228838835000A5504 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC27F9C428838835000A5504 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DC27F9C628838835000A5504 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DC27F9C628838835000A5504 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DC27F9C928838835000A5504 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC27F9CB28838839000A5504 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC27F9CE28838839000A5504 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +49,8 @@
 		DC803673288AF9C100AC678D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DC803675288B0E7F00AC678D /* Alamofire-Info.template.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Alamofire-Info.template.plist"; sourceTree = "<group>"; };
 		DC803677288B0FC200AC678D /* Alamofire-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Alamofire-Info.plist"; sourceTree = "<group>"; };
+		DC803679288E0FE000AC678D /* RecipesTableViewController */ = {isa = PBXFileReference; lastKnownFileType = text; path = RecipesTableViewController; sourceTree = "<group>"; };
+		DC80367B288E12AF00AC678D /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +123,8 @@
 		DC27F9F328838860000A5504 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				DC27F9C628838835000A5504 /* ViewController.swift */,
+				DC27F9C628838835000A5504 /* SearchViewController.swift */,
+				DC803679288E0FE000AC678D /* RecipesTableViewController */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -127,6 +132,7 @@
 		DC27F9F428838874000A5504 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DC80367B288E12AF00AC678D /* Search.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -260,8 +266,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC27F9C728838835000A5504 /* ViewController.swift in Sources */,
+				DC27F9C728838835000A5504 /* SearchViewController.swift in Sources */,
 				DC27F9C328838835000A5504 /* AppDelegate.swift in Sources */,
+				DC80367C288E12AF00AC678D /* Search.swift in Sources */,
+				DC80367A288E0FE000AC678D /* RecipesTableViewController in Sources */,
 				DC27F9C528838835000A5504 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -5,14 +5,15 @@
 //  Created by Rod on 17/07/2022.
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 
 class SearchViewController: UIViewController {
     var search: Search!
+//    var recipes: [Recipe]? = nil
 
     @IBOutlet var ingredientTextField: UITextField!
-    @IBOutlet weak var ingredientsTableView: UITableView!
+    @IBOutlet var ingredientsTableView: UITableView!
 
     @IBOutlet var addIngredientButton: UIButton!
     @IBOutlet var clearAllButton: UIButton!
@@ -29,13 +30,44 @@ class SearchViewController: UIViewController {
     }
     
     @IBAction func searchRecipesButtonTapped(_ sender: Any) {
+        guard !search.isEmpty else { return }
         
+//        let recipes = Array.init(repeating: Recipe.sample, count: 3)
+//        self.performSegue(withIdentifier: "SegueFromSearchToRecipes", sender: self)
+
+        RecipesAPIService.searchRecipes(ingredients: search.ingredients) { recipes in
+            DispatchQueue.main.async {
+                guard let recipes = recipes else {
+                    self.present(ControllerHelper.simpleAlert(message: "No recipe found !"), animated: true)
+                    return
+                }
+//                self.recipes = recipes
+//                print(recipes[0])
+                self.performSegue(withIdentifier: "SegueFromSearchToRecipes", sender: recipes)
+            }
+        }
     }
     
     @objc func hideKeyboard() {
         view.endEditing(true)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        print("PREPARE")
+        if segue.identifier == "SegueFromSearchToRecipes" {
+            let recipesVC = segue.destination as! RecipesTableViewController
+            recipesVC.recipes = sender as! [Recipe]
+//            recipesVC.recipes = Array(repeating: Recipe.sample, count: 4)
+//                recipes = sender! as! [Recipe]
+            //            let searchVC = segue.source as! SearchViewController
+            //            recipes = searchVC.recipes!
+            //            recipes = [Recipe.sample]
+            //            recipes = Array.init(repeating: Recipe.sample, count: 3)
+        }
+//                        recipes = Array.init(repeating: Recipe.sample, count: 3)
+        //        super.prepare(for: segue, sender: sender)
+    }
+
     func transferIngredientTextFieldContentToIngredientsTextView() {
         guard let ingredientText = ingredientTextField.text?.trimmingCharacters(in: .whitespaces),
               !ingredientText.isEmpty
@@ -57,8 +89,6 @@ class SearchViewController: UIViewController {
         addIngredientButton.isEnabled = !(ingredientTextField.text?.isEmpty ?? true)
     }
     
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         ingredientsTableView.reloadData()
     }
@@ -72,7 +102,7 @@ class SearchViewController: UIViewController {
         
         ingredientTextField.delegate = self
        
-        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ingredientTextField, queue: nil) {_ in
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ingredientTextField, queue: nil) { _ in
             self.updateIngredientAddButtonState()
         }
         

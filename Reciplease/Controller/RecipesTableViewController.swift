@@ -18,12 +18,6 @@ class RecipesTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-//        recipes = Array.init(repeating: Recipe.sample, count: 3)
-
-//        tableView.dataSource = self
-//        tableView.delegate = self
-//        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -44,15 +38,7 @@ class RecipesTableViewController: UITableViewController {
 
         let recipe = recipes[indexPath.row]
 
-        let imageUrl = URL(string: recipe.image)!
-        let imageData = try! Data(contentsOf: imageUrl)
-        let image = UIImage(data: imageData)!
-
-        cell.configure(image: image, title: recipe.label, subtitle: "")
-
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath)
-//        let recipe = recipes[indexPath.row]
-//        cell.textLabel?.text = recipe.label
+        cell.configure(imageUrl: URL(string: recipe.image)!, title: recipe.label, subtitle: "ingrédients")
 
         return cell
     }

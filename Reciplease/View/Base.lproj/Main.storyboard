@@ -279,7 +279,7 @@
         <scene sceneID="bLM-yb-0mC">
             <objects>
                 <tableViewController id="pAx-tJ-Gta" customClass="RecipesTableViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="vG7-dl-18y">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="121" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="vG7-dl-18y">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -291,11 +291,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nbz-T4-ZSp">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="121"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="121" id="dB0-CV-MqD"/>
-                                            </constraints>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1en-mF-oHi">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eZ-x0-Ml9" userLabel="Subtitle Label">
                                             <rect key="frame" x="20" y="93" width="108" height="20"/>
@@ -312,23 +309,22 @@
                                     </subviews>
                                     <color key="backgroundColor" name="BackgroundColor"/>
                                     <constraints>
-                                        <constraint firstItem="Nbz-T4-ZSp" firstAttribute="leading" secondItem="UhB-bx-dFU" secondAttribute="leading" id="2ap-Vh-gA3"/>
-                                        <constraint firstAttribute="trailing" secondItem="Nbz-T4-ZSp" secondAttribute="trailing" id="Gem-Eb-vVe"/>
+                                        <constraint firstAttribute="bottom" secondItem="1en-mF-oHi" secondAttribute="bottom" id="ILj-Cf-9bh"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NXO-hj-mKj" secondAttribute="trailing" constant="20" symbolic="YES" id="Is1-67-suI"/>
                                         <constraint firstItem="1eZ-x0-Ml9" firstAttribute="leading" secondItem="UhB-bx-dFU" secondAttribute="leading" constant="20" symbolic="YES" id="SXH-kG-XDG"/>
+                                        <constraint firstAttribute="trailing" secondItem="1en-mF-oHi" secondAttribute="trailing" id="Uyl-M0-ksT"/>
                                         <constraint firstItem="1eZ-x0-Ml9" firstAttribute="top" secondItem="NXO-hj-mKj" secondAttribute="bottom" constant="2" id="aaf-5f-bJK"/>
+                                        <constraint firstItem="1en-mF-oHi" firstAttribute="leading" secondItem="UhB-bx-dFU" secondAttribute="leading" id="f6d-oi-w71"/>
+                                        <constraint firstItem="1en-mF-oHi" firstAttribute="top" secondItem="UhB-bx-dFU" secondAttribute="top" id="mIc-7L-ddU"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1eZ-x0-Ml9" secondAttribute="trailing" constant="20" symbolic="YES" id="nd1-ZX-D3W"/>
-                                        <constraint firstItem="Nbz-T4-ZSp" firstAttribute="top" secondItem="UhB-bx-dFU" secondAttribute="top" id="tmQ-AA-T6a"/>
                                         <constraint firstAttribute="bottom" secondItem="1eZ-x0-Ml9" secondAttribute="bottom" constant="7" id="tmy-x4-58j"/>
                                         <constraint firstItem="NXO-hj-mKj" firstAttribute="leading" secondItem="UhB-bx-dFU" secondAttribute="leadingMargin" id="vn3-fC-2qc"/>
-                                        <constraint firstItem="1eZ-x0-Ml9" firstAttribute="top" secondItem="NXO-hj-mKj" secondAttribute="bottom" constant="2" id="xUY-pC-9rr"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="backgroundImageView" destination="Nbz-T4-ZSp" id="afi-Nd-bH7"/>
+                                    <outlet property="recipeImageView" destination="1en-mF-oHi" id="s4n-NK-uMg"/>
                                     <outlet property="subtitleLabel" destination="1eZ-x0-Ml9" id="kOP-KM-qc1"/>
                                     <outlet property="titleLabel" destination="NXO-hj-mKj" id="Vlv-RA-tht"/>
-                                    <segue destination="Bnx-UT-Mpe" kind="show" id="EoX-3R-XFg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -338,6 +334,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="NXm-fg-3gg"/>
+                    <connections>
+                        <segue destination="Bnx-UT-Mpe" kind="show" identifier="SequeFromRecipesToRecipe" id="p4H-Dr-3N9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XUE-cN-nTy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -6,28 +6,28 @@
 //
 
 import UIKit
+import SDWebImage
 
 class RecipeTableViewCell: UITableViewCell {
 
-    @IBOutlet var backgroundImageView: UIImageView!
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var subtitleLabel: UILabel!
+    @IBOutlet weak var recipeImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        // Initialization code
+//    }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//
+//        // Configure the view for the selected state
+//    }
     
-    func configure(image: UIImage, title: String, subtitle: String) {
-        backgroundImageView.image = image
+    func configure(imageUrl: URL, title: String, subtitle: String) {
+        recipeImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "RecipeSample"))
         titleLabel.text = title
         subtitleLabel.text = subtitle
     }
-
 }

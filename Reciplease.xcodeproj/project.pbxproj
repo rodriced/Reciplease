@@ -25,6 +25,7 @@
 		DC803680288F5D2700AC678D /* RecipesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80367F288F5D2700AC678D /* RecipesTableViewController.swift */; };
 		DC803682288F5F7100AC678D /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC803681288F5F7100AC678D /* RecipeTableViewCell.swift */; };
 		DC803684288FC07D00AC678D /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC803683288FC07D00AC678D /* ControllerHelper.swift */; };
+		DC803687289122F000AC678D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = DC803686289122F000AC678D /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 			files = (
 				DC803671288AB33A00AC678D /* Alamofire in Frameworks */,
 				DC80366C2889AA9D00AC678D /* FirebaseFirestoreCombine-Community in Frameworks */,
+				DC803687289122F000AC678D /* SDWebImage in Frameworks */,
 				DC80366E2889AA9D00AC678D /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,6 +184,7 @@
 				DC80366B2889AA9D00AC678D /* FirebaseFirestoreCombine-Community */,
 				DC80366D2889AA9D00AC678D /* FirebaseFirestoreSwift */,
 				DC803670288AB33A00AC678D /* Alamofire */,
+				DC803686289122F000AC678D /* SDWebImage */,
 			);
 			productName = Reciplease;
 			productReference = DC27F9BF28838835000A5504 /* Reciplease.app */;
@@ -236,6 +239,7 @@
 			packageReferences = (
 				DC80366A2889AA9D00AC678D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				DC80366F288AB33A00AC678D /* XCRemoteSwiftPackageReference "Alamofire" */,
+				DC803685289122F000AC678D /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = DC27F9C028838835000A5504 /* Products */;
 			projectDirPath = "";
@@ -581,6 +585,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		DC803685289122F000AC678D /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -598,6 +610,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DC80366F288AB33A00AC678D /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		DC803686289122F000AC678D /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC803685289122F000AC678D /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

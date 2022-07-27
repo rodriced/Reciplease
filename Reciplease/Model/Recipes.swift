@@ -56,29 +56,21 @@ struct RecipesRequestData: Decodable {
 
 struct RecipesRequestParameters: Encodable {
     ////    static var config: NSDictionary? {
-//    static var config: [String:String]? {
-    ////        let configpathUrl = Bundle.main.url(forResource: "Alamofire-Info", withExtension: "plist", subdirectory: "Supporting files")!
-//        let path = Bundle.main.path(forResource: "Alamofire-Info", ofType: "plist")!
-//        let configUrl = URL(fileURLWithPath: path)
-//        let data = try! Data(contentsOf: configUrl)
-//        return try? PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as? [String:String]
-    ////        return configUrl.flatMap { NSDictionary(contentsOf: $0) }
-//    }
+    static var config: [String:String]? {
+       let configUrl = Bundle.main.url(forResource: "Alamofire-Info", withExtension: "plist")!
+        let data = try! Data(contentsOf: configUrl)
+        return try? PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as? [String:String]
+    }
 
     let q: String
     let type = "public"
-    let app_id: String? = nil
-    let app_key: String? = nil
+    let app_id: String?
+    let app_key: String?
 
     init(ingredients: [String]) {
         q = ingredients.joined(separator: ",")
-//        app_id = Self.config?.object(forKey: "APP_ID") as? String
-//        app_key = Self.config?.object(forKey: "APP_KEY") as? String
-//        app_id = Self.config?["APP_ID"]
-//        app_key = Self.config?["APP_KEY"]
-
-//        print("APP id & key", app_id ?? "None" , app_key ?? "None")
-
+        app_id = Self.config?["EDAMAM_APPLICATION_ID"]
+        app_key = Self.config?["EDAMAM_APPLICATION_KEY"]
     }
 }
 

@@ -13,14 +13,15 @@
         <!--Recipe-->
         <scene sceneID="UD5-C9-A4y">
             <objects>
-                <viewController id="Bnx-UT-Mpe" sceneMemberID="viewController">
+                <viewController id="Bnx-UT-Mpe" customClass="RecipeViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uOL-Va-LQb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1cB-23-Sax">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1cB-23-Sax">
                                 <rect key="frame" x="0.0" y="88" width="414" height="276"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="414" id="0Y0-mq-2HG"/>
                                     <constraint firstAttribute="width" secondItem="1cB-23-Sax" secondAttribute="height" multiplier="3:2" id="sCc-gi-qFZ"/>
                                 </constraints>
                             </imageView>
@@ -63,8 +64,17 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Recipe" id="x7J-OB-AWg">
-                        <barButtonItem key="rightBarButtonItem" image="star" catalog="system" id="lox-84-bbd"/>
+                        <barButtonItem key="rightBarButtonItem" image="star" catalog="system" id="lox-84-bbd" userLabel="Favorite Button Item">
+                            <connections>
+                                <action selector="favoriteButtonTapped:" destination="Bnx-UT-Mpe" id="2IG-qF-lvn"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="favoriteButton" destination="lox-84-bbd" id="0ak-zp-Pyz"/>
+                        <outlet property="imageView" destination="1cB-23-Sax" id="5Db-W1-8ze"/>
+                        <outlet property="ingredientsTextView" destination="RKE-2Z-8kK" id="OvT-bM-Sgd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WgP-gk-epk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -275,7 +285,7 @@
             </objects>
             <point key="canvasLocation" x="433" y="456"/>
         </scene>
-        <!--Recipes Table View Controller-->
+        <!--Favorites recipes-->
         <scene sceneID="bLM-yb-0mC">
             <objects>
                 <tableViewController id="pAx-tJ-Gta" customClass="RecipesTableViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
@@ -333,9 +343,9 @@
                             <outlet property="delegate" destination="pAx-tJ-Gta" id="OkF-QN-xXH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="NXm-fg-3gg"/>
+                    <navigationItem key="navigationItem" title="Favorites recipes" id="NXm-fg-3gg"/>
                     <connections>
-                        <segue destination="Bnx-UT-Mpe" kind="show" identifier="SequeFromRecipesToRecipe" id="p4H-Dr-3N9"/>
+                        <segue destination="Bnx-UT-Mpe" kind="show" identifier="SegueFromRecipesToRecipe" id="p4H-Dr-3N9"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XUE-cN-nTy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -344,7 +354,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="caD-kw-mOn"/>
+        <segue reference="VYf-yo-xfF"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>

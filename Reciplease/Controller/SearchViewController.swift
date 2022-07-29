@@ -32,7 +32,7 @@ class SearchViewController: UIViewController {
     @IBAction func searchRecipesButtonTapped(_ sender: Any) {
         guard !search.isEmpty else { return }
         
-        RecipesAPIService.searchRecipes(ingredients: search.ingredients) { recipes in
+        RecipesAPIService.shared!.searchRecipes(ingredients: search.ingredients) { recipes in
             DispatchQueue.main.async {
                 guard let recipes = recipes else {
                     self.present(ControllerHelper.simpleAlert(message: "No recipe found !"), animated: true)
@@ -48,6 +48,7 @@ class SearchViewController: UIViewController {
         if segue.identifier == "SegueFromSearchToRecipes" {
             let recipesVC = segue.destination as! RecipesTableViewController
             recipesVC.recipes = sender as! [Recipe]
+            recipesVC.navigationItem.title = "Recipes found"
         }
     }
 

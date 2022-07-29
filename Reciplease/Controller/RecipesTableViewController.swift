@@ -23,14 +23,11 @@ class RecipesTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return recipes.count
-//        return 3
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,6 +38,17 @@ class RecipesTableViewController: UITableViewController {
         cell.configure(imageUrl: URL(string: recipe.image)!, title: recipe.label, subtitle: "ingrédients")
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "SegueFromRecipesToRecipe", sender: recipes[indexPath.row])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SegueFromRecipesToRecipe" {
+            let recipeVC = segue.destination as! RecipeViewController
+            recipeVC.recipe = sender as? Recipe
+        }
     }
 
     /*

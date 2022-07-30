@@ -80,10 +80,10 @@
             </objects>
             <point key="canvasLocation" x="2315.9420289855075" y="454.6875"/>
         </scene>
-        <!--Search-->
+        <!--Search recipes-->
         <scene sceneID="naF-By-eXn">
             <objects>
-                <viewController id="5sm-cE-3zf" userLabel="Search" customClass="SearchViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5sm-cE-3zf" customClass="SearchViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ahe-gP-ZKm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -211,7 +211,7 @@
                             <constraint firstItem="xlY-hq-OrX" firstAttribute="leading" secondItem="Pmb-KA-vQD" secondAttribute="leading" id="lm3-jb-Lve"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Search" id="iDG-a0-7N4"/>
+                    <navigationItem key="navigationItem" title="Search recipes" id="iDG-a0-7N4"/>
                     <connections>
                         <outlet property="addIngredientButton" destination="uG1-JZ-x4Y" id="mBg-Aa-hti"/>
                         <outlet property="clearAllButton" destination="1d9-fX-0Nv" id="013-rL-ZgC"/>
@@ -248,7 +248,7 @@
         <scene sceneID="1gH-EY-Ob4">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="acn-Fb-kd1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="UK8-1Y-D6T"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Search" image="magnifyingglass" catalog="system" id="UK8-1Y-D6T"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ubt-Lz-D59">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -270,7 +270,7 @@
         <scene sceneID="WIX-Ca-G9U">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2bS-rL-fub" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favourites" image="star.leadinghalf.filled" catalog="system" id="dxI-TY-Cmr"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="Favourites" image="star.leadinghalf.filled" catalog="system" id="dxI-TY-Cmr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bb0-gd-GgW">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -289,29 +289,29 @@
         <scene sceneID="bLM-yb-0mC">
             <objects>
                 <tableViewController id="pAx-tJ-Gta" customClass="RecipesTableViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="121" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="vG7-dl-18y">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="vG7-dl-18y">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="120" id="l1Y-sn-rwc" customClass="RecipeTableViewCell" customModule="Reciplease" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="120"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" id="l1Y-sn-rwc" customClass="RecipeTableViewCell" customModule="Reciplease" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="l1Y-sn-rwc" id="UhB-bx-dFU">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1en-mF-oHi">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eZ-x0-Ml9" userLabel="Subtitle Label">
-                                            <rect key="frame" x="20" y="93" width="108" height="20"/>
+                                            <rect key="frame" x="20" y="123" width="108" height="20"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" name="TextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXO-hj-mKj" userLabel="Title Label">
-                                            <rect key="frame" x="20" y="68" width="99" height="23"/>
+                                            <rect key="frame" x="20" y="98" width="99" height="23"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                             <color key="textColor" name="TextColor"/>
                                             <nil key="highlightedColor"/>

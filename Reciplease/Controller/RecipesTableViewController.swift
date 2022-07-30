@@ -10,6 +10,34 @@ import UIKit
 class RecipesTableViewController: UITableViewController {
     var recipes: [Recipe] = []
 
+    func loadfavoriteRecipes() {
+        print("loadfavoriteRecipes")
+        Task {
+            guard let recipesAPI = RecipesAPIService.shared,
+            let favoriteRecipes = await recipesAPI.loadFavoriteRecipes() else {
+                self.present(ControllerHelper.simpleAlert(message: "Network access error !"), animated: true)
+                return
+            }
+            
+            guard !favoriteRecipes.isEmpty else {
+                self.present(ControllerHelper.simpleAlert(message: "No favorite recipes found"), animated: true)
+                return
+            }
+            
+            recipes = favoriteRecipes
+            tableView.reloadData()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear")
+
+        if navigationController!.tabBarItem.tag == TabBarItemTag.favorites.rawValue {
+            print("viewWillAppear:TabBarItemTag")
+            loadfavoriteRecipes()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -8,11 +8,9 @@
 import Alamofire
 import Foundation
 
-
-
 struct Recipe {
     static var favoritesIds = Set<String>()
-    
+
     enum CodingKeys: CodingKey, CaseIterable {
         case uri, label, image, url, yield, ingredientLines, totalTime
     }
@@ -24,11 +22,11 @@ struct Recipe {
     let yield: Float
     let ingredientLines: [String]
     let totalTime: Float
-    
+
     var isFavorite: Bool {
         Recipe.favoritesIds.contains(id)
     }
-    
+
     func setFavorite(_ favorite: Bool) {
         if favorite {
             Self.favoritesIds.insert(id)
@@ -36,7 +34,7 @@ struct Recipe {
             Self.favoritesIds.remove(id)
         }
     }
-    
+
     func toggleFavorite() {
         setFavorite(!isFavorite)
     }
@@ -91,7 +89,7 @@ struct RecipesRequestData: Decodable {
     let hits: [RecipeData]
 }
 
-//struct RecipesRequestParameters: Encodable {
+// struct RecipesRequestParameters: Encodable {
 //    ////    static var config: NSDictionary? {
 //    static var config: [String: String]? {
 //        let configUrl = Bundle.main.url(forResource: "Alamofire-Info", withExtension: "plist")!
@@ -109,16 +107,16 @@ struct RecipesRequestData: Decodable {
 //        app_id = Self.config?["EDAMAM_APPLICATION_ID"]
 //        app_key = Self.config?["EDAMAM_APPLICATION_KEY"]
 //    }
-//}
+// }
 
 class RecipesAPIService {
     let baseUrl = "https://api.edamam.com/api/recipes/v2"
 
     let config: [String: String]
     let baseParameters: [String: Any]
-    let headers: [HTTPHeader] = [.accept("application/json"),
-                                        .defaultUserAgent,
-                                        .acceptEncoding("gzip")]
+    let headers: HTTPHeaders = [.accept("application/json"),
+                                .defaultUserAgent,
+                                .acceptEncoding("gzip")]
 
     static func getConfig() -> [String: String]? {
         let configUrl = Bundle.main.url(forResource: "Alamofire-Info", withExtension: "plist")!
@@ -127,7 +125,7 @@ class RecipesAPIService {
     }
 
     static let shared = RecipesAPIService()
-    
+
     private init?() {
         guard let config = Self.getConfig() else {
             return nil
@@ -142,10 +140,6 @@ class RecipesAPIService {
         ]
     }
 
-    
-
-   
-
     func searchRecipes(ingredients: [String], completionHandler: @escaping ([Recipe]?) -> Void) {
         var parameters = baseParameters
         parameters["q"] = ingredients.joined(separator: ",")
@@ -153,7 +147,7 @@ class RecipesAPIService {
         AF
             .request(baseUrl,
                      parameters: parameters,
-                     headers: [.accept("application/json"), .defaultUserAgent])
+                     headers: headers)
 //            .cURLDescription { description in
 //                print(description)
 //            }
@@ -168,5 +162,74 @@ class RecipesAPIService {
                     completionHandler(nil)
                 }
             }
+    }
+
+    func loadRecipe(id: String) async throws -> Recipe {
+        return try await withCheckedThrowingContinuation() { continuation in
+            let url = "\(baseUrl)/\(id)"
+
+            AF
+                .request(url,
+                         parameters: baseParameters,
+                         headers: headers)
+//            .cURLDescription { description in
+//                print(description)
+//            }
+                .validate()
+                .responseDecodable(of: RecipeData.self) {
+                    response in
+
+                    switch response.result {
+                    case .success(let recipesData):
+                        //                    debugPrint(recipesRequestData)
+                        return continuation.resume(returning: recipesData.recipe)
+                    case .failure(let afError):
+                        debugPrint(afError)
+                        continuation.resume(throwing: afError)
+                    }
+                }
+        }
+    }
+
+    func loadRecipes(ids: [String]) async -> [Recipe]? {
+        do {
+            return try await ids.concurrentMap { id in
+                try await self.loadRecipe(id: id)
+            }
+        } catch {
+            return nil
+        }
+    }
+
+    func loadFavoriteRecipes() async -> [Recipe]? {
+        return await loadRecipes(ids: Array(Recipe.favoritesIds))
+    }
+}
+
+extension Sequence {
+    func asyncMap<T>(
+        _ transform: (Element) async throws -> T
+    ) async rethrows -> [T] {
+        var values = [T]()
+
+        for element in self {
+            try await values.append(transform(element))
+        }
+
+        return values
+    }
+
+    func concurrentMap<T>(
+        _ transform: @escaping (Element) async throws -> T
+    ) async throws -> [T] {
+        let tasks = map { element in
+            Task {
+                try await transform(element)
+            }
+        }
+
+        return try await tasks.asyncMap { task in
+            try await task.value
+        }
     }
 }

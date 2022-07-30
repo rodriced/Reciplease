@@ -34,8 +34,8 @@ class RecipeViewController: UIViewController {
         updateFavoriteButtonState()
         
         let imageUrl = URL(string: recipe.image)!
-        imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "RecipeSample"))
-        
+        imageView.sd_setImage(with: imageUrl)
+
         ingredientsTextView.text = recipe.ingredientLines.joined(separator: "\n")
 
         // Do any additional setup after loading the view.

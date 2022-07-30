@@ -25,8 +25,19 @@ class RecipeTableViewCell: UITableViewCell {
 //        // Configure the view for the selected state
 //    }
     
+    func addBottomGradient() {
+        let gradient = CAGradientLayer()
+        gradient.frame = recipeImageView.bounds
+        gradient.startPoint = CGPoint(x: 0.5, y: 0.5)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1)
+        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradient.locations = [0.0, 1.0]
+        recipeImageView.layer.addSublayer(gradient)
+    }
+    
     func configure(imageUrl: URL, title: String, subtitle: String) {
-        recipeImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "RecipeSample"))
+        addBottomGradient()
+        recipeImageView.sd_setImage(with: imageUrl)
         titleLabel.text = title
         subtitleLabel.text = subtitle
     }

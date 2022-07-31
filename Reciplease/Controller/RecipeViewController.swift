@@ -12,12 +12,23 @@ class RecipeViewController: UIViewController {
     
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var ingredientsTextView: UITextView!
-    
     @IBOutlet var favoriteButton: UIBarButtonItem!
+    @IBOutlet weak var directionsButton: UIButton!
     
     @IBAction func favoriteButtonTapped(_ sender: Any) {
         recipe.toggleFavorite()
         updateFavoriteButtonState()
+    }
+    
+    @IBAction func directionsButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "SegueFromRecipeToDirections", sender: nil)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SegueFromRecipeToDirections" {
+            let directionsVC = segue.destination as! RecipeDirectionsViewController
+            directionsVC.directionsUrl = URL(string: recipe.url)!
+        }
     }
     
     func updateFavoriteButtonState() {

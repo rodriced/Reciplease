@@ -43,6 +43,10 @@
                                 <rect key="frame" x="100" y="762" width="214" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Get directions"/>
+                                <connections>
+                                    <action selector="directionsButtonTapped:" destination="Bnx-UT-Mpe" eventType="touchUpInside" id="MLf-CW-ZBg"/>
+                                    <action selector="favoriteButtonTapped:" destination="Bnx-UT-Mpe" eventType="touchUpInside" id="imm-rv-4aP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mLG-sK-5xm"/>
@@ -71,14 +75,31 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="directionsButton" destination="Eyl-75-Zcp" id="IKy-ZJ-Kej"/>
                         <outlet property="favoriteButton" destination="lox-84-bbd" id="0ak-zp-Pyz"/>
                         <outlet property="imageView" destination="1cB-23-Sax" id="5Db-W1-8ze"/>
                         <outlet property="ingredientsTextView" destination="RKE-2Z-8kK" id="OvT-bM-Sgd"/>
+                        <segue destination="GuV-Ey-4VC" kind="showDetail" identifier="SegueFromRecipeToDirections" id="Jn1-ZZ-bHH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WgP-gk-epk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2315.9420289855075" y="454.6875"/>
+        </scene>
+        <!--Recipe Directions View Controller-->
+        <scene sceneID="Zae-Fg-PkX">
+            <objects>
+                <viewController id="GuV-Ey-4VC" customClass="RecipeDirectionsViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="G1h-37-y0B">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="yJS-UL-1mC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VfE-kZ-C68" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3261" y="455"/>
         </scene>
         <!--Search recipes-->
         <scene sceneID="naF-By-eXn">

@@ -27,6 +27,7 @@
 		DC803684288FC07D00AC678D /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC803683288FC07D00AC678D /* ControllerHelper.swift */; };
 		DC803687289122F000AC678D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = DC803686289122F000AC678D /* SDWebImage */; };
 		DC8036892892012E00AC678D /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8036882892012E00AC678D /* RecipeViewController.swift */; };
+		DC80368F2895DA9C00AC678D /* RecipeDirectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80368E2895DA9C00AC678D /* RecipeDirectionsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		DC803681288F5F7100AC678D /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
 		DC803683288FC07D00AC678D /* ControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelper.swift; sourceTree = "<group>"; };
 		DC8036882892012E00AC678D /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		DC80368E2895DA9C00AC678D /* RecipeDirectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDirectionsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				DC27F9C628838835000A5504 /* SearchViewController.swift */,
 				DC80367F288F5D2700AC678D /* RecipesTableViewController.swift */,
 				DC8036882892012E00AC678D /* RecipeViewController.swift */,
+				DC80368E2895DA9C00AC678D /* RecipeDirectionsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				DC803682288F5F7100AC678D /* RecipeTableViewCell.swift in Sources */,
 				DC80367C288E12AF00AC678D /* Search.swift in Sources */,
 				DC803684288FC07D00AC678D /* ControllerHelper.swift in Sources */,
+				DC80368F2895DA9C00AC678D /* RecipeDirectionsViewController.swift in Sources */,
 				DC803680288F5D2700AC678D /* RecipesTableViewController.swift in Sources */,
 				DC27F9C528838835000A5504 /* SceneDelegate.swift in Sources */,
 				DC8036892892012E00AC678D /* RecipeViewController.swift in Sources */,

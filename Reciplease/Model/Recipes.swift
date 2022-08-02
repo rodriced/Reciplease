@@ -6,11 +6,74 @@
 //
 
 import Alamofire
+import FirebaseCore
+import FirebaseFirestore
 import Foundation
 
-struct Recipe {
-    static var favoritesIds = Set<String>()
+class FavoriteRecipes {
+    static var shared = FavoriteRecipes()
+    private init() {}
 
+    private(set) var ids = Set<String>()
+
+    private let db = Firestore.firestore()
+
+    func load(completionHandler: ((Bool) -> Void)? = nil) {
+        db.collection("favorites").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+                completionHandler?(false)
+            } else {
+                print("Loading favorites :")
+                self.ids = Set<String>(querySnapshot!.documents.map {
+                    print("\($0.documentID)")
+                    return $0.documentID
+                })
+                completionHandler?(true)
+            }
+        }
+    }
+
+    func contains(_ recipe: Recipe) -> Bool {
+        ids.contains(recipe.id)
+    }
+
+    func add(_ recipe: Recipe, completionHandler: @escaping (Bool) -> Void) {
+        db.collection("favorites").document(recipe.id).setData([:]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+                completionHandler(false)
+            } else {
+                print("Document added with ID: \(recipe.id)")
+                self.ids.insert(recipe.id)
+                completionHandler(true)
+            }
+        }
+    }
+
+    func remove(_ recipe: Recipe, completionHandler: @escaping (Bool) -> Void) {
+        db.collection("favorites").document(recipe.id).delete() { err in
+            if let err = err {
+                print("Error deleting document: \(err)")
+                completionHandler(false)
+            } else {
+                print("Document with ID: \(recipe.id) deleted")
+                self.ids.remove(recipe.id)
+                completionHandler(true)
+            }
+        }
+    }
+
+//    func toggle(for recipe: Recipe) {
+//        if contains(recipe) {
+//            remove(recipe)
+//        } else {
+//            add(recipe)
+//        }
+//    }
+}
+
+struct Recipe {
     enum CodingKeys: CodingKey, CaseIterable {
         case uri, label, image, url, yield, ingredientLines, totalTime
     }
@@ -24,19 +87,19 @@ struct Recipe {
     let totalTime: Float
 
     var isFavorite: Bool {
-        Recipe.favoritesIds.contains(id)
+        FavoriteRecipes.shared.contains(self)
     }
 
-    func setFavorite(_ favorite: Bool) {
+    func setFavorite(_ favorite: Bool, completionHandler: @escaping (Bool) -> Void) {
         if favorite {
-            Self.favoritesIds.insert(id)
+            FavoriteRecipes.shared.add(self, completionHandler: completionHandler)
         } else {
-            Self.favoritesIds.remove(id)
+            FavoriteRecipes.shared.remove(self, completionHandler: completionHandler)
         }
     }
 
-    func toggleFavorite() {
-        setFavorite(!isFavorite)
+    func toggleFavorite(completionHandler: @escaping (Bool) -> Void) {
+        setFavorite(!isFavorite, completionHandler: completionHandler)
     }
 
 //    static let sample = Recipe(
@@ -110,6 +173,8 @@ struct RecipesRequestData: Decodable {
 // }
 
 class RecipesAPIService {
+    static let shared = RecipesAPIService()
+
     let baseUrl = "https://api.edamam.com/api/recipes/v2"
 
     let config: [String: String]
@@ -123,8 +188,6 @@ class RecipesAPIService {
         let data = try! Data(contentsOf: configUrl)
         return try? PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as? [String: String]
     }
-
-    static let shared = RecipesAPIService()
 
     private init?() {
         guard let config = Self.getConfig() else {
@@ -144,13 +207,7 @@ class RecipesAPIService {
         var parameters = baseParameters
         parameters["q"] = ingredients.joined(separator: ",")
 
-        AF
-            .request(baseUrl,
-                     parameters: parameters,
-                     headers: headers)
-//            .cURLDescription { description in
-//                print(description)
-//            }
+        AF.request(baseUrl, parameters: parameters, headers: headers)
             .validate()
             .responseDecodable(of: RecipesRequestData.self) { response in
                 switch response.result {
@@ -168,13 +225,7 @@ class RecipesAPIService {
         return try await withCheckedThrowingContinuation() { continuation in
             let url = "\(baseUrl)/\(id)"
 
-            AF
-                .request(url,
-                         parameters: baseParameters,
-                         headers: headers)
-//            .cURLDescription { description in
-//                print(description)
-//            }
+            AF.request(url, parameters: baseParameters, headers: headers)
                 .validate()
                 .responseDecodable(of: RecipeData.self) {
                     response in
@@ -202,7 +253,7 @@ class RecipesAPIService {
     }
 
     func loadFavoriteRecipes() async -> [Recipe]? {
-        return await loadRecipes(ids: Array(Recipe.favoritesIds))
+        return await loadRecipes(ids: Array(FavoriteRecipes.shared.ids))
     }
 }
 

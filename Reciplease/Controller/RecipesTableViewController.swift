@@ -9,9 +9,10 @@ import UIKit
 
 class RecipesTableViewController: UITableViewController {
     var recipes: [Recipe] = []
+    var favoriteMode = false
 
     func loadfavoriteRecipes() {
-        print("loadfavoriteRecipes")
+//        print("loadfavoriteRecipes")
         Task {
             guard let recipesAPI = RecipesAPIService.shared,
             let favoriteRecipes = await recipesAPI.loadFavoriteRecipes() else {
@@ -19,21 +20,40 @@ class RecipesTableViewController: UITableViewController {
                 return
             }
             
-            guard !favoriteRecipes.isEmpty else {
-                self.present(ControllerHelper.simpleAlert(message: "No favorite recipes found"), animated: true)
-                return
-            }
+//            guard !favoriteRecipes.isEmpty else {
+//                self.present(ControllerHelper.simpleAlert(message: "No favorite recipes found"), animated: true)
+//                return
+//            }
             
             recipes = favoriteRecipes
             tableView.reloadData()
         }
     }
     
+    func setTableViewBackgroundEmptyMessage(_ message: String) {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+        messageLabel.text = message
+        messageLabel.textColor = UIColor(named: "TextColor")
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont(name: "TrebuchetMS", size: 20)
+        messageLabel.sizeToFit()
+
+        tableView.backgroundView = messageLabel
+//        tableView.separatorStyle = .none
+    }
+
+    func restoreBackground() {
+        tableView.backgroundView = nil
+//        tableView.separatorStyle = .singleLine
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
 
-        if navigationController!.tabBarItem.tag == TabBarItemTag.favorites.rawValue {
-            print("viewWillAppear:TabBarItemTag")
+        favoriteMode = navigationController!.tabBarItem.tag == TabBarItemTag.favorites.rawValue
+
+        if favoriteMode {
             loadfavoriteRecipes()
         }
     }
@@ -55,6 +75,14 @@ class RecipesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if favoriteMode {
+            if recipes.isEmpty {
+                setTableViewBackgroundEmptyMessage("No favorites")
+            } else {
+                tableView.backgroundView = nil
+            }
+        }
+        
         return recipes.count
     }
 

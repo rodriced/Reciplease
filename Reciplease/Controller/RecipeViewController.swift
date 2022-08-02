@@ -10,14 +10,19 @@ import UIKit
 class RecipeViewController: UIViewController {
     var recipe: Recipe!
     
+    var recipeInfoVC: RecipeInfoViewController!
+    @IBOutlet var recipeInfoView: UIView!
+    @IBOutlet var recipeInfoView2: UIView!
+    
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var ingredientsTextView: UITextView!
     @IBOutlet var favoriteButton: UIBarButtonItem!
-    @IBOutlet weak var directionsButton: UIButton!
+    @IBOutlet var directionsButton: UIButton!
     
     @IBAction func favoriteButtonTapped(_ sender: Any) {
-        recipe.toggleFavorite()
-        updateFavoriteButtonState()
+        recipe.toggleFavorite() { success in
+            if success { self.updateFavoriteButtonState() }
+        }
     }
     
     @IBAction func directionsButtonTapped(_ sender: Any) {
@@ -25,12 +30,18 @@ class RecipeViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "SegueFromRecipeToDirections" {
+        switch segue.identifier {
+        case "SegueFromRecipeToDirections":
             let directionsVC = segue.destination as! RecipeDirectionsViewController
             directionsVC.directionsUrl = URL(string: recipe.url)!
+        case "SegueFromRecipeToRecipeInfos":
+            recipeInfoVC = (segue.destination as! RecipeInfoViewController)
+            recipeInfoVC.recipe = recipe
+        default:
+            return
         }
     }
-    
+        
     func updateFavoriteButtonState() {
         if recipe.isFavorite {
             favoriteButton.image = UIImage(systemName: "star.fill")
@@ -41,6 +52,8 @@ class RecipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        recipeInfoVC.view.frame = recipeInfoView.bounds
         
         updateFavoriteButtonState()
         

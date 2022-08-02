@@ -28,6 +28,8 @@
 		DC803687289122F000AC678D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = DC803686289122F000AC678D /* SDWebImage */; };
 		DC8036892892012E00AC678D /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8036882892012E00AC678D /* RecipeViewController.swift */; };
 		DC80368F2895DA9C00AC678D /* RecipeDirectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80368E2895DA9C00AC678D /* RecipeDirectionsViewController.swift */; };
+		DC80369A289746E900AC678D /* RecipeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC803698289746E900AC678D /* RecipeInfoViewController.swift */; };
+		DC80369B289746E900AC678D /* RecipeInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC803699289746E900AC678D /* RecipeInfoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		DC803683288FC07D00AC678D /* ControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelper.swift; sourceTree = "<group>"; };
 		DC8036882892012E00AC678D /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		DC80368E2895DA9C00AC678D /* RecipeDirectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDirectionsViewController.swift; sourceTree = "<group>"; };
+		DC803698289746E900AC678D /* RecipeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoViewController.swift; sourceTree = "<group>"; };
+		DC803699289746E900AC678D /* RecipeInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeInfoViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,8 @@
 				DC80367F288F5D2700AC678D /* RecipesTableViewController.swift */,
 				DC8036882892012E00AC678D /* RecipeViewController.swift */,
 				DC80368E2895DA9C00AC678D /* RecipeDirectionsViewController.swift */,
+				DC803698289746E900AC678D /* RecipeInfoViewController.swift */,
+				DC803699289746E900AC678D /* RecipeInfoViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -262,6 +268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC80369B289746E900AC678D /* RecipeInfoViewController.xib in Resources */,
 				DC27F9CF28838839000A5504 /* LaunchScreen.storyboard in Resources */,
 				DC803678288B0FC200AC678D /* Alamofire-Info.plist in Resources */,
 				DC803674288AF9C100AC678D /* GoogleService-Info.plist in Resources */,
@@ -292,6 +299,7 @@
 				DC80367C288E12AF00AC678D /* Search.swift in Sources */,
 				DC803684288FC07D00AC678D /* ControllerHelper.swift in Sources */,
 				DC80368F2895DA9C00AC678D /* RecipeDirectionsViewController.swift in Sources */,
+				DC80369A289746E900AC678D /* RecipeInfoViewController.swift in Sources */,
 				DC803680288F5D2700AC678D /* RecipesTableViewController.swift in Sources */,
 				DC27F9C528838835000A5504 /* SceneDelegate.swift in Sources */,
 				DC8036892892012E00AC678D /* RecipeViewController.swift in Sources */,

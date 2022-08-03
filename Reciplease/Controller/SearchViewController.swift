@@ -2,7 +2,7 @@
 //  SearchViewController.swift
 //  Reciplease
 //
-//  Created by Rod on 17/07/2022.
+//  Created by Rodolphe Desruelles on 17/07/2022.
 //
 
 import SwiftUI
@@ -35,7 +35,7 @@ class SearchViewController: UIViewController {
         RecipesAPIService.shared!.searchRecipes(ingredients: search.ingredients) { recipes in
             DispatchQueue.main.async {
                 guard let recipes = recipes else {
-                    self.present(ControllerHelper.simpleAlert(message: "No recipe found !"), animated: true)
+                    self.present(ControllerHelper.simpleErrorAlert(message: "No recipe found !"), animated: true)
                     return
                 }
 

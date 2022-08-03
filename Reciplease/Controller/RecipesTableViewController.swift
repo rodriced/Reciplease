@@ -2,7 +2,7 @@
 //  RecipesTableViewController.swift
 //  Reciplease
 //
-//  Created by Rod on 26/07/2022.
+//  Created by Rodolphe Desruelles on 26/07/2022.
 //
 
 import UIKit
@@ -16,7 +16,7 @@ class RecipesTableViewController: UITableViewController {
         Task {
             guard let recipesAPI = RecipesAPIService.shared,
             let favoriteRecipes = await recipesAPI.loadFavoriteRecipes() else {
-                self.present(ControllerHelper.simpleAlert(message: "Network access error !"), animated: true)
+                self.present(ControllerHelper.simpleErrorAlert(message: "Network access error !"), animated: true)
                 return
             }
             
@@ -90,8 +90,8 @@ class RecipesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as! RecipeTableViewCell
 
         let recipe = recipes[indexPath.row]
-
-        cell.configure(imageUrl: URL(string: recipe.image)!, title: recipe.label, subtitle: "ingrédients")
+        let foodsString = recipe.foods.map { $0.firstUppercased }.joined(separator: ", ")
+        cell.configure(imageUrl: URL(string: recipe.image)!, title: recipe.label, subtitle: foodsString)
 
         return cell
     }

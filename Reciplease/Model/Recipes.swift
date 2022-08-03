@@ -2,7 +2,7 @@
 //  Recipes.swift
 //  Reciplease
 //
-//  Created by Rod on 25/07/2022.
+//  Created by Rodolphe Desruelles on 25/07/2022.
 //
 
 import Alamofire
@@ -63,19 +63,15 @@ class FavoriteRecipes {
             }
         }
     }
+}
 
-//    func toggle(for recipe: Recipe) {
-//        if contains(recipe) {
-//            remove(recipe)
-//        } else {
-//            add(recipe)
-//        }
-//    }
+struct RecipientIngredient: Decodable {
+    let food: String
 }
 
 struct Recipe {
     enum CodingKeys: CodingKey, CaseIterable {
-        case uri, label, image, url, yield, ingredientLines, totalTime
+        case uri, label, image, url, yield, ingredientLines, ingredients, totalTime
     }
 
     let id: String
@@ -84,6 +80,7 @@ struct Recipe {
     let url: String
     let yield: Float
     let ingredientLines: [String]
+    let foods: [String]
     let totalTime: Float
 
     var isFavorite: Bool {
@@ -130,14 +127,19 @@ struct Recipe {
 extension Recipe: Decodable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
+        
         let uri = try values.decode(String.self, forKey: .uri)
         id = URL(string: uri)!.fragment!
+        
         label = try values.decode(String.self, forKey: .label)
         image = try values.decode(String.self, forKey: .image)
         url = try values.decode(String.self, forKey: .url)
         yield = try values.decode(Float.self, forKey: .yield)
         ingredientLines = try values.decode([String].self, forKey: .ingredientLines)
         totalTime = try values.decode(Float.self, forKey: .totalTime)
+        
+        let recipeIngredients = try values.decode([RecipientIngredient].self, forKey: .ingredients)
+        foods = recipeIngredients.map {$0.food}
     }
 }
 
@@ -151,26 +153,6 @@ struct RecipesRequestData: Decodable {
 //    }
     let hits: [RecipeData]
 }
-
-// struct RecipesRequestParameters: Encodable {
-//    ////    static var config: NSDictionary? {
-//    static var config: [String: String]? {
-//        let configUrl = Bundle.main.url(forResource: "Alamofire-Info", withExtension: "plist")!
-//        let data = try! Data(contentsOf: configUrl)
-//        return try? PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as? [String: String]
-//    }
-//
-//    var q: String?
-//    let type = "public"
-//    let app_id: String?
-//    let app_key: String?
-//    let field = Recipe.CodingKeys.allCases.map { "\($0)" }
-//
-//    init() {
-//        app_id = Self.config?["EDAMAM_APPLICATION_ID"]
-//        app_key = Self.config?["EDAMAM_APPLICATION_KEY"]
-//    }
-// }
 
 class RecipesAPIService {
     static let shared = RecipesAPIService()

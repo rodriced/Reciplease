@@ -13,9 +13,16 @@ enum TabBarItemTag: Int {
 }
 
 class ControllerHelper {
-    static func simpleAlert(message: String) -> UIAlertController {
-        let alertVC = UIAlertController(title: "Erreur", message: message, preferredStyle: .alert)
+    static func simpleErrorAlert(message: String) -> UIAlertController {
+        let alertVC = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         return alertVC
+    }
+}
+
+extension String {
+    var firstUppercased: String {
+        guard let firstLetter = self.first?.uppercased() else { return self }
+        return firstLetter + suffix(from: index(startIndex, offsetBy: 1))
     }
 }

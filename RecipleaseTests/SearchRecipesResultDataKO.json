@@ -1,0 +1,11 @@
+{
+  "from": 1,
+  "to": 20,
+  "count": 10000,
+  "_links": {
+    "next": {
+      "href": "https://api.edamam.com/api/recipes/v2?q=salad&app_key=dc6f7a0228b0c0bbf84e80a868f30315&field=uri&field=label&field=url&field=image&field=yield&field=ingredientLines&field=ingredients&field=totalTime&_cont=CHcVQBtNNQphDmgVQntAEX4BYlNtBgsPQGVAB2ETYVx0DAYFUXlSVmRGYl1zVVUBEmdDVTFAY1clAFEDQzBBVjRAY1AhBQEVLnlSVSBMPkd5BgMbUSYRVTdgMgksRlpSAAcRXTVGcV84SU4%3D&type=public&app_id=c1d8e35b",
+      "title": "Next page"
+    }
+  }
+}

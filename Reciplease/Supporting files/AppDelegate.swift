@@ -12,11 +12,38 @@ import FirebaseFirestoreSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+//    let dbService = DbService()
+//    static var firebaseApp: FirebaseAppProto = isTestRun() ? MockFirebaseApp() : FirebaseAppService()
+//    static var favoriteRecipes: FavoriteRecipes! = {
+//        if isTestRun() {
+//            FavoriteRecipes.shared = FavoriteRecipes(idsDb: MockIdsDb())
+//        }
+//    }()
+    
+    static private func isTestRun() -> Bool {
+        return NSClassFromString("XCTest") != nil
+    }
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure()
-        FavoriteRecipes.shared.load()
+        print("AppDelegate")
+//        Self.firebaseApp = Self.firebaseApp ?? FirebaseAppService()
+//        Self.firebaseApp.configure()
+//
+//        Self.favoriteRecipes = Self.favoriteRecipes ?? FavoriteRecipes.shared
+//
+        if !Self.isTestRun() {
+//            print("isTestRun")
+//            FavoriteRecipes.idsDb = MockIdsDb()
+//        } else {
+            FirebaseApp.configure()
+            FavoriteRecipes.idsStore = IdsStore("favorites")
+            
+            Task {
+                try await FavoriteRecipes.shared.load()
+            }
+        }
+//        dbService.configure()
         // Override point for customization after application launch.
         return true
     }

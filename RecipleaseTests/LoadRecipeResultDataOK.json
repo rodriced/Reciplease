@@ -1,0 +1,85 @@
+{
+  "recipe": {
+    "uri": "http://www.edamam.com/ontologies/edamam.owl#recipe_dd4a76ee9f4ce2efd21e40e3d620f8c4",
+    "label": "Steak & Chips Salad",
+    "image": "https://edamam-product-images.s3.amazonaws.com/web-img/72e/72ebeef4f13b029165ce5fc4a675130e.jpg?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIBaMWOuiGAav7FqNDAKo6OXf%2F9mlzeFQ%2F9jJEw4jtYSMAiEAgGasxM%2B2uHEwt6aKMCOi%2BZONrESaYlAvEkTVsdtebkcq2wQI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgwxODcwMTcxNTA5ODYiDPsT65PhoGkbKx8XLyqvBFIaobvtFlumD9n03A2jZ9Y6ooSsshc3L44aOEsejAyswYCac3ZfoN0AY6%2B4fTlxzMQl3TjavUpEEwAs6INuQfz2ykFiYCIB7Rz9%2FjXyQ9V8EtSrkRpg%2Bud7KktiF8oboavV7UUiZeE2PAg%2FVo75hCFe2TRoPC7d6FK%2FIl4DSYlrVYfSJCUMvEpvlF7OzX%2F0o2LPSGbZxArf8VKS%2FSKr71rdAiqfp%2FHfsIgrR1tYmbQHMwQ95RDxM9odYKHP3awscs5ciTyzgHOK0k%2BYW5FxUz9nOaF7hSWVuUqLYOl7jJKelRGuCtf6E8064qOFlNUU2nvHOLnd6Lqbp2QE8voZCJ7S7UP1y3%2FVmlkConAZ1JaRfPHICbd8P%2F3yeLdKN6wg0fVh72x4uKgtisPTRdYiZk0eK54Ct9X%2FfJ58Tt7rLKPZA%2Bc76gJIbVT32GK52nY2Y6RsU1onTg%2BtwBXBLKr1%2BvKsUfKbMXRVG2VNWq2yQu8nj19520izd8d1gtsqrUqdGbTeaP%2F9N%2B8XaBdtXDzGcbxrd5nFeU7IF8z6lrhZ5UNmAUGvhrL4Fqq9RsUpfDUoT1vHg%2BbwYDitF1XzeSnsnI6DTpY%2FR%2Bd6uR%2Bo5CkPJb%2Bu0dX8gTulHTHTaE3XSjd3azDKti4J5rWb%2F3IVkqeFNERrADONBOzsymUJXa938QrQFoLlXT%2BAbV78rpzjhfF3P5rBwQH5fYEl86xKbYpFzj5j4MJhv2yLy14rkXrbAyYw7bG%2FlwY6qQGdK6GcAebts3aprCPKNueUWkFF7PE7waJ%2Bl6HQSvBk0qz%2Fgz2ah%2FUj8DTVg92cN%2FNTZPB2kVONJdaPBN0F0ONKhN2eeFjrV2Owk4Q5JrRQEfiDDOy7VDUp3grZFptMJdOMEH4oe0Zcu7RDbCJhpMlAqbtu9ol9fkqAi9xjrCbQm346B3YlTlG400q0MIHZUmdoNWQGIwLtf8hl4Vmh2uZQSWPIHcAKFCND&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220807T162723Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Credential=ASIASXCYXIIFFSFCUGWB%2F20220807%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=808e95e61eca5623a042cef152c1603545c26a93b451f70b73f8f21f18896717",
+    "url": "http://www.bbcgoodfood.com/recipes/3076/",
+    "yield": 4.0,
+    "ingredientLines": [
+      "750.0g bag frozen potato wedges",
+      "1.0 tbsp olive oil",
+      "2 pieces sirloin steak , about 350g/12oz in total",
+      "120.0g bag herb salad",
+      "6.0 tbsp honey and mustard salad dessing , bought or homemade"
+    ],
+    "ingredients": [
+      {
+        "text": "750.0g bag frozen potato wedges",
+        "quantity": 750.0,
+        "measure": "gram",
+        "food": "potato",
+        "weight": 750.0,
+        "foodCategory": "vegetables",
+        "foodId": "food_abiw5baauresjmb6xpap2bg3otzu",
+        "image": "https://www.edamam.com/food-img/651/6512e82417bce15c2899630c1a2799df.jpg"
+      },
+      {
+        "text": "1.0 tbsp olive oil",
+        "quantity": 1.0,
+        "measure": "tablespoon",
+        "food": "olive oil",
+        "weight": 13.5,
+        "foodCategory": "Oils",
+        "foodId": "food_b1d1icuad3iktrbqby0hiagafaz7",
+        "image": "https://www.edamam.com/food-img/4d6/4d651eaa8a353647746290c7a9b29d84.jpg"
+      },
+      {
+        "text": "2 pieces sirloin steak , about 350g/12oz in total",
+        "quantity": 2.0,
+        "measure": "<unit>",
+        "food": "sirloin steak",
+        "weight": 680.0,
+        "foodCategory": "meats",
+        "foodId": "food_aifm62daw1i6txalya881bcetyzn",
+        "image": "https://www.edamam.com/food-img/4f1/4f10105d5c8178f25590ca6dfcd37fca.jpg"
+      },
+      {
+        "text": "120.0g bag herb salad",
+        "quantity": 120.0,
+        "measure": "gram",
+        "food": "herb",
+        "weight": 120.0,
+        "foodCategory": "Condiments and sauces",
+        "foodId": "food_avsq22zadwyb5cb5sl1byaa4mbo8",
+        "image": "https://www.edamam.com/food-img/89b/89b37a04e46e052671d73addcb84aa51.jpg"
+      },
+      {
+        "text": "6.0 tbsp honey and mustard salad dessing , bought or homemade",
+        "quantity": 6.0,
+        "measure": "tablespoon",
+        "food": "honey",
+        "weight": 126.0,
+        "foodCategory": null,
+        "foodId": "food_bn6aoj9atkqx8fbkli859bbbxx62",
+        "image": "https://www.edamam.com/food-img/198/198c7b25c23b4235b4cc33818c7b335f.jpg"
+      },
+      {
+        "text": "6.0 tbsp honey and mustard salad dessing , bought or homemade",
+        "quantity": 6.0,
+        "measure": "tablespoon",
+        "food": "mustard",
+        "weight": 93.3749999984214,
+        "foodCategory": "Condiments and sauces",
+        "foodId": "food_a34cdj5b0kyuhfbov30xcb50u4dv",
+        "image": "https://www.edamam.com/food-img/e23/e238f2e4cfa6aa1a30f46dc73e7344eb.jpg"
+      }
+    ],
+    "totalTime": 0.0
+  },
+  "_links": {
+    "self": {
+      "href": "https://api.edamam.com/api/recipes/v2/recipe_dd4a76ee9f4ce2efd21e40e3d620f8c4/dd4a76ee9f4ce2efd21e40e3d620f8c4?type=public&app_id=c1d8e35b&app_key=dc6f7a0228b0c0bbf84e80a868f30315",
+      "title": "Self"
+    }
+  }
+}

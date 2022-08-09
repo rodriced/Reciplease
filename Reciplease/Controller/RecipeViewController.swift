@@ -20,8 +20,11 @@ class RecipeViewController: UIViewController {
     @IBOutlet var directionsButton: UIButton!
     
     @IBAction func favoriteButtonTapped(_ sender: Any) {
-        recipe.toggleFavorite() { success in
-            if success { self.updateFavoriteButtonState() }
+        Task {
+            try await recipe.toggleFavorite()
+            DispatchQueue.main.async {
+                self.updateFavoriteButtonState()
+            }
         }
     }
     

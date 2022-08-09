@@ -32,7 +32,8 @@ class SearchViewController: UIViewController {
     @IBAction func searchRecipesButtonTapped(_ sender: Any) {
         guard !search.isEmpty else { return }
         
-        RecipesAPIService.shared!.searchRecipes(ingredients: search.ingredients) { recipes in
+        Task {
+            let recipes = await RecipesAPIService.shared!.searchRecipesTask(ingredients: search.ingredients)
             DispatchQueue.main.async {
                 guard let recipes = recipes else {
                     self.present(ControllerHelper.simpleErrorAlert(message: "No recipe found !"), animated: true)
@@ -42,6 +43,16 @@ class SearchViewController: UIViewController {
                 self.performSegue(withIdentifier: "SegueFromSearchToRecipes", sender: recipes)
             }
         }
+//        RecipesAPIService.shared!.searchRecipes(ingredients: search.ingredients) { recipes in
+//            DispatchQueue.main.async {
+//                guard let recipes = recipes else {
+//                    self.present(ControllerHelper.simpleErrorAlert(message: "No recipe found !"), animated: true)
+//                    return
+//                }
+//
+//                self.performSegue(withIdentifier: "SegueFromSearchToRecipes", sender: recipes)
+//            }
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

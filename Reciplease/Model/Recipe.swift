@@ -26,14 +26,14 @@ struct Recipe: Equatable {
     let totalTime: Float
 
     var isFavorite: Bool {
-        FavoriteRecipes.shared.contains(self)
+        FavoriteRecipesIds.shared.contains(self)
     }
 
     func setFavorite(_ favorite: Bool) async throws {
         if favorite {
-            try await FavoriteRecipes.shared.add(self)
+            try await FavoriteRecipesIds.shared.add(self)
         } else {
-            try await FavoriteRecipes.shared.remove(self)
+            try await FavoriteRecipesIds.shared.remove(self)
         }
     }
 
@@ -61,30 +61,40 @@ extension Recipe: Decodable {
     }
 }
 
-class FavoriteRecipes {
-    static var shared = FavoriteRecipes()
+class FavoriteRecipesIds {
+    static var shared = FavoriteRecipesIds()
     private init() {}
 
     private(set) var ids = Set<String>()
+    private(set) var idsStore: IdsStoreProto!
+    
+    func setIdsStore(_ idsStore: IdsStoreProto) async throws {
+        self.idsStore = idsStore
+        try await syncWithStore()
+    }
 
-    static var idsStore: IdsStoreProto!
-
-    func load() async throws {
-        let ids = try await Self.idsStore.load()
+    private func syncWithStore() async throws {
+        let ids = try await idsStore.load()
         self.ids = Set(ids)
     }
 
     func contains(_ recipe: Recipe) -> Bool {
         ids.contains(recipe.id)
     }
+    
+    func getAll() async throws -> [Recipe]? {
+        return try await ids.concurrentMap { id in
+            try await RecipesAPIService.shared.loadRecipe(id: id)
+        }
+    }
 
     func add(_ recipe: Recipe) async throws {
-        try await Self.idsStore.add(recipe.id)
+        try await idsStore.add(recipe.id)
         ids.insert(recipe.id)
     }
 
     func remove(_ recipe: Recipe) async throws {
-        try await Self.idsStore.remove(recipe.id)
+        try await idsStore.remove(recipe.id)
         ids.remove(recipe.id)
     }
 }

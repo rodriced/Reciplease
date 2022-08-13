@@ -33,18 +33,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Self.favoriteRecipes = Self.favoriteRecipes ?? FavoriteRecipes.shared
 //
         if !Self.isTestRun() {
-//            print("isTestRun")
-//            FavoriteRecipes.idsDb = MockIdsDb()
-//        } else {
             FirebaseApp.configure()
-            FavoriteRecipes.idsStore = IdsStore("favorites")
-            
+//            FavoriteRecipes.shared.idsStore = IdsStore("favorites")
             Task {
-                try await FavoriteRecipes.shared.load()
+                try await FavoriteRecipesIds.shared.setIdsStore(IdsStore("favorites"))
             }
+
+//            Task {
+//                try await FavoriteRecipes.shared.syncWithStore()
+//            }
         }
-//        dbService.configure()
-        // Override point for customization after application launch.
         return true
     }
 

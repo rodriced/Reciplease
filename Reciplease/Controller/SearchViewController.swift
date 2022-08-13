@@ -33,7 +33,7 @@ class SearchViewController: UIViewController {
         guard !search.isEmpty else { return }
         
         Task {
-            let recipes = await RecipesAPIService.shared!.searchRecipesTask(ingredients: search.ingredients)
+            let recipes = try? await RecipesAPIService.shared.searchRecipes(ingredients: search.ingredients)
             DispatchQueue.main.async {
                 guard let recipes = recipes else {
                     self.present(ControllerHelper.simpleErrorAlert(message: "No recipe found !"), animated: true)
@@ -105,8 +105,9 @@ class SearchViewController: UIViewController {
             self.updateIngredientAddButtonState()
         }
         
-        search = Search.initTest()
-        
+//        search = Search.initTest()
+        search = Search()
+
         updateButtonsState()
         updateIngredientAddButtonState()
     }

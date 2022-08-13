@@ -13,24 +13,24 @@ class MockIdsStore: IdsStoreProto {
         case StoreError
     }
     
-    var store: Set<String>
+    var data: Set<String>
     var errorThrown: Bool
     
     init(store: Set<String> = Set(), errorThrown: Bool = false) {
-        self.store = store
+        self.data = store
         self.errorThrown = errorThrown
     }
     func load() async throws -> [String] {
         guard !errorThrown else {throw Err.StoreError}
-        return Array(store)
+        return Array(data)
     }
     func add(_ id: String) async throws {
         guard !errorThrown else {throw Err.StoreError}
-        store.insert(id)
+        data.insert(id)
     }
     func remove(_ id: String) async throws {
         guard !errorThrown else {throw Err.StoreError}
-        store.remove(id)
+        data.remove(id)
     }
 }
 

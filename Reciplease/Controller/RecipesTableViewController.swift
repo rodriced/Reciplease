@@ -14,8 +14,7 @@ class RecipesTableViewController: UITableViewController {
     func loadfavoriteRecipes() {
 //        print("loadfavoriteRecipes")
         Task {
-            guard let recipesAPI = RecipesAPIService.shared,
-            let favoriteRecipes = await recipesAPI.loadFavoriteRecipes() else {
+            guard let favoriteRecipes = try? await FavoriteRecipesIds.shared.getAll() else {
                 self.present(ControllerHelper.simpleErrorAlert(message: "Network access error !"), animated: true)
                 return
             }

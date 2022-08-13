@@ -24,12 +24,12 @@ class Search {
         ingredients.append(ingredient)
     }
     
-    static func initTest() -> Search {
-        let search = Search()
-        search.addIngredient("egg")
-        search.addIngredient("salad")
-        search.addIngredient("tomato")
-        search.addIngredient("corn")
-        return search
-    }
+//    static func initTest() -> Search {
+//        let search = Search()
+//        search.addIngredient("egg")
+//        search.addIngredient("salad")
+//        search.addIngredient("tomato")
+//        search.addIngredient("corn")
+//        return search
+//    }
 }

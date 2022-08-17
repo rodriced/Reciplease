@@ -15,6 +15,7 @@ class SearchViewController: UIViewController {
     @IBOutlet var ingredientTextField: UITextField!
     @IBOutlet var ingredientsTableView: UITableView!
 
+    @IBOutlet var yourIngredientsLabel: UILabel!
     @IBOutlet var addIngredientButton: UIButton!
     @IBOutlet var clearAllButton: UIButton!
     @IBOutlet var searchRecipesButton: UIButton!
@@ -64,20 +65,46 @@ class SearchViewController: UIViewController {
     }
 
     func transferIngredientTextFieldContentToIngredientsTextView() {
-        guard let ingredientText = ingredientTextField.text?.trimmingCharacters(in: .whitespaces),
-              !ingredientText.isEmpty
-        else { return }
+        let maybeIngredients = ingredientTextField.text?
+            .split(separator: ",")
+            .map {
+                $0.trimmingCharacters(in: .whitespaces)
+            }.filter { !$0.isEmpty }
         
-        search.addIngredient(ingredientText)
+        guard let ingredients = maybeIngredients, !ingredients.isEmpty else { return }
+        
+//        guard let ingredients = ingredientTextField.text?.split(separator: ",").map{ "\($0)" } else { return }
+//        guard let ingredientText = ingredientTextField.text?.trimmingCharacters(in: .whitespaces),
+//              !ingredientText.isEmpty
+//        else { return }
+        
+//        guard let ingredients = ingredientTextField.text?.split(separator: ',')
+//                .split(separator: ",").map {$0} else { return }
+//                .map { return "\($0)" }
+//                    .map("\($0)".trimmingCharacters(in: .whitespaces)},
+//              !ingredients.isEmpty
+//        else { return }
+        
+//        search.addIngredient(ingredientText)
+        search.addIngredients(ingredients)
         ingredientsTableView.reloadData()
         ingredientTextField.text = ""
+        
         updateButtonsState()
         updateIngredientAddButtonState()
+        updateAccessibilityState()
     }
     
     func updateButtonsState() {
         clearAllButton.isEnabled = !search.isEmpty
         searchRecipesButton.isEnabled = !search.isEmpty
+    }
+    
+    func updateAccessibilityState() {
+        yourIngredientsLabel.accessibilityLabel = search.isEmpty ? "Ingredients list is empty" : "Your ingredients : " + search.ingredients.joined(separator: ",")
+//        clearAllButton.accessibilityElementsHidden = search.isEmpty
+        ingredientsTableView.accessibilityElementsHidden = true
+//        searchRecipesButton.accessibilityElementsHidden = search.isEmpty
     }
     
     func updateIngredientAddButtonState() {
@@ -110,6 +137,7 @@ class SearchViewController: UIViewController {
 
         updateButtonsState()
         updateIngredientAddButtonState()
+        updateAccessibilityState()
     }
 }
 

@@ -125,7 +125,7 @@
             </objects>
             <point key="canvasLocation" x="3261" y="455"/>
         </scene>
-        <!--Search recipes-->
+        <!--Searching recipes-->
         <scene sceneID="naF-By-eXn">
             <objects>
                 <viewController id="5sm-cE-3zf" customClass="SearchViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
@@ -150,6 +150,7 @@
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lemon, cheese, sausages..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Igt-gt-mgY">
                                                         <rect key="frame" x="0.0" y="0.0" width="340" height="34"/>
+                                                        <accessibility key="accessibilityConfiguration" hint="Enter an ingredient" label="Field for adding an ingrdient"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -191,13 +192,14 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1d9-fX-0Nv" userLabel="Clear all Button">
                                         <rect key="frame" x="368" y="0.0" width="26" height="26"/>
+                                        <accessibility key="accessibilityConfiguration" label="Empty ingredients list"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="1d9-fX-0Nv" secondAttribute="height" id="CQ4-KD-E0Q"/>
                                         </constraints>
                                         <color key="tintColor" name="DismissColor"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal">
-                                            <imageReference key="image" image="xmark.circle.fill" catalog="system" symbolScale="large"/>
+                                            <imageReference key="image" image="minus.circle.fill" catalog="system" symbolScale="large"/>
                                         </state>
                                         <connections>
                                             <action selector="clearAllButtonTapped:" destination="5sm-cE-3zf" eventType="touchUpInside" id="qs9-i7-Gr8"/>
@@ -229,6 +231,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -256,13 +261,14 @@
                             <constraint firstItem="xlY-hq-OrX" firstAttribute="leading" secondItem="Pmb-KA-vQD" secondAttribute="leading" id="lm3-jb-Lve"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Search recipes" id="iDG-a0-7N4"/>
+                    <navigationItem key="navigationItem" title="Searching recipes" id="iDG-a0-7N4"/>
                     <connections>
                         <outlet property="addIngredientButton" destination="uG1-JZ-x4Y" id="mBg-Aa-hti"/>
                         <outlet property="clearAllButton" destination="1d9-fX-0Nv" id="013-rL-ZgC"/>
                         <outlet property="ingredientTextField" destination="Igt-gt-mgY" id="X4D-p2-6Gi"/>
                         <outlet property="ingredientsTableView" destination="A0m-6I-sq8" id="azx-KJ-3dM"/>
                         <outlet property="searchRecipesButton" destination="x8P-kd-U6w" id="uKy-YR-Lqh"/>
+                        <outlet property="yourIngredientsLabel" destination="NwC-v2-PuC" id="S4W-BU-HDm"/>
                         <segue destination="pAx-tJ-Gta" kind="show" identifier="SegueFromSearchToRecipes" id="caD-kw-mOn"/>
                     </connections>
                 </viewController>
@@ -404,6 +410,7 @@
                     <view key="view" contentMode="scaleToFill" id="Bx2-Pt-8F1">
                         <rect key="frame" x="0.0" y="0.0" width="134" height="77"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="jOU-TE-7of"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
@@ -413,22 +420,22 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VYf-yo-xfF"/>
+        <segue reference="caD-kw-mOn"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="minus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.leadinghalf.filled" catalog="system" width="128" height="116"/>
-        <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
         <namedColor name="AccentColor">
             <color red="0.29282572870000001" green="0.58188217880000004" blue="0.3359448612" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="BackgroundColor">
-            <color red="0.2149527967" green="0.20016926530000001" blue="0.19547444580000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.21500000357627869" green="0.20000000298023224" blue="0.19499999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="DismissColor">
-            <color red="0.53721731900000003" green="0.53734892609999996" blue="0.5328568816" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.53700000047683716" green="0.53700000047683716" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -24,6 +24,11 @@ class Search {
         ingredients.append(ingredient)
     }
     
+    func addIngredients(_ ingredients: [String]) {
+//        ingredients.append(ingredients)
+        self.ingredients += ingredients
+    }
+    
 //    static func initTest() -> Search {
 //        let search = Search()
 //        search.addIngredient("egg")

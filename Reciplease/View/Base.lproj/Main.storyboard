@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Recipe-->
+        <!--Ingredients-->
         <scene sceneID="UD5-C9-A4y">
             <objects>
                 <viewController id="Bnx-UT-Mpe" customClass="RecipeViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
@@ -89,7 +89,8 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Recipe" id="x7J-OB-AWg">
+                    <navigationItem key="navigationItem" title="Ingredients" id="x7J-OB-AWg">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="Wk0-R9-bHp"/>
                         <barButtonItem key="rightBarButtonItem" image="star" catalog="system" id="lox-84-bbd" userLabel="Favorite Button Item">
                             <connections>
                                 <action selector="favoriteButtonTapped:" destination="Bnx-UT-Mpe" id="2IG-qF-lvn"/>
@@ -103,23 +104,26 @@
                         <outlet property="ingredientsTextView" destination="RKE-2Z-8kK" id="OvT-bM-Sgd"/>
                         <outlet property="recipeInfoView" destination="Irg-Rb-8VC" id="QCR-Uo-xye"/>
                         <outlet property="recipeInfoView2" destination="KBv-zi-4Wm" id="y2f-IV-jjV"/>
-                        <segue destination="GuV-Ey-4VC" kind="showDetail" identifier="SegueFromRecipeToDirections" id="Jn1-ZZ-bHH"/>
+                        <segue destination="GuV-Ey-4VC" kind="show" identifier="SegueFromRecipeToDirections" id="Jn1-ZZ-bHH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WgP-gk-epk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2315.9420289855075" y="454.6875"/>
         </scene>
-        <!--Recipe Directions View Controller-->
+        <!--Directions-->
         <scene sceneID="Zae-Fg-PkX">
             <objects>
                 <viewController id="GuV-Ey-4VC" customClass="RecipeDirectionsViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="G1h-37-y0B">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="yJS-UL-1mC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Directions" id="EOa-Vy-ARb">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="v6N-8s-E2c"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VfE-kZ-C68" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -261,7 +265,9 @@
                             <constraint firstItem="xlY-hq-OrX" firstAttribute="leading" secondItem="Pmb-KA-vQD" secondAttribute="leading" id="lm3-jb-Lve"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Searching recipes" id="iDG-a0-7N4"/>
+                    <navigationItem key="navigationItem" title="Searching recipes" id="iDG-a0-7N4">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="qiO-Hd-tRF"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="addIngredientButton" destination="uG1-JZ-x4Y" id="mBg-Aa-hti"/>
                         <outlet property="clearAllButton" destination="1d9-fX-0Nv" id="013-rL-ZgC"/>
@@ -394,7 +400,9 @@
                             <outlet property="delegate" destination="pAx-tJ-Gta" id="OkF-QN-xXH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Favorites recipes" id="NXm-fg-3gg"/>
+                    <navigationItem key="navigationItem" title="Favorites recipes" id="NXm-fg-3gg">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="wV3-IV-rWZ"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="Bnx-UT-Mpe" kind="show" identifier="SegueFromRecipesToRecipe" id="p4H-Dr-3N9"/>
                     </connections>
@@ -429,7 +437,7 @@
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.leadinghalf.filled" catalog="system" width="128" height="116"/>
         <namedColor name="AccentColor">
-            <color red="0.29282572870000001" green="0.58188217880000004" blue="0.3359448612" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="BackgroundColor">
             <color red="0.21500000357627869" green="0.20000000298023224" blue="0.19499999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

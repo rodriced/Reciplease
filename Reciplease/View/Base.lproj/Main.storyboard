@@ -45,7 +45,6 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Get directions"/>
                                 <connections>
                                     <action selector="directionsButtonTapped:" destination="Bnx-UT-Mpe" eventType="touchUpInside" id="MLf-CW-ZBg"/>
-                                    <action selector="favoriteButtonTapped:" destination="Bnx-UT-Mpe" eventType="touchUpInside" id="imm-rv-4aP"/>
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Irg-Rb-8VC">

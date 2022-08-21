@@ -26,14 +26,14 @@ struct Recipe: Equatable {
     let totalTime: Float
 
     var isFavorite: Bool {
-        FavoriteRecipesIds.shared.contains(self)
+        FavoriteRecipes.shared.contains(self)
     }
 
     func setFavorite(_ favorite: Bool) async throws {
         if favorite {
-            try await FavoriteRecipesIds.shared.add(self)
+            try await FavoriteRecipes.shared.add(self)
         } else {
-            try await FavoriteRecipesIds.shared.remove(self)
+            try await FavoriteRecipes.shared.remove(self)
         }
     }
 
@@ -61,40 +61,61 @@ extension Recipe: Decodable {
     }
 }
 
-class FavoriteRecipesIds {
-    static var shared = FavoriteRecipesIds()
+class FavoriteRecipes {
+    static var shared = FavoriteRecipes()
     private init() {}
 
-    private(set) var ids = Set<String>()
+    private(set) var recipesCache = [String: Recipe?]()
     private(set) var idsStore: IdsStoreProto!
-    
+
     func setIdsStore(_ idsStore: IdsStoreProto) async throws {
         self.idsStore = idsStore
-        try await syncWithStore()
+        try await syncCache()
+        
+        idsStore.addListener { ids in
+            print("favoriteRecipesChanged : \(String(describing: ids))")
+            guard let ids = ids else { return }
+
+            self.syncCache(with: ids)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "favoriteRecipesChanged"), object: nil)
+        }
     }
 
-    private func syncWithStore() async throws {
+    private func syncCache() async throws {
         let ids = try await idsStore.load()
-        self.ids = Set(ids)
+        syncCache(with: ids)
+    }
+
+    private func syncCache(with ids: [String]) {
+        var newRecipesCache = [String: Recipe?]()
+        for id in ids {
+            newRecipesCache[id] = recipesCache[id, default: nil]
+        }
+        recipesCache = newRecipesCache
     }
 
     func contains(_ recipe: Recipe) -> Bool {
-        ids.contains(recipe.id)
+        recipesCache[recipe.id] != nil
     }
-    
+
     func getAll() async throws -> [Recipe]? {
-        return try await ids.concurrentMap { id in
-            try await RecipesAPIService.shared.loadRecipe(id: id)
+        return try await recipesCache.concurrentMap { id, recipe in
+            if let recipe = recipe {
+                return recipe
+            }
+            let recipe = try await RecipesAPIService.shared.loadRecipe(id: id)
+            self.recipesCache[id] = recipe
+            return recipe
         }
     }
 
     func add(_ recipe: Recipe) async throws {
         try await idsStore.add(recipe.id)
-        ids.insert(recipe.id)
+        recipesCache[recipe.id] = recipe
     }
 
     func remove(_ recipe: Recipe) async throws {
         try await idsStore.remove(recipe.id)
-        ids.remove(recipe.id)
+        recipesCache[recipe.id] = nil
     }
 }

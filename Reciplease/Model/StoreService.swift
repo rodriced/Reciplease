@@ -5,12 +5,12 @@
 //  Created by Rodolphe Desruelles on 08/08/2022.
 //
 
-import Foundation
 import FirebaseCore
 import FirebaseFirestore
-
+import Foundation
 
 protocol IdsStoreProto {
+    func addListener(_ handler: @escaping ([String]?) -> Void)
     func load() async throws -> [String]
     func add(_ id: String) async throws
     func remove(_ id: String) async throws
@@ -24,17 +24,37 @@ class IdsStore: IdsStoreProto {
     init(_ collectionName: String) {
         self.collectionName = collectionName
     }
+    
+    func addListener(_ handler: @escaping ([String]?) -> Void) {
+        store.collection(collectionName).addSnapshotListener {
+            (querySnapshot, error) in
+            print("IdsStore -> listener")
+            if let error = error {
+                print("IdsStore listener error : \(String(describing: error))")
+                return
+            }
+            
+            if querySnapshot!.metadata.hasPendingWrites {
+                // If change came from local then ids are already up to date
+                handler(nil)
+            } else {
+                let ids = querySnapshot!.documents.map { $0.documentID }
+                handler(ids)
+            }
+        }
+    }
 
     func load() async throws -> [String] {
-            let snapshot = try await store.collection(collectionName).getDocuments()
-            return snapshot.documents.map {$0.documentID}
+        let snapshot = try await store.collection(collectionName).getDocuments()
+        return snapshot.documents.map { $0.documentID }
     }
     
     func add(_ id: String) async throws {
-            try await store.collection(collectionName).document(id).setData([:])
+        try await store.collection(collectionName).document(id).setData([:])
     }
     
     func remove(_ id: String) async throws {
-            try await store.collection(collectionName).document(id).delete()
+//        print("IdsStore.remove \(id)")
+        try await store.collection(collectionName).document(id).delete()
     }
 }

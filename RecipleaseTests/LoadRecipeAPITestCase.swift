@@ -16,7 +16,7 @@ class LoadRecipeAPITestCase: XCTestCase {
     override func setUp() {
 //        FavoriteRecipes.shared.idsStore = MockIdsStore()
         Task {
-            try await FavoriteRecipesIds.shared.setIdsStore(MockIdsStore())
+            try await FavoriteRecipes.shared.setIdsStore(MockIdsStore())
         }
     }
 

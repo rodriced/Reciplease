@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             FirebaseApp.configure()
 //            FavoriteRecipes.shared.idsStore = IdsStore("favorites")
             Task {
-                try await FavoriteRecipesIds.shared.setIdsStore(IdsStore("favorites"))
+                try await FavoriteRecipes.shared.setIdsStore(IdsStore("favorites"))
             }
 
 //            Task {

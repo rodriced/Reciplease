@@ -11,19 +11,16 @@ class RecipesTableViewController: UITableViewController {
     var recipes: [Recipe] = []
     var favoriteMode = false
 
-    func loadfavoriteRecipes() {
-//        print("loadfavoriteRecipes")
+    @objc func loadFavoriteRecipes() {
+        print("RecipesTableViewController.loadFavoriteRecipes")
         Task {
-            guard let favoriteRecipes = try? await FavoriteRecipesIds.shared.getAll() else {
-                self.present(ControllerHelper.simpleErrorAlert(message: "Network access error !"), animated: true)
+            guard let favoriteRecipes = try? await FavoriteRecipes.shared.getAll() else {
+                self.present(ControllerHelper.simpleErrorAlert(message: "Network error, can't retrieve favorite recipes."), animated: true)
                 return
             }
             
-//            guard !favoriteRecipes.isEmpty else {
-//                self.present(ControllerHelper.simpleAlert(message: "No favorite recipes found"), animated: true)
-//                return
-//            }
-            
+           print("RecipesTableViewController.loadFavoriteRecipes OK")
+
             recipes = favoriteRecipes
             tableView.reloadData()
         }
@@ -47,18 +44,25 @@ class RecipesTableViewController: UITableViewController {
 //        tableView.separatorStyle = .singleLine
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear")
-
-        favoriteMode = navigationController!.tabBarItem.tag == TabBarItemTag.favorites.rawValue
-
-        if favoriteMode {
-            loadfavoriteRecipes()
-        }
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        print("viewWillAppear")
+//
+//        if favoriteMode {
+//            loadFavoriteRecipes()
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("RecipesTableViewController.viewDidLoad")
+        
+        favoriteMode = navigationController!.tabBarItem.tag == TabBarItemTag.favorites.rawValue
+        
+        if favoriteMode {
+            // For remote update from firestore
+            NotificationCenter.default.addObserver(self, selector: #selector(self.loadFavoriteRecipes), name: NSNotification.Name(rawValue: "favoriteRecipesChanged"), object: nil)
+        }
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

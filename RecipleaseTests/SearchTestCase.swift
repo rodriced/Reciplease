@@ -12,7 +12,7 @@ import XCTest
 class SearchTestCase: XCTestCase {
     override func setUp() {
         Task {
-            try await FavoriteRecipesIds.shared.setIdsStore(MockIdsStore())
+            try await FavoriteRecipes.shared.setIdsStore(MockIdsStore())
         }
     }
 

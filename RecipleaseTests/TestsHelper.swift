@@ -18,7 +18,7 @@ class TestsHelper {
     static func initFavoriteRecipesWithIdsStoreMock(data: Set<String> = Set()) async throws {
         let store = MockIdsStore()
         store.data = data
-        try await FavoriteRecipesIds.shared.setIdsStore(store)
+        try await FavoriteRecipes.shared.setIdsStore(store)
     }
 
 

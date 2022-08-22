@@ -18,14 +18,14 @@ class RecipesTableViewController: UITableViewController {
                 self.present(ControllerHelper.simpleErrorAlert(message: "Network error, can't retrieve favorite recipes."), animated: true)
                 return
             }
-            
-           print("RecipesTableViewController.loadFavoriteRecipes OK")
+
+            print("RecipesTableViewController.loadFavoriteRecipes OK")
 
             recipes = favoriteRecipes
             tableView.reloadData()
         }
     }
-    
+
     func setTableViewBackgroundEmptyMessage(_ message: String) {
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
         messageLabel.text = message
@@ -43,25 +43,27 @@ class RecipesTableViewController: UITableViewController {
         tableView.backgroundView = nil
 //        tableView.separatorStyle = .singleLine
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        print("viewWillAppear")
-//
-//        if favoriteMode {
-//            loadFavoriteRecipes()
-//        }
-//    }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear")
+
+        if favoriteMode {
+            loadFavoriteRecipes()
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         print("RecipesTableViewController.viewDidLoad")
-        
+
         favoriteMode = navigationController!.tabBarItem.tag == TabBarItemTag.favorites.rawValue
-        
+
         if favoriteMode {
+//            loadFavoriteRecipes()
+
             // For remote update from firestore
-            NotificationCenter.default.addObserver(self, selector: #selector(self.loadFavoriteRecipes), name: NSNotification.Name(rawValue: "favoriteRecipesChanged"), object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(loadFavoriteRecipes), name: NSNotification.Name(rawValue: "favoriteRecipesChanged"), object: nil)
         }
 
         // Uncomment the following line to preserve selection between presentations
@@ -79,13 +81,14 @@ class RecipesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if favoriteMode {
-            if recipes.isEmpty {
+//            if recipes.isEmpty {
+            if FavoriteRecipes.shared.recipesCache.isEmpty {
                 setTableViewBackgroundEmptyMessage("No favorites")
             } else {
                 tableView.backgroundView = nil
             }
         }
-        
+
         return recipes.count
     }
 
@@ -98,11 +101,11 @@ class RecipesTableViewController: UITableViewController {
 
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "SegueFromRecipesToRecipe", sender: recipes[indexPath.row])
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SegueFromRecipesToRecipe" {
             let recipeVC = segue.destination as! RecipeViewController

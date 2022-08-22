@@ -71,12 +71,13 @@ class FavoriteRecipes {
     func setIdsStore(_ idsStore: IdsStoreProto) async throws {
         self.idsStore = idsStore
         try await syncCache()
-        
+
         idsStore.addListener { ids in
             print("favoriteRecipesChanged : \(String(describing: ids))")
-            guard let ids = ids else { return }
+//            guard let ids = ids else { return }
 
-            self.syncCache(with: ids)
+            if let ids = ids { self.syncCache(with: ids) }
+
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "favoriteRecipesChanged"), object: nil)
         }
     }

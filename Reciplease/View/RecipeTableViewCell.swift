@@ -36,7 +36,7 @@ class RecipeTableViewCell: UITableViewCell {
 
     func configure(imageUrl: URL, title: String, subtitle: String) {
         addBottomGradient()
-        recipeImageView.sd_setImage(with: imageUrl)
+        recipeImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "RecipePlaceholder"))
         titleLabel.text = title
         subtitleLabel.text = subtitle
     }

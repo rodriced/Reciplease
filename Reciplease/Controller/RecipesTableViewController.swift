@@ -7,29 +7,91 @@
 
 import UIKit
 
+enum RecipesTableState {
+    case unknown, start, loading, message, error, normal
+}
+
 class RecipesTableViewController: UITableViewController {
     var recipes: [Recipe] = []
-    var favoriteMode = false
+    private var isFavoriteRecipesTab = false
+    private var state = RecipesTableState.unknown
+    
+    private var indicator: UIActivityIndicatorView!
+
+    func initActivityIndicator() {
+        indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        indicator.style = .medium
+        indicator.hidesWhenStopped = true
+        indicator.center = self.view.center
+        self.view.addSubview(indicator)
+    }
+    
+    func changeState(_ newState: RecipesTableState) {
+//        if indicator.isAnimating && newState != .loading {
+//            indicator.stopAnimating()
+//        }
+        
+        switch newState {
+        case .unknown:
+            return
+        case .start:
+            tableView.backgroundView = nil
+            indicator.startAnimating()
+        case .loading:
+            tableView.backgroundView = nil
+            indicator.startAnimating()
+        case .message:
+            indicator.stopAnimating()
+            setTableViewBackgroundMessage("No favorites")
+        case .error:
+            indicator.stopAnimating()
+            setTableViewBackgroundMessage("Network error, can't retrieve favorite recipes.\nCome back on this tab later.", isError: true)
+        case .normal:
+            tableView.backgroundView = nil
+            indicator.stopAnimating()
+        }
+        state = newState
+    }
 
     @objc func loadFavoriteRecipes() {
+//        state = .loading
+//        tableView.backgroundView = nil
+//        indicator.startAnimating()
+        changeState(.loading)
+        
         print("RecipesTableViewController.loadFavoriteRecipes")
         Task {
             guard let favoriteRecipes = try? await FavoriteRecipes.shared.getAll() else {
-                self.present(ControllerHelper.simpleErrorAlert(message: "Network error, can't retrieve favorite recipes."), animated: true)
+                changeState(.error)
+
+//                indicator.stopAnimating()
+//                state = .error
+//                setTableViewBackgroundMessage("Network error, can't retrieve favorite recipes.\nCome back on this tab later.", isError: true)
+//                self.present(ControllerHelper.simpleErrorAlert(message: "Network error, can't retrieve favorite recipes."), animated: true)
                 return
             }
 
             print("RecipesTableViewController.loadFavoriteRecipes OK")
-
+//            indicator.stopAnimating()
             recipes = favoriteRecipes
             tableView.reloadData()
+            if isFavoriteRecipesTab {
+//                if recipes.isEmpty {
+                if FavoriteRecipes.shared.recipesCache.isEmpty {
+//                    setTableViewBackgroundMessage("No favorites")
+                    changeState(.message)
+                } else {
+//                    tableView.backgroundView = nil
+                    changeState(.normal)
+                }
+            }
         }
     }
 
-    func setTableViewBackgroundEmptyMessage(_ message: String) {
+    func setTableViewBackgroundMessage(_ message: String, isError: Bool = false) {
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
         messageLabel.text = message
-        messageLabel.textColor = UIColor(named: "TextColor")
+        messageLabel.textColor = isError ? UIColor.red : UIColor(named: "TextColor")
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
         messageLabel.font = UIFont(name: "TrebuchetMS", size: 20)
@@ -39,15 +101,15 @@ class RecipesTableViewController: UITableViewController {
 //        tableView.separatorStyle = .none
     }
 
-    func restoreBackground() {
-        tableView.backgroundView = nil
-//        tableView.separatorStyle = .singleLine
-    }
+//    func restoreBackground() {
+//        tableView.backgroundView = nil
+////        tableView.separatorStyle = .singleLine
+//    }
 
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
 
-        if favoriteMode {
+        if isFavoriteRecipesTab {
             loadFavoriteRecipes()
         }
     }
@@ -57,14 +119,18 @@ class RecipesTableViewController: UITableViewController {
 
         print("RecipesTableViewController.viewDidLoad")
 
-        favoriteMode = navigationController!.tabBarItem.tag == TabBarItemTag.favorites.rawValue
+        initActivityIndicator()
+        
+        isFavoriteRecipesTab = navigationController!.tabBarItem.tag == TabBarItemTag.favorites.rawValue
 
-        if favoriteMode {
+        if isFavoriteRecipesTab {
 //            loadFavoriteRecipes()
 
             // For remote update from firestore
             NotificationCenter.default.addObserver(self, selector: #selector(loadFavoriteRecipes), name: NSNotification.Name(rawValue: "favoriteRecipesChanged"), object: nil)
         }
+        
+        changeState(.start)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -80,14 +146,14 @@ class RecipesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if favoriteMode {
-//            if recipes.isEmpty {
-            if FavoriteRecipes.shared.recipesCache.isEmpty {
-                setTableViewBackgroundEmptyMessage("No favorites")
-            } else {
-                tableView.backgroundView = nil
-            }
-        }
+//        if isFavoriteRecipesTab {
+////            if recipes.isEmpty {
+//            if FavoriteRecipes.shared.recipesCache.isEmpty {
+//                setTableViewBackgroundMessage("No favorites")
+//            } else {
+//                tableView.backgroundView = nil
+//            }
+//        }
 
         return recipes.count
     }

@@ -46,7 +46,7 @@ class RecipeViewController: UIViewController {
         }
     }
         
-    func updateFavoriteButtonState() {
+    @objc func updateFavoriteButtonState() {
         if recipe.isFavorite {
             favoriteButton.image = UIImage(systemName: "star.fill")
         } else {
@@ -60,6 +60,7 @@ class RecipeViewController: UIViewController {
         recipeInfoVC.view.frame = recipeInfoView.bounds
         
         updateFavoriteButtonState()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateFavoriteButtonState), name: NSNotification.Name(rawValue: "favoriteRecipesChanged"), object: nil)
         
         let imageUrl = URL(string: recipe.image)!
         imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "RecipePlaceholder"))

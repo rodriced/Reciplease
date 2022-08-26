@@ -12,7 +12,8 @@ class RecipeTableViewCell: UITableViewCell {
     @IBOutlet var recipeImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
-
+    @IBOutlet weak var recipeInfosView: UIView!
+    
 //    override func awakeFromNib() {
 //        super.awakeFromNib()
 //        // Initialization code
@@ -24,20 +25,17 @@ class RecipeTableViewCell: UITableViewCell {
 //        // Configure the view for the selected state
 //    }
 
-    func addBottomGradient() {
-        let gradient = CAGradientLayer()
-        gradient.frame = recipeImageView.bounds
-        gradient.startPoint = CGPoint(x: 0.5, y: 0.5)
-        gradient.endPoint = CGPoint(x: 0.5, y: 1)
-        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradient.locations = [0.0, 1.0]
-        recipeImageView.layer.addSublayer(gradient)
-    }
+    func configure(recipe: Recipe) {
+        ControllerHelper.addBottomGradient(to: recipeImageView)
 
-    func configure(imageUrl: URL, title: String, subtitle: String) {
-        addBottomGradient()
-        recipeImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "RecipePlaceholder"))
-        titleLabel.text = title
-        subtitleLabel.text = subtitle
+        let foodsString = recipe.foods.map { $0.firstUppercased }.joined(separator: ", ")
+        recipeImageView.sd_setImage(with: URL(string: recipe.image)!, placeholderImage: UIImage(named: "RecipePlaceholder"))
+        titleLabel.text = recipe.label
+        subtitleLabel.text = foodsString
+        
+//        let recipeInfoVC = UIStoryboard(name: "RecipeInfoViewController", bundle: nil).instantiateInitialViewController()! as! RecipeInfoViewController
+//        recipeInfoVC.recipe = recipe
+//        recipeInfoVC.view.frame = recipeInfosView.bounds
+//        recipeInfosView.addSubview(recipeInfoVC.view)
     }
 }

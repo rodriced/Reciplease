@@ -12,6 +12,8 @@ class SearchViewController: UIViewController {
     var search: Search!
 //    var recipes: [Recipe]? = nil
 
+    var loadingIndicator: UIActivityIndicatorView!
+    
     @IBOutlet var ingredientTextField: UITextField!
     @IBOutlet var ingredientsTableView: UITableView!
 
@@ -33,14 +35,19 @@ class SearchViewController: UIViewController {
     @IBAction func searchRecipesButtonTapped(_ sender: Any) {
         guard !search.isEmpty else { return }
         
+        setLoadingStatus(true)
+        
         Task {
             let recipes = try? await RecipesAPIService.shared.searchRecipes(ingredients: search.ingredients)
+            try! await Task.sleep(nanoseconds: 4_000_000_000)
+            self.setLoadingStatus(false)
+
             DispatchQueue.main.async {
                 guard let recipes = recipes else {
                     self.present(ControllerHelper.simpleErrorAlert(message: "No recipe found !"), animated: true)
                     return
                 }
-
+                
                 self.performSegue(withIdentifier: "SegueFromSearchToRecipes", sender: recipes)
             }
         }
@@ -59,6 +66,7 @@ class SearchViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SegueFromSearchToRecipes" {
             let recipesVC = segue.destination as! RecipesTableViewController
+//            recipesVC.recipes = sender as? [Recipe]
             recipesVC.recipes = sender as! [Recipe]
             recipesVC.navigationItem.title = "Recipes found"
         }
@@ -108,33 +116,40 @@ class SearchViewController: UIViewController {
     }
     
     func updateIngredientAddButtonState() {
-        addIngredientButton.isEnabled = !(ingredientTextField.text?.isEmpty ?? true)
+        let ingredientTextFieldIsEmpty = !(ingredientTextField.text?.isEmpty ?? true)
+        addIngredientButton.isEnabled = ingredientTextFieldIsEmpty
     }
     
     @objc func hideKeyboard() {
         view.endEditing(true)
     }
     
+    func setLoadingStatus(_ loading: Bool) {
+        searchRecipesButton.isEnabled = !loading
+        loading ? loadingIndicator.startAnimating() : loadingIndicator.stopAnimating()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         ingredientsTableView.reloadData()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: "#hideKeyboard", action: nil))
         
+        loadingIndicator = ControllerHelper.addButtonActivityIndicator(to: searchRecipesButton)
+
         ingredientsTableView.dataSource = self
         
         ingredientTextField.delegate = self
        
-        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ingredientTextField, queue: nil) { _ in
-            self.updateIngredientAddButtonState()
-        }
+//        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ingredientTextField, queue: nil) { _ in
+//            self.updateIngredientAddButtonState()
+//        }
         
-//        search = Search.initTest()
         search = Search()
-
+        
         updateButtonsState()
         updateIngredientAddButtonState()
         updateAccessibilityState()

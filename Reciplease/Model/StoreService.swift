@@ -10,7 +10,7 @@ import FirebaseFirestore
 import Foundation
 
 protocol IdsStoreProto {
-    func addListener(_ handler: @escaping ([String]?) -> Void)
+    func addListener(_ snapshotHandler: @escaping ([String]?) -> Void)
     func load() async throws -> [String]
     func add(_ id: String) async throws
     func remove(_ id: String) async throws
@@ -25,7 +25,7 @@ class IdsStore: IdsStoreProto {
         self.collectionName = collectionName
     }
     
-    func addListener(_ handler: @escaping ([String]?) -> Void) {
+    func addListener(_ snapshotHandler: @escaping ([String]?) -> Void) {
         store.collection(collectionName).addSnapshotListener {
             (querySnapshot, error) in
             print("IdsStore -> listener")
@@ -34,12 +34,12 @@ class IdsStore: IdsStoreProto {
                 return
             }
             
-            if querySnapshot!.metadata.hasPendingWrites {
+            if querySnapshot!.metadata.hasPendingWrites || querySnapshot!.metadata.isFromCache {
                 // If change came from local then ids are already up to date
-                handler(nil)
+                snapshotHandler(nil)
             } else {
                 let ids = querySnapshot!.documents.map { $0.documentID }
-                handler(ids)
+                snapshotHandler(ids)
             }
         }
     }

@@ -11,6 +11,8 @@ class RecipeInfoViewController: UIViewController {
     var recipe: Recipe!
 
     @IBOutlet weak var globalStackView: UIStackView!
+    @IBOutlet weak var scoreStackView: UIStackView!
+    @IBOutlet weak var durationStackView: UIStackView!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     
@@ -32,12 +34,27 @@ class RecipeInfoViewController: UIViewController {
         return Self.durationFormatter.string(from: TimeInterval(timesInMinutes * 60.0))
     }
     
+    func setupHorizontalStackView(_ stackView: UIStackView) {
+        let margin = 3.0
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(
+            top: margin,
+            leading: margin,
+            bottom: margin,
+            trailing: margin
+        )
+        stackView.isLayoutMarginsRelativeArrangement = true
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         globalStackView.layer.borderWidth = 2.0
         globalStackView.layer.borderColor = UIColor.white.cgColor
         globalStackView.layer.cornerRadius = 10.0
+        
+        setupHorizontalStackView(scoreStackView)
+        setupHorizontalStackView(durationStackView)
 
         scoreLabel.text = Self.scoreFormatter.string(from: NSNumber(value: recipe.yield))
         durationLabel.text = convertToHoursMinutes(timesInMinutes: recipe.totalTime) ?? "?"

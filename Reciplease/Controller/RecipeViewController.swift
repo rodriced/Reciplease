@@ -14,18 +14,34 @@ class RecipeViewController: UIViewController {
     @IBOutlet var recipeInfoView: UIView!
     @IBOutlet var recipeInfoView2: UIView!
     
+    @IBOutlet var titleLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var ingredientsTextView: UITextView!
-    @IBOutlet var favoriteButton: UIBarButtonItem!
     @IBOutlet var directionsButton: UIButton!
     
+    @IBOutlet var favoriteButton: UIBarButtonItem!
+    var activityFakeButton: UIBarButtonItem!
+    var activityIndicator: UIActivityIndicatorView!
+    
     @IBAction func favoriteButtonTapped(_ sender: Any) {
+//        let oldFavoriteState = recipe.isFavorite
 //        print("favoriteButtonTapped")
+        updateFavoriteButtonState(loading: true)
         Task {
+//            do {
             try await recipe.toggleFavorite()
+            
             DispatchQueue.main.async {
+//                // To prevent a bad state if firestore network connexion is lost
+//                let isLoadingBecauseOfFirestoreResponseDelay = self.recipe.isFavorite == oldFavoriteState
+//
+//                self.updateFavoriteButtonState(loading: isLoadingBecauseOfFirestoreResponseDelay)
+                
                 self.updateFavoriteButtonState()
             }
+//            } catch {
+//                print("favoriteButtonTapped : \(error)")
+//            }
         }
     }
     
@@ -46,12 +62,28 @@ class RecipeViewController: UIViewController {
         }
     }
         
-    @objc func updateFavoriteButtonState() {
-        if recipe.isFavorite {
-            favoriteButton.image = UIImage(systemName: "star.fill")
+    @objc func updateFavoriteButtonState(loading: Bool = false) {
+        if loading {
+            navigationItem.setRightBarButton(activityFakeButton, animated: true)
+            activityIndicator.startAnimating()
         } else {
-            favoriteButton.image = UIImage(systemName: "star")
+            activityIndicator.stopAnimating()
+            
+            navigationItem.setRightBarButton(favoriteButton, animated: true)
+            if recipe.isFavorite {
+                favoriteButton.image = UIImage(systemName: "star.fill")
+            } else {
+                favoriteButton.image = UIImage(systemName: "star")
+            }
         }
+    }
+    
+    func initActivityStuff() {
+        activityIndicator = UIActivityIndicatorView()
+        activityIndicator.sizeToFit()
+        activityIndicator.style = .medium
+        
+        activityFakeButton = UIBarButtonItem(customView: activityIndicator)
     }
     
     override func viewDidLoad() {
@@ -59,9 +91,13 @@ class RecipeViewController: UIViewController {
         
         recipeInfoVC.view.frame = recipeInfoView.bounds
         
+        initActivityStuff()
+        
         updateFavoriteButtonState()
         NotificationCenter.default.addObserver(self, selector: #selector(updateFavoriteButtonState), name: NSNotification.Name(rawValue: "favoriteRecipesChanged"), object: nil)
         
+        ControllerHelper.addBottomGradient(to: imageView)
+        titleLabel.text = recipe.label
         let imageUrl = URL(string: recipe.image)!
         imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "RecipePlaceholder"))
 

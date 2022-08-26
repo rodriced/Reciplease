@@ -16,7 +16,7 @@ class MockIdsStore: IdsStoreProto {
     var data: Set<String>
     var errorThrown: Bool
     
-    func addListener(_ handler: @escaping ([String]?) -> Void) {}
+    func addListener(_ snapshotHandler: @escaping ([String]?) -> Void) {}
     
     init(store: Set<String> = Set(), errorThrown: Bool = false) {
         self.data = store

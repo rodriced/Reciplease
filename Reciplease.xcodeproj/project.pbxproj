@@ -14,6 +14,7 @@
 		DC27F9CC28838839000A5504 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC27F9CB28838839000A5504 /* Assets.xcassets */; };
 		DC27F9CF28838839000A5504 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC27F9CD28838839000A5504 /* LaunchScreen.storyboard */; };
 		DC27F9DA28838839000A5504 /* RecipeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27F9D928838839000A5504 /* RecipeTests.swift */; };
+		DC6F59D528B6593900859A63 /* FavoriteRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F59D428B6593900859A63 /* FavoriteRecipes.swift */; };
 		DC80366C2889AA9D00AC678D /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = DC80366B2889AA9D00AC678D /* FirebaseFirestoreCombine-Community */; };
 		DC80366E2889AA9D00AC678D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DC80366D2889AA9D00AC678D /* FirebaseFirestoreSwift */; };
 		DC803671288AB33A00AC678D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DC803670288AB33A00AC678D /* Alamofire */; };
@@ -71,6 +72,7 @@
 		DC27F9D528838839000A5504 /* RecipleaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC27F9D928838839000A5504 /* RecipeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTests.swift; sourceTree = "<group>"; };
 		DC27F9F628838A93000A5504 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		DC6F59D428B6593900859A63 /* FavoriteRecipes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteRecipes.swift; sourceTree = "<group>"; };
 		DC803673288AF9C100AC678D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DC803675288B0E7F00AC678D /* Alamofire-Info.template.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Alamofire-Info.template.plist"; sourceTree = "<group>"; };
 		DC803677288B0FC200AC678D /* Alamofire-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Alamofire-Info.plist"; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 			children = (
 				DC80367B288E12AF00AC678D /* Search.swift */,
 				DC80367D288F2C4500AC678D /* Recipe.swift */,
+				DC6F59D428B6593900859A63 /* FavoriteRecipes.swift */,
 				DCE1BD9228A1D84100A83EA0 /* RecipesAPIService.swift */,
 				DCE1BD9728A51D7400A83EA0 /* ConcurrecyUtil.swift */,
 				DCE1BD7E289DE1E200A83EA0 /* Config.swift */,
@@ -372,6 +375,7 @@
 				DC803680288F5D2700AC678D /* RecipesTableViewController.swift in Sources */,
 				DC27F9C528838835000A5504 /* SceneDelegate.swift in Sources */,
 				DC8036892892012E00AC678D /* RecipeViewController.swift in Sources */,
+				DC6F59D528B6593900859A63 /* FavoriteRecipes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

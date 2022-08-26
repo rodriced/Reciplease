@@ -25,18 +25,24 @@
                                     <constraint firstAttribute="width" secondItem="1cB-23-Sax" secondAttribute="height" multiplier="3:2" id="sCc-gi-qFZ"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLu-Y5-LxN" userLabel="Title Label">
+                                <rect key="frame" x="157.5" y="336" width="99" height="23"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <color key="textColor" name="TextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1qT-KO-NQ7">
                                 <rect key="frame" x="20" y="384" width="374" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RKE-2Z-8kK">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RKE-2Z-8kK">
                                 <rect key="frame" x="20" y="425" width="374" height="317"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eyl-75-Zcp">
@@ -48,10 +54,10 @@
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Irg-Rb-8VC">
-                                <rect key="frame" x="260" y="112" width="134" height="77"/>
+                                <rect key="frame" x="314" y="112" width="80" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="77" id="RHy-KD-dtl"/>
-                                    <constraint firstAttribute="width" constant="134" id="nuF-9X-oik"/>
+                                    <constraint firstAttribute="height" constant="40" id="RHy-KD-dtl"/>
+                                    <constraint firstAttribute="width" constant="80" id="nuF-9X-oik"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="gfR-YL-kBw" kind="embed" identifier="SegueFromRecipeToRecipeInfos" id="8HP-1d-sgP"/>
@@ -67,6 +73,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="mLG-sK-5xm" firstAttribute="bottom" secondItem="Eyl-75-Zcp" secondAttribute="bottom" constant="20" id="1go-hq-gwK"/>
+                            <constraint firstItem="gLu-Y5-LxN" firstAttribute="centerX" secondItem="uOL-Va-LQb" secondAttribute="centerX" id="5zE-4X-Dsd"/>
                             <constraint firstItem="1qT-KO-NQ7" firstAttribute="leading" secondItem="mLG-sK-5xm" secondAttribute="leading" constant="20" id="Ac6-ln-wpy"/>
                             <constraint firstItem="1cB-23-Sax" firstAttribute="top" secondItem="mLG-sK-5xm" secondAttribute="top" id="DRs-gw-HSZ"/>
                             <constraint firstItem="mLG-sK-5xm" firstAttribute="trailing" secondItem="RKE-2Z-8kK" secondAttribute="trailing" constant="20" id="Dl4-FF-Rx9"/>
@@ -74,6 +81,7 @@
                             <constraint firstItem="mLG-sK-5xm" firstAttribute="trailing" secondItem="Eyl-75-Zcp" secondAttribute="trailing" constant="100" id="FtP-xm-2RC"/>
                             <constraint firstItem="mLG-sK-5xm" firstAttribute="trailing" secondItem="1cB-23-Sax" secondAttribute="trailing" id="HCc-7a-sgM"/>
                             <constraint firstItem="RKE-2Z-8kK" firstAttribute="top" secondItem="1qT-KO-NQ7" secondAttribute="bottom" constant="20" id="J1m-bo-GMe"/>
+                            <constraint firstItem="gLu-Y5-LxN" firstAttribute="bottom" secondItem="1cB-23-Sax" secondAttribute="bottom" constant="-5" id="UAS-Hs-cc8"/>
                             <constraint firstItem="1cB-23-Sax" firstAttribute="leading" secondItem="mLG-sK-5xm" secondAttribute="leading" id="Zcd-TS-4CY"/>
                             <constraint firstItem="RKE-2Z-8kK" firstAttribute="leading" secondItem="mLG-sK-5xm" secondAttribute="leading" constant="20" id="gQ1-z1-EgU"/>
                             <constraint firstItem="Irg-Rb-8VC" firstAttribute="top" secondItem="mLG-sK-5xm" secondAttribute="top" constant="24" id="irT-Zn-qkk"/>
@@ -103,6 +111,7 @@
                         <outlet property="ingredientsTextView" destination="RKE-2Z-8kK" id="OvT-bM-Sgd"/>
                         <outlet property="recipeInfoView" destination="Irg-Rb-8VC" id="QCR-Uo-xye"/>
                         <outlet property="recipeInfoView2" destination="KBv-zi-4Wm" id="y2f-IV-jjV"/>
+                        <outlet property="titleLabel" destination="gLu-Y5-LxN" id="Ar2-yv-RUU"/>
                         <segue destination="GuV-Ey-4VC" kind="show" identifier="SegueFromRecipeToDirections" id="Jn1-ZZ-bHH"/>
                     </connections>
                 </viewController>
@@ -228,7 +237,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="- chiken" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dan-zo-nr5" userLabel="Ingredient">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="28"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -241,7 +250,10 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8P-kd-U6w">
-                                <rect key="frame" x="136" y="762" width="142" height="31"/>
+                                <rect key="frame" x="107" y="762" width="200" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="2Aj-bU-6vb"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Search for recipes">
                                     <color key="baseBackgroundColor" name="AccentColor"/>
@@ -372,15 +384,25 @@
                                             <color key="textColor" name="TextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8x-tg-tt9">
+                                            <rect key="frame" x="314" y="11" width="80" height="40"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="80" id="IpW-nu-SVu"/>
+                                                <constraint firstAttribute="height" constant="40" id="qlT-Kc-hyp"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" name="BackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="1en-mF-oHi" secondAttribute="bottom" id="ILj-Cf-9bh"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NXO-hj-mKj" secondAttribute="trailing" constant="20" symbolic="YES" id="Is1-67-suI"/>
+                                        <constraint firstItem="X8x-tg-tt9" firstAttribute="top" secondItem="UhB-bx-dFU" secondAttribute="topMargin" id="RS6-if-9ZY"/>
                                         <constraint firstItem="1eZ-x0-Ml9" firstAttribute="leading" secondItem="UhB-bx-dFU" secondAttribute="leading" constant="20" symbolic="YES" id="SXH-kG-XDG"/>
                                         <constraint firstAttribute="trailing" secondItem="1en-mF-oHi" secondAttribute="trailing" id="Uyl-M0-ksT"/>
                                         <constraint firstItem="1eZ-x0-Ml9" firstAttribute="top" secondItem="NXO-hj-mKj" secondAttribute="bottom" constant="2" id="aaf-5f-bJK"/>
                                         <constraint firstItem="1en-mF-oHi" firstAttribute="leading" secondItem="UhB-bx-dFU" secondAttribute="leading" id="f6d-oi-w71"/>
+                                        <constraint firstItem="X8x-tg-tt9" firstAttribute="trailing" secondItem="UhB-bx-dFU" secondAttribute="trailingMargin" id="hVD-Yi-Gcc"/>
                                         <constraint firstItem="1en-mF-oHi" firstAttribute="top" secondItem="UhB-bx-dFU" secondAttribute="top" id="mIc-7L-ddU"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1eZ-x0-Ml9" secondAttribute="trailing" constant="20" symbolic="YES" id="nd1-ZX-D3W"/>
                                         <constraint firstAttribute="bottom" secondItem="1eZ-x0-Ml9" secondAttribute="bottom" constant="7" id="tmy-x4-58j"/>
@@ -389,6 +411,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="recipeImageView" destination="1en-mF-oHi" id="s4n-NK-uMg"/>
+                                    <outlet property="recipeInfosView" destination="X8x-tg-tt9" id="1I1-WE-imz"/>
                                     <outlet property="subtitleLabel" destination="1eZ-x0-Ml9" id="kOP-KM-qc1"/>
                                     <outlet property="titleLabel" destination="NXO-hj-mKj" id="Vlv-RA-tht"/>
                                 </connections>
@@ -415,7 +438,7 @@
             <objects>
                 <viewController id="gfR-YL-kBw" customClass="RecipeInfoViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bx2-Pt-8F1">
-                        <rect key="frame" x="0.0" y="0.0" width="134" height="77"/>
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="jOU-TE-7of"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

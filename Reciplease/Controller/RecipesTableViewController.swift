@@ -7,40 +7,35 @@
 
 import UIKit
 
-enum RecipesTableState {
-    case unknown, start, loading, message, error, normal
-}
-
 class RecipesTableViewController: UITableViewController {
-    var recipes: [Recipe] = []
+    var recipes = [Recipe]()
     private var isFavoriteRecipesTab = false
-    private var state = RecipesTableState.unknown
-    
+
+    enum RecipesTableState {
+        case start, loading, empty, error, normal
+    }
+
+    private var state = RecipesTableState.normal
+
     private var indicator: UIActivityIndicatorView!
 
     func initActivityIndicator() {
         indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         indicator.style = .medium
         indicator.hidesWhenStopped = true
-        indicator.center = self.view.center
-        self.view.addSubview(indicator)
+        indicator.center = tableView.center
+        view.addSubview(indicator)
     }
-    
-    func changeState(_ newState: RecipesTableState) {
-//        if indicator.isAnimating && newState != .loading {
-//            indicator.stopAnimating()
-//        }
-        
+
+    func updateState(_ newState: RecipesTableState) {
         switch newState {
-        case .unknown:
-            return
         case .start:
             tableView.backgroundView = nil
             indicator.startAnimating()
         case .loading:
             tableView.backgroundView = nil
             indicator.startAnimating()
-        case .message:
+        case .empty:
             indicator.stopAnimating()
             setTableViewBackgroundMessage("No favorites")
         case .error:
@@ -54,36 +49,30 @@ class RecipesTableViewController: UITableViewController {
     }
 
     @objc func loadFavoriteRecipes() {
-//        state = .loading
-//        tableView.backgroundView = nil
-//        indicator.startAnimating()
-        changeState(.loading)
-        
+        updateState(.loading)
+
         print("RecipesTableViewController.loadFavoriteRecipes")
         Task {
-            guard let favoriteRecipes = try? await FavoriteRecipes.shared.getAll() else {
-                changeState(.error)
-
-//                indicator.stopAnimating()
-//                state = .error
-//                setTableViewBackgroundMessage("Network error, can't retrieve favorite recipes.\nCome back on this tab later.", isError: true)
-//                self.present(ControllerHelper.simpleErrorAlert(message: "Network error, can't retrieve favorite recipes."), animated: true)
-                return
-            }
-
-            print("RecipesTableViewController.loadFavoriteRecipes OK")
-//            indicator.stopAnimating()
-            recipes = favoriteRecipes
-            tableView.reloadData()
-            if isFavoriteRecipesTab {
-//                if recipes.isEmpty {
-                if FavoriteRecipes.shared.recipesCache.isEmpty {
-//                    setTableViewBackgroundMessage("No favorites")
-                    changeState(.message)
-                } else {
-//                    tableView.backgroundView = nil
-                    changeState(.normal)
+            do {
+                guard let favoriteRecipes = try await FavoriteRecipes.shared.getAll() else {
+                    // Favorite recipes not ready
+                    // List filling will be done on next notification reception
+                    return
                 }
+
+                print("RecipesTableViewController.loadFavoriteRecipes OK")
+                recipes = favoriteRecipes
+                tableView.reloadData()
+
+                if isFavoriteRecipesTab {
+                    if recipes.isEmpty {
+                        updateState(.empty)
+                    } else {
+                        updateState(.normal)
+                    }
+                }
+            } catch {
+                updateState(.error)
             }
         }
     }
@@ -98,13 +87,7 @@ class RecipesTableViewController: UITableViewController {
         messageLabel.sizeToFit()
 
         tableView.backgroundView = messageLabel
-//        tableView.separatorStyle = .none
     }
-
-//    func restoreBackground() {
-//        tableView.backgroundView = nil
-////        tableView.separatorStyle = .singleLine
-//    }
 
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
@@ -120,17 +103,15 @@ class RecipesTableViewController: UITableViewController {
         print("RecipesTableViewController.viewDidLoad")
 
         initActivityIndicator()
-        
+
         isFavoriteRecipesTab = navigationController!.tabBarItem.tag == TabBarItemTag.favorites.rawValue
 
         if isFavoriteRecipesTab {
-//            loadFavoriteRecipes()
-
             // For remote update from firestore
             NotificationCenter.default.addObserver(self, selector: #selector(loadFavoriteRecipes), name: NSNotification.Name(rawValue: "favoriteRecipesChanged"), object: nil)
         }
-        
-        changeState(.start)
+
+        updateState(.start)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -146,15 +127,6 @@ class RecipesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if isFavoriteRecipesTab {
-////            if recipes.isEmpty {
-//            if FavoriteRecipes.shared.recipesCache.isEmpty {
-//                setTableViewBackgroundMessage("No favorites")
-//            } else {
-//                tableView.backgroundView = nil
-//            }
-//        }
-
         return recipes.count
     }
 
@@ -162,8 +134,7 @@ class RecipesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as! RecipeTableViewCell
 
         let recipe = recipes[indexPath.row]
-        let foodsString = recipe.foods.map { $0.firstUppercased }.joined(separator: ", ")
-        cell.configure(imageUrl: URL(string: recipe.image)!, title: recipe.label, subtitle: foodsString)
+        cell.configure(recipe: recipe)
 
         return cell
     }

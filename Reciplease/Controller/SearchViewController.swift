@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 class SearchViewController: UIViewController {
-    var search: Search!
+    var ingredients = [String]()
 //    var recipes: [Recipe]? = nil
 
     var loadingIndicator: UIActivityIndicatorView!
@@ -27,18 +27,18 @@ class SearchViewController: UIViewController {
     }
     
     @IBAction func clearAllButtonTapped(_ sender: Any) {
-        search.clear()
+        ingredients = []
         ingredientsTableView.reloadData()
         updateButtonsState()
     }
     
     @IBAction func searchRecipesButtonTapped(_ sender: Any) {
-        guard !search.isEmpty else { return }
+        guard !ingredients.isEmpty else { return }
         
         setLoadingStatus(true)
         
         Task {
-            let recipes = try? await RecipesAPIService.shared.searchRecipes(ingredients: search.ingredients)
+            let recipes = try? await RecipesAPIService.shared.searchRecipes(ingredients: ingredients)
 //            try! await Task.sleep(nanoseconds: 4_000_000_000)
             self.setLoadingStatus(false)
 
@@ -94,7 +94,7 @@ class SearchViewController: UIViewController {
 //        else { return }
         
 //        search.addIngredient(ingredientText)
-        search.addIngredients(ingredients)
+        self.ingredients.append(contentsOf: ingredients)
         ingredientsTableView.reloadData()
         ingredientTextField.text = ""
         
@@ -104,12 +104,12 @@ class SearchViewController: UIViewController {
     }
     
     func updateButtonsState() {
-        clearAllButton.isEnabled = !search.isEmpty
-        searchRecipesButton.isEnabled = !search.isEmpty
+        clearAllButton.isEnabled = !ingredients.isEmpty
+        searchRecipesButton.isEnabled = !ingredients.isEmpty
     }
     
     func updateAccessibilityState() {
-        yourIngredientsLabel.accessibilityLabel = search.isEmpty ? "Ingredients list is empty" : "Your ingredients : " + search.ingredients.joined(separator: ",")
+        yourIngredientsLabel.accessibilityLabel = ingredients.isEmpty ? "Ingredients list is empty" : "Your ingredients : " + ingredients.joined(separator: ",")
 //        clearAllButton.accessibilityElementsHidden = search.isEmpty
         ingredientsTableView.accessibilityElementsHidden = true
 //        searchRecipesButton.accessibilityElementsHidden = search.isEmpty
@@ -148,7 +148,7 @@ class SearchViewController: UIViewController {
 //            self.updateIngredientAddButtonState()
 //        }
         
-        search = Search()
+//        ingredients = []
         
         updateButtonsState()
         updateIngredientAddButtonState()
@@ -160,12 +160,12 @@ extension SearchViewController: UITableViewDataSource {
     static let ingredientCellId = "IngredientCell"
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        search.ingredients.count
+        ingredients.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Self.ingredientCellId, for: indexPath)
-        cell.textLabel?.text = "- \(search.ingredients[indexPath.row])"
+        cell.textLabel?.text = "- \(ingredients[indexPath.row])"
         return cell
     }
 }

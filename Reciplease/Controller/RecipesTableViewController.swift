@@ -12,26 +12,24 @@ class RecipesTableViewController: UITableViewController {
     private var isFavoriteRecipesTab = false
 
     enum RecipesTableState {
-        case start, loading, empty, error, normal
+        case loading, empty, error, normal
     }
 
-    private var state = RecipesTableState.normal
+    private var state: RecipesTableState!
 
     private var indicator: UIActivityIndicatorView!
 
-    func initActivityIndicator() {
-        indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        indicator.style = .medium
-        indicator.hidesWhenStopped = true
-        indicator.center = tableView.center
-        view.addSubview(indicator)
-    }
+//    func initActivityIndicator() {
+//        indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+//        indicator.style = .medium
+//        indicator.hidesWhenStopped = true
+////        indicator.center = tableView.center
+//        view.addSubview(indicator)
+////        indicator
+//    }
 
     func updateState(_ newState: RecipesTableState) {
         switch newState {
-        case .start:
-            tableView.backgroundView = nil
-            indicator.startAnimating()
         case .loading:
             tableView.backgroundView = nil
             indicator.startAnimating()
@@ -102,17 +100,20 @@ class RecipesTableViewController: UITableViewController {
 
         print("RecipesTableViewController.viewDidLoad")
 
-        initActivityIndicator()
+//        initActivityIndicator()
+        indicator = ControllerHelper.addTableViewActivityIndicator(to: tableView)
 
         isFavoriteRecipesTab = navigationController!.tabBarItem.tag == TabBarItemTag.favorites.rawValue
 
         if isFavoriteRecipesTab {
             // For remote update from firestore
             NotificationCenter.default.addObserver(self, selector: #selector(loadFavoriteRecipes), name: NSNotification.Name(rawValue: "favoriteRecipesChanged"), object: nil)
+
+            updateState(.loading)
+        } else {
+            updateState(.normal)
         }
-
-        updateState(.start)
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

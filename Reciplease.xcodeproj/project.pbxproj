@@ -29,8 +29,8 @@
 		DC803687289122F000AC678D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = DC803686289122F000AC678D /* SDWebImage */; };
 		DC8036892892012E00AC678D /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8036882892012E00AC678D /* RecipeViewController.swift */; };
 		DC80368F2895DA9C00AC678D /* RecipeDirectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80368E2895DA9C00AC678D /* RecipeDirectionsViewController.swift */; };
-		DC80369A289746E900AC678D /* RecipeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC803698289746E900AC678D /* RecipeInfoViewController.swift */; };
-		DC80369B289746E900AC678D /* RecipeInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC803699289746E900AC678D /* RecipeInfoViewController.xib */; };
+		DCC12DA128B8E5C9009D5ADA /* RecipeInfosBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC12DA028B8E5C9009D5ADA /* RecipeInfosBoxView.swift */; };
+		DCC12DA728B925D1009D5ADA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DCC12DA628B925D1009D5ADA /* SnapKit */; };
 		DCDCB66C28A64581007C895A /* LoadRecipeAPITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCB66B28A64581007C895A /* LoadRecipeAPITestCase.swift */; };
 		DCDCB66E28A6A77D007C895A /* LoadRecipeResultDataKO.json in Resources */ = {isa = PBXBuildFile; fileRef = DCDCB66D28A6A77D007C895A /* LoadRecipeResultDataKO.json */; };
 		DCDCB67028A70676007C895A /* SearchTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCB66F28A70676007C895A /* SearchTestCase.swift */; };
@@ -42,8 +42,6 @@
 		DCE1BD8528A0246D00A83EA0 /* FakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE1BD8428A0246D00A83EA0 /* FakeData.swift */; };
 		DCE1BD8728A1084F00A83EA0 /* SearchRecipesAPITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE1BD8628A1084F00A83EA0 /* SearchRecipesAPITestCase.swift */; };
 		DCE1BD8928A1110300A83EA0 /* SearchRecipesResultDataKO.json in Resources */ = {isa = PBXBuildFile; fileRef = DCE1BD8828A1110300A83EA0 /* SearchRecipesResultDataKO.json */; };
-		DCE1BD8B28A1432F00A83EA0 /* APIRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE1BD8A28A1432F00A83EA0 /* APIRequestLoader.swift */; };
-		DCE1BD8D28A1572800A83EA0 /* RecipeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE1BD8C28A1572800A83EA0 /* RecipeAPI.swift */; };
 		DCE1BD8F28A1739F00A83EA0 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE1BD8E28A1739F00A83EA0 /* StoreService.swift */; };
 		DCE1BD9128A1A27C00A83EA0 /* MockStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE1BD9028A1A27C00A83EA0 /* MockStoreService.swift */; };
 		DCE1BD9328A1D84100A83EA0 /* RecipesAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE1BD9228A1D84100A83EA0 /* RecipesAPIService.swift */; };
@@ -83,8 +81,7 @@
 		DC803683288FC07D00AC678D /* ControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelper.swift; sourceTree = "<group>"; };
 		DC8036882892012E00AC678D /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		DC80368E2895DA9C00AC678D /* RecipeDirectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDirectionsViewController.swift; sourceTree = "<group>"; };
-		DC803698289746E900AC678D /* RecipeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoViewController.swift; sourceTree = "<group>"; };
-		DC803699289746E900AC678D /* RecipeInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeInfoViewController.xib; sourceTree = "<group>"; };
+		DCC12DA028B8E5C9009D5ADA /* RecipeInfosBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfosBoxView.swift; sourceTree = "<group>"; };
 		DCDCB66B28A64581007C895A /* LoadRecipeAPITestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadRecipeAPITestCase.swift; sourceTree = "<group>"; };
 		DCDCB66D28A6A77D007C895A /* LoadRecipeResultDataKO.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoadRecipeResultDataKO.json; sourceTree = "<group>"; };
 		DCDCB66F28A70676007C895A /* SearchTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTestCase.swift; sourceTree = "<group>"; };
@@ -96,8 +93,6 @@
 		DCE1BD8428A0246D00A83EA0 /* FakeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeData.swift; sourceTree = "<group>"; };
 		DCE1BD8628A1084F00A83EA0 /* SearchRecipesAPITestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRecipesAPITestCase.swift; sourceTree = "<group>"; };
 		DCE1BD8828A1110300A83EA0 /* SearchRecipesResultDataKO.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SearchRecipesResultDataKO.json; sourceTree = "<group>"; };
-		DCE1BD8A28A1432F00A83EA0 /* APIRequestLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestLoader.swift; sourceTree = "<group>"; };
-		DCE1BD8C28A1572800A83EA0 /* RecipeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAPI.swift; sourceTree = "<group>"; };
 		DCE1BD8E28A1739F00A83EA0 /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
 		DCE1BD9028A1A27C00A83EA0 /* MockStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStoreService.swift; sourceTree = "<group>"; };
 		DCE1BD9228A1D84100A83EA0 /* RecipesAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesAPIService.swift; sourceTree = "<group>"; };
@@ -113,6 +108,7 @@
 				DC80366C2889AA9D00AC678D /* FirebaseFirestoreCombine-Community in Frameworks */,
 				DC803687289122F000AC678D /* SDWebImage in Frameworks */,
 				DC80366E2889AA9D00AC678D /* FirebaseFirestoreSwift in Frameworks */,
+				DCC12DA728B925D1009D5ADA /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,7 +125,6 @@
 		DC27F9B628838835000A5504 = {
 			isa = PBXGroup;
 			children = (
-				DCE1BD9428A2290500A83EA0 /* TMP */,
 				DC27F9F628838A93000A5504 /* .gitignore */,
 				DC27F9C128838835000A5504 /* Reciplease */,
 				DC27F9D828838839000A5504 /* RecipleaseTests */,
@@ -181,6 +176,7 @@
 			children = (
 				DC27F9C828838835000A5504 /* Main.storyboard */,
 				DC803681288F5F7100AC678D /* RecipeTableViewCell.swift */,
+				DCC12DA028B8E5C9009D5ADA /* RecipeInfosBoxView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -193,8 +189,6 @@
 				DC80367F288F5D2700AC678D /* RecipesTableViewController.swift */,
 				DC8036882892012E00AC678D /* RecipeViewController.swift */,
 				DC80368E2895DA9C00AC678D /* RecipeDirectionsViewController.swift */,
-				DC803698289746E900AC678D /* RecipeInfoViewController.swift */,
-				DC803699289746E900AC678D /* RecipeInfoViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -229,15 +223,6 @@
 			path = "Reciplease/Supporting files";
 			sourceTree = SOURCE_ROOT;
 		};
-		DCE1BD9428A2290500A83EA0 /* TMP */ = {
-			isa = PBXGroup;
-			children = (
-				DCE1BD8A28A1432F00A83EA0 /* APIRequestLoader.swift */,
-				DCE1BD8C28A1572800A83EA0 /* RecipeAPI.swift */,
-			);
-			path = TMP;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -259,6 +244,7 @@
 				DC80366D2889AA9D00AC678D /* FirebaseFirestoreSwift */,
 				DC803670288AB33A00AC678D /* Alamofire */,
 				DC803686289122F000AC678D /* SDWebImage */,
+				DCC12DA628B925D1009D5ADA /* SnapKit */,
 			);
 			productName = Reciplease;
 			productReference = DC27F9BF28838835000A5504 /* Reciplease.app */;
@@ -314,6 +300,7 @@
 				DC80366A2889AA9D00AC678D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				DC80366F288AB33A00AC678D /* XCRemoteSwiftPackageReference "Alamofire" */,
 				DC803685289122F000AC678D /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				DCC12DA528B925D0009D5ADA /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = DC27F9C028838835000A5504 /* Products */;
 			projectDirPath = "";
@@ -330,7 +317,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC80369B289746E900AC678D /* RecipeInfoViewController.xib in Resources */,
 				DC27F9CF28838839000A5504 /* LaunchScreen.storyboard in Resources */,
 				DC803678288B0FC200AC678D /* Alamofire-Info.plist in Resources */,
 				DC803674288AF9C100AC678D /* GoogleService-Info.plist in Resources */,
@@ -358,20 +344,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCE1BD8B28A1432F00A83EA0 /* APIRequestLoader.swift in Sources */,
 				DCE1BD8F28A1739F00A83EA0 /* StoreService.swift in Sources */,
 				DC27F9C728838835000A5504 /* SearchViewController.swift in Sources */,
 				DC80367E288F2C4500AC678D /* Recipe.swift in Sources */,
 				DC27F9C328838835000A5504 /* AppDelegate.swift in Sources */,
 				DC803682288F5F7100AC678D /* RecipeTableViewCell.swift in Sources */,
 				DC80367C288E12AF00AC678D /* Search.swift in Sources */,
-				DCE1BD8D28A1572800A83EA0 /* RecipeAPI.swift in Sources */,
+				DCC12DA128B8E5C9009D5ADA /* RecipeInfosBoxView.swift in Sources */,
 				DCE1BD9328A1D84100A83EA0 /* RecipesAPIService.swift in Sources */,
 				DCE1BD7F289DE1E200A83EA0 /* Config.swift in Sources */,
 				DC803684288FC07D00AC678D /* ControllerHelper.swift in Sources */,
 				DCE1BD9828A51D7400A83EA0 /* ConcurrecyUtil.swift in Sources */,
 				DC80368F2895DA9C00AC678D /* RecipeDirectionsViewController.swift in Sources */,
-				DC80369A289746E900AC678D /* RecipeInfoViewController.swift in Sources */,
 				DC803680288F5D2700AC678D /* RecipesTableViewController.swift in Sources */,
 				DC27F9C528838835000A5504 /* SceneDelegate.swift in Sources */,
 				DC8036892892012E00AC678D /* RecipeViewController.swift in Sources */,
@@ -689,6 +673,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		DCC12DA528B925D0009D5ADA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -711,6 +703,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DC803685289122F000AC678D /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		DCC12DA628B925D1009D5ADA /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCC12DA528B925D0009D5ADA /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

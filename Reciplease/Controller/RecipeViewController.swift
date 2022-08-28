@@ -10,9 +10,8 @@ import UIKit
 class RecipeViewController: UIViewController {
     var recipe: Recipe!
     
-    var recipeInfoVC: RecipeInfoViewController!
-    @IBOutlet var recipeInfoView: UIView!
-    @IBOutlet var recipeInfoView2: UIView!
+//    var recipeInfoVC: RecipeInfoViewController!
+    @IBOutlet var recipeInfosBoxView: RecipeInfosBoxView!
     
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
@@ -54,9 +53,9 @@ class RecipeViewController: UIViewController {
         case "SegueFromRecipeToDirections":
             let directionsVC = segue.destination as! RecipeDirectionsViewController
             directionsVC.directionsUrl = URL(string: recipe.url)!
-        case "SegueFromRecipeToRecipeInfos":
-            recipeInfoVC = (segue.destination as! RecipeInfoViewController)
-            recipeInfoVC.recipe = recipe
+//        case "SegueFromRecipeToRecipeInfos":
+//            recipeInfoVC = (segue.destination as! RecipeInfoViewController)
+//            recipeInfoVC.recipe = recipe
         default:
             return
         }
@@ -89,7 +88,9 @@ class RecipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        recipeInfoVC.view.frame = recipeInfoView.bounds
+//        recipeInfoVC.view.frame = recipeInfosBoxView.bounds
+        
+        recipeInfosBoxView.setupWithRecipe(recipe)
         
         initActivityStuff()
         

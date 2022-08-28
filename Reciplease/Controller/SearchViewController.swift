@@ -39,7 +39,7 @@ class SearchViewController: UIViewController {
         
         Task {
             let recipes = try? await RecipesAPIService.shared.searchRecipes(ingredients: search.ingredients)
-            try! await Task.sleep(nanoseconds: 4_000_000_000)
+//            try! await Task.sleep(nanoseconds: 4_000_000_000)
             self.setLoadingStatus(false)
 
             DispatchQueue.main.async {

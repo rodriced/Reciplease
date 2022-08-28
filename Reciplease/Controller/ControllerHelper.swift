@@ -43,6 +43,22 @@ class ControllerHelper {
         return indicator
     }
     
+    static func addTableViewActivityIndicator(to tableView: UITableView) -> UIActivityIndicatorView {
+        let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
+        tableView.addSubview(indicator)
+
+        indicator.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        indicator.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        indicator.centerXAnchor.constraint(equalTo: tableView.frameLayoutGuide.centerXAnchor).isActive = true
+        indicator.centerYAnchor.constraint(equalTo: tableView.frameLayoutGuide.centerYAnchor).isActive = true
+        
+//        indicator.isHidden = true
+//        indicator.startAnimating()
+        return indicator
+    }
+    
     static func addBottomGradient(to view: UIView) {
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds

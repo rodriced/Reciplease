@@ -12,7 +12,7 @@ class RecipeTableViewCell: UITableViewCell {
     @IBOutlet var recipeImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
-    @IBOutlet weak var recipeInfosView: UIView!
+    @IBOutlet weak var recipeInfosView: RecipeInfosBoxView!
     
 //    override func awakeFromNib() {
 //        super.awakeFromNib()
@@ -32,6 +32,8 @@ class RecipeTableViewCell: UITableViewCell {
         recipeImageView.sd_setImage(with: URL(string: recipe.image)!, placeholderImage: UIImage(named: "RecipePlaceholder"))
         titleLabel.text = recipe.label
         subtitleLabel.text = foodsString
+        
+        recipeInfosView.setupWithRecipe(recipe)
         
 //        let recipeInfoVC = UIStoryboard(name: "RecipeInfoViewController", bundle: nil).instantiateInitialViewController()! as! RecipeInfoViewController
 //        recipeInfoVC.recipe = recipe

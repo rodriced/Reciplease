@@ -111,13 +111,12 @@ class SearchViewController: UIViewController {
     func updateAccessibilityState() {
         yourIngredientsLabel.accessibilityLabel = ingredients.isEmpty ? "Ingredients list is empty" : "Your ingredients : " + ingredients.joined(separator: ",")
 //        clearAllButton.accessibilityElementsHidden = search.isEmpty
-        ingredientsTableView.accessibilityElementsHidden = true
 //        searchRecipesButton.accessibilityElementsHidden = search.isEmpty
     }
     
     func updateIngredientAddButtonState() {
-        let ingredientTextFieldIsEmpty = !(ingredientTextField.text?.isEmpty ?? true)
-        addIngredientButton.isEnabled = ingredientTextFieldIsEmpty
+        let ingredientTextFieldIsEmpty = ingredientTextField.text?.isEmpty ?? true
+        addIngredientButton.isEnabled = !ingredientTextFieldIsEmpty
     }
     
     @objc func hideKeyboard() {
@@ -136,20 +135,18 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addGestureRecognizer(UITapGestureRecognizer(target: "#hideKeyboard", action: nil))
-        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+
         loadingIndicator = ControllerHelper.addButtonActivityIndicator(to: searchRecipesButton)
 
         ingredientsTableView.dataSource = self
-        
+        ingredientsTableView.accessibilityElementsHidden = true
+
         ingredientTextField.delegate = self
-       
-//        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ingredientTextField, queue: nil) { _ in
-//            self.updateIngredientAddButtonState()
-//        }
-        
-//        ingredients = []
-        
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: ingredientTextField, queue: nil) { _ in
+            self.updateIngredientAddButtonState()
+        }
+                
         updateButtonsState()
         updateIngredientAddButtonState()
         updateAccessibilityState()

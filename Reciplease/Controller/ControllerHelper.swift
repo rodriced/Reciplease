@@ -29,6 +29,7 @@ class ControllerHelper {
     
     static func addButtonActivityIndicator(to button: UIButton) -> UIActivityIndicatorView {
         let indicator = UIActivityIndicatorView()
+        indicator.color = UIColor.white
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.hidesWhenStopped = true
         button.addSubview(indicator)
@@ -45,6 +46,7 @@ class ControllerHelper {
     
     static func addTableViewActivityIndicator(to tableView: UITableView) -> UIActivityIndicatorView {
         let indicator = UIActivityIndicatorView()
+        indicator.color = UIColor.white
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.hidesWhenStopped = true
         tableView.addSubview(indicator)

@@ -71,8 +71,10 @@ class RecipeViewController: UIViewController {
             navigationItem.setRightBarButton(favoriteButton, animated: true)
             if recipe.isFavorite {
                 favoriteButton.image = UIImage(systemName: "star.fill")
+                favoriteButton.accessibilityValue = "Selected"
             } else {
                 favoriteButton.image = UIImage(systemName: "star")
+                favoriteButton.accessibilityValue = ""
             }
         }
     }
@@ -104,6 +106,11 @@ class RecipeViewController: UIViewController {
 
         ingredientsTextView.text = recipe.ingredientLines.joined(separator: "\n")
 
+        titleLabel.accessibilityLabel = recipe.label + "."
+        + (recipeInfosBoxView.accessibilityText.isEmpty ? "" : " \(recipeInfosBoxView.accessibilityText).")
+        recipeInfosBoxView.isAccessibilityElement = false
+        recipeInfosBoxView.accessibilityElements = []
+        imageView.isAccessibilityElement = false
         // Do any additional setup after loading the view.
     }
     

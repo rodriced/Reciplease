@@ -114,6 +114,8 @@ class RecipesTableViewController: UITableViewController {
             updateState(.normal)
         }
         
+//        tableView.allowsSelection = false
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

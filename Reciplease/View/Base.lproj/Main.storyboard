@@ -34,14 +34,14 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1qT-KO-NQ7">
                                 <rect key="frame" x="20" y="384" width="374" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="TextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RKE-2Z-8kK">
                                 <rect key="frame" x="20" y="425" width="374" height="317"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="BackgroundColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" systemColor="labelColor"/>
+                                <color key="textColor" name="TextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -54,16 +54,16 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="krL-FO-v7C" customClass="RecipeInfosBoxView" customModule="Reciplease" customModuleProvider="target">
-                                <rect key="frame" x="309" y="108" width="80" height="40"/>
+                                <rect key="frame" x="309" y="108" width="85" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="FZp-15-LJp"/>
+                                    <constraint firstAttribute="width" constant="85" id="FZp-15-LJp"/>
                                     <constraint firstAttribute="height" constant="40" id="eUr-aJ-ptm"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mLG-sK-5xm"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
                             <constraint firstItem="mLG-sK-5xm" firstAttribute="bottom" secondItem="Eyl-75-Zcp" secondAttribute="bottom" constant="20" id="1go-hq-gwK"/>
                             <constraint firstItem="gLu-Y5-LxN" firstAttribute="centerX" secondItem="uOL-Va-LQb" secondAttribute="centerX" id="5zE-4X-Dsd"/>
@@ -78,7 +78,7 @@
                             <constraint firstItem="1cB-23-Sax" firstAttribute="leading" secondItem="mLG-sK-5xm" secondAttribute="leading" id="Zcd-TS-4CY"/>
                             <constraint firstItem="krL-FO-v7C" firstAttribute="top" secondItem="1cB-23-Sax" secondAttribute="top" constant="20" id="cEi-5E-7ZC"/>
                             <constraint firstItem="RKE-2Z-8kK" firstAttribute="leading" secondItem="mLG-sK-5xm" secondAttribute="leading" constant="20" id="gQ1-z1-EgU"/>
-                            <constraint firstItem="krL-FO-v7C" firstAttribute="trailing" secondItem="1cB-23-Sax" secondAttribute="trailing" constant="-25" id="qCq-SN-zv8"/>
+                            <constraint firstItem="krL-FO-v7C" firstAttribute="trailing" secondItem="1cB-23-Sax" secondAttribute="trailing" constant="-20" id="qCq-SN-zv8"/>
                             <constraint firstItem="1qT-KO-NQ7" firstAttribute="top" secondItem="1cB-23-Sax" secondAttribute="bottom" constant="20" id="qF9-ua-ZM1"/>
                             <constraint firstItem="Eyl-75-Zcp" firstAttribute="top" secondItem="RKE-2Z-8kK" secondAttribute="bottom" constant="20" id="qii-Ut-42H"/>
                             <constraint firstItem="mLG-sK-5xm" firstAttribute="trailing" secondItem="1qT-KO-NQ7" secondAttribute="trailing" constant="20" id="rsn-La-rm6"/>
@@ -114,7 +114,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="yJS-UL-1mC"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Directions" id="EOa-Vy-ARb">
                         <barButtonItem key="backBarButtonItem" title="Back" id="v6N-8s-E2c"/>
@@ -181,16 +181,16 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1n8-c8-IVn" userLabel="Ingredients Stack View">
-                                <rect key="frame" x="10" y="192.5" width="394" height="26"/>
+                                <rect key="frame" x="10" y="192.5" width="394" height="34"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your ingredients:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NwC-v2-PuC">
-                                        <rect key="frame" x="0.0" y="0.0" width="348" height="26"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="340" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" name="TextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1d9-fX-0Nv" userLabel="Clear all Button">
-                                        <rect key="frame" x="368" y="0.0" width="26" height="26"/>
+                                        <rect key="frame" x="360" y="0.0" width="34" height="34"/>
                                         <accessibility key="accessibilityConfiguration" label="Empty ingredients list"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="1d9-fX-0Nv" secondAttribute="height" id="CQ4-KD-E0Q"/>
@@ -243,6 +243,7 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Search for recipes">
+                                    <color key="baseForegroundColor" name="TextColor"/>
                                     <color key="baseBackgroundColor" name="AccentColor"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -261,6 +262,7 @@
                             <constraint firstItem="Pmb-KA-vQD" firstAttribute="bottom" secondItem="x8P-kd-U6w" secondAttribute="bottom" constant="20" id="ac6-8x-wRP"/>
                             <constraint firstItem="1n8-c8-IVn" firstAttribute="leading" secondItem="Pmb-KA-vQD" secondAttribute="leading" constant="10" id="k2z-1d-9X8"/>
                             <constraint firstItem="xlY-hq-OrX" firstAttribute="leading" secondItem="Pmb-KA-vQD" secondAttribute="leading" id="lm3-jb-Lve"/>
+                            <constraint firstItem="1d9-fX-0Nv" firstAttribute="width" secondItem="uG1-JZ-x4Y" secondAttribute="width" id="v0i-Ia-Qlt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Searching recipes" id="iDG-a0-7N4">
@@ -283,11 +285,12 @@
         <!--Tab Bar Controller-->
         <scene sceneID="VQ3-ze-0ZA">
             <objects>
-                <tabBarController id="vDb-76-8up" sceneMemberID="viewController">
+                <tabBarController id="vDb-76-8up" customClass="TabBarController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cIb-Z6-rgy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="selectedImageTintColor" name="AccentColor"/>
                     </tabBar>
                     <connections>
@@ -330,6 +333,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bb0-gd-GgW">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" name="TextColor"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -347,7 +353,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="vG7-dl-18y">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" id="l1Y-sn-rwc" customClass="RecipeTableViewCell" customModule="Reciplease" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="150"/>
@@ -372,10 +378,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8x-tg-tt9" customClass="RecipeInfosBoxView" customModule="Reciplease" customModuleProvider="target">
-                                            <rect key="frame" x="314" y="11" width="80" height="40"/>
+                                            <rect key="frame" x="309" y="11" width="85" height="40"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="IpW-nu-SVu"/>
+                                                <constraint firstAttribute="width" constant="85" id="IpW-nu-SVu"/>
                                                 <constraint firstAttribute="height" constant="40" id="qlT-Kc-hyp"/>
                                             </constraints>
                                         </view>
@@ -396,6 +402,9 @@
                                         <constraint firstItem="NXO-hj-mKj" firstAttribute="leading" secondItem="UhB-bx-dFU" secondAttribute="leadingMargin" id="vn3-fC-2qc"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES"/>
+                                </accessibility>
                                 <connections>
                                     <outlet property="recipeImageView" destination="1en-mF-oHi" id="s4n-NK-uMg"/>
                                     <outlet property="recipeInfosView" destination="X8x-tg-tt9" id="1I1-WE-imz"/>
@@ -442,9 +451,6 @@
         <namedColor name="TextColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

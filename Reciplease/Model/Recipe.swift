@@ -25,6 +25,8 @@ struct Recipe: Equatable {
     let foods: [String]
     let totalTime: Float
 
+    let totalTimeInterval: TimeInterval
+    
     var isFavorite: Bool {
         FavoriteRecipes.shared.contains(self)
     }
@@ -55,6 +57,7 @@ extension Recipe: Decodable {
         yield = try values.decode(Float.self, forKey: .yield)
         ingredientLines = try values.decode([String].self, forKey: .ingredientLines)
         totalTime = try values.decode(Float.self, forKey: .totalTime)
+        totalTimeInterval = TimeInterval(totalTime * 60)
 
         let recipeIngredients = try values.decode([RecipientIngredient].self, forKey: .ingredients)
         foods = recipeIngredients.map { $0.food }

@@ -10,7 +10,8 @@ import UIKit
 
 class SearchViewController: UIViewController {
     var ingredients = [String]()
-//    var recipes: [Recipe]? = nil
+
+    // MARK: - View components
 
     var loadingIndicator: UIActivityIndicatorView!
     
@@ -22,56 +23,64 @@ class SearchViewController: UIViewController {
     @IBOutlet var clearAllButton: UIButton!
     @IBOutlet var searchRecipesButton: UIButton!
     
+    // MARK: - View actions
+
     @IBAction func addIngredientButtonTapped(_ sender: Any) {
         transferIngredientTextFieldContentToIngredientsTextView()
     }
     
     @IBAction func clearAllButtonTapped(_ sender: Any) {
+        clearIngredients()
+    }
+    
+    @IBAction func searchRecipesButtonTapped(_ sender: Any) {
+        launchSearch()
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SegueFromSearchToRecipes" {
+            let recipesVC = segue.destination as! RecipesTableViewController
+            recipesVC.recipes = sender as! [Recipe]
+            recipesVC.navigationItem.title = "Search result"
+        }
+    }
+
+    // MARK: - Logic
+    
+    func clearIngredients() {
         ingredients = []
         ingredientsTableView.reloadData()
         updateButtonsState()
     }
     
-    @IBAction func searchRecipesButtonTapped(_ sender: Any) {
+    func launchSearch() {
         guard !ingredients.isEmpty else { return }
         
-        setLoadingStatus(true)
+        updateLoadingStatus(true)
         
         Task {
             let recipes = try? await RecipesAPIService.shared.searchRecipes(ingredients: ingredients)
 //            try! await Task.sleep(nanoseconds: 4_000_000_000)
-            self.setLoadingStatus(false)
+            self.updateLoadingStatus(false)
 
             DispatchQueue.main.async {
                 guard let recipes = recipes else {
-                    self.present(ControllerHelper.simpleErrorAlert(message: "No recipe found !"), animated: true)
+                    self.present(ControllerHelper.simpleErrorAlert(message: "Network error, can't retrieve recipes."), animated: true)
                     return
                 }
+                
+//                if recipes.isEmpty {
+//                    self.present(ControllerHelper.simpleErrorAlert(message: "No recipe found !"), animated: true)
+//                    return
+//                }
                 
                 self.performSegue(withIdentifier: "SegueFromSearchToRecipes", sender: recipes)
             }
         }
-//        RecipesAPIService.shared!.searchRecipes(ingredients: search.ingredients) { recipes in
-//            DispatchQueue.main.async {
-//                guard let recipes = recipes else {
-//                    self.present(ControllerHelper.simpleErrorAlert(message: "No recipe found !"), animated: true)
-//                    return
-//                }
-//
-//                self.performSegue(withIdentifier: "SegueFromSearchToRecipes", sender: recipes)
-//            }
-//        }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "SegueFromSearchToRecipes" {
-            let recipesVC = segue.destination as! RecipesTableViewController
-//            recipesVC.recipes = sender as? [Recipe]
-            recipesVC.recipes = sender as! [Recipe]
-            recipesVC.navigationItem.title = "Recipes found"
-        }
-    }
-
     func transferIngredientTextFieldContentToIngredientsTextView() {
         let maybeIngredients = ingredientTextField.text?
             .split(separator: ",")
@@ -81,19 +90,6 @@ class SearchViewController: UIViewController {
         
         guard let ingredients = maybeIngredients, !ingredients.isEmpty else { return }
         
-//        guard let ingredients = ingredientTextField.text?.split(separator: ",").map{ "\($0)" } else { return }
-//        guard let ingredientText = ingredientTextField.text?.trimmingCharacters(in: .whitespaces),
-//              !ingredientText.isEmpty
-//        else { return }
-        
-//        guard let ingredients = ingredientTextField.text?.split(separator: ',')
-//                .split(separator: ",").map {$0} else { return }
-//                .map { return "\($0)" }
-//                    .map("\($0)".trimmingCharacters(in: .whitespaces)},
-//              !ingredients.isEmpty
-//        else { return }
-        
-//        search.addIngredient(ingredientText)
         self.ingredients.append(contentsOf: ingredients)
         ingredientsTableView.reloadData()
         ingredientTextField.text = ""
@@ -123,10 +119,12 @@ class SearchViewController: UIViewController {
         view.endEditing(true)
     }
     
-    func setLoadingStatus(_ loading: Bool) {
+    func updateLoadingStatus(_ loading: Bool) {
         searchRecipesButton.isEnabled = !loading
         loading ? loadingIndicator.startAnimating() : loadingIndicator.stopAnimating()
     }
+    
+    // MARK: Initialization
     
     override func viewWillAppear(_ animated: Bool) {
         ingredientsTableView.reloadData()
@@ -153,6 +151,8 @@ class SearchViewController: UIViewController {
     }
 }
 
+// MARK: - Table view data source
+
 extension SearchViewController: UITableViewDataSource {
     static let ingredientCellId = "IngredientCell"
 
@@ -167,10 +167,11 @@ extension SearchViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - Text field delegate
+
 extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == ingredientTextField {
-//            textField.resignFirstResponder()
             transferIngredientTextFieldContentToIngredientsTextView()
             return false
         }

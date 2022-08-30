@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct RecipientIngredient: Decodable {
-    let food: String
-}
-
 struct Recipe: Equatable {
     enum CodingKeys: CodingKey, CaseIterable {
         case uri, label, image, url, yield, ingredientLines, ingredients, totalTime
@@ -26,7 +22,7 @@ struct Recipe: Equatable {
     let totalTime: Float
 
     let totalTimeInterval: TimeInterval
-    
+
     var isFavorite: Bool {
         FavoriteRecipes.shared.contains(self)
     }
@@ -45,6 +41,10 @@ struct Recipe: Equatable {
 }
 
 extension Recipe: Decodable {
+    struct Ingredient: Decodable {
+        let food: String
+    }
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -59,7 +59,7 @@ extension Recipe: Decodable {
         totalTime = try values.decode(Float.self, forKey: .totalTime)
         totalTimeInterval = TimeInterval(totalTime * 60)
 
-        let recipeIngredients = try values.decode([RecipientIngredient].self, forKey: .ingredients)
-        foods = recipeIngredients.map { $0.food }
+        let ingredients = try values.decode([Ingredient].self, forKey: .ingredients)
+        foods = ingredients.map { $0.food }
     }
 }

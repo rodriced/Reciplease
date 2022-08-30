@@ -15,23 +15,13 @@ struct LoadRecipeResultData: Decodable {
 struct SearchRecipesResultData {
     enum RootKeys: String, CodingKey {
         case hits
-        case links = "_links"
     }
 
     struct HitData: Decodable {
         let recipe: Recipe
     }
 
-    enum LinksKeys: CodingKey {
-        case next
-    }
-
-    enum NextKeys: CodingKey {
-        case href
-    }
-
     let recipes: [Recipe]
-    let nextPageHref: String
 }
 
 extension SearchRecipesResultData: Decodable {
@@ -39,10 +29,6 @@ extension SearchRecipesResultData: Decodable {
         let values = try decoder.container(keyedBy: RootKeys.self)
         let hits = try values.decode([HitData].self, forKey: .hits)
         recipes = hits.map { $0.recipe }
-
-        let links = try values.nestedContainer(keyedBy: LinksKeys.self, forKey: .links)
-        let next = try links.nestedContainer(keyedBy: NextKeys.self, forKey: .next)
-        nextPageHref = try next.decode(String.self, forKey: .href)
     }
 }
 
@@ -76,14 +62,13 @@ class RecipesAPIService {
 
             session
                 .request(baseUrl,
-                            parameters: parameters,
-                            headers: headers,
-                            requestModifier: { $0.timeoutInterval = 5 })
+                         parameters: parameters,
+                         headers: headers,
+                         requestModifier: { $0.timeoutInterval = 10 })
                 .validate()
                 .responseDecodable(of: SearchRecipesResultData.self) { response in
                     switch response.result {
                     case .success(let recipesRequestData):
-//                    debugPrint(recipesRequestData)
                         return continuation.resume(returning: recipesRequestData.recipes)
                     case .failure(let afError):
                         debugPrint(afError)
@@ -113,10 +98,4 @@ class RecipesAPIService {
                 }
         }
     }
-
-//    func loadFavoriteRecipes() async throws -> [Recipe]? {
-//        return try await FavoriteRecipesIds.shared.ids.concurrentMap { id in
-//            try await self.loadRecipe(id: id)
-//        }
-//    }
 }

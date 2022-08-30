@@ -11,6 +11,9 @@ class RecipesTableViewController: UITableViewController {
     var recipes = [Recipe]()
     private var isFavoriteRecipesTab = false
 
+    private lazy var emptyMessage: String =
+        isFavoriteRecipesTab ? "No favorites" : "No recipe found"
+
     enum RecipesTableState {
         case loading, empty, error, normal
     }
@@ -19,15 +22,6 @@ class RecipesTableViewController: UITableViewController {
 
     private var indicator: UIActivityIndicatorView!
 
-//    func initActivityIndicator() {
-//        indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-//        indicator.style = .medium
-//        indicator.hidesWhenStopped = true
-////        indicator.center = tableView.center
-//        view.addSubview(indicator)
-////        indicator
-//    }
-
     func updateState(_ newState: RecipesTableState) {
         switch newState {
         case .loading:
@@ -35,7 +29,7 @@ class RecipesTableViewController: UITableViewController {
             indicator.startAnimating()
         case .empty:
             indicator.stopAnimating()
-            setTableViewBackgroundMessage("No favorites")
+            setTableViewBackgroundMessage(emptyMessage)
         case .error:
             indicator.stopAnimating()
             setTableViewBackgroundMessage("Network error, can't retrieve favorite recipes.\nCome back on this tab later.", isError: true)
@@ -49,7 +43,6 @@ class RecipesTableViewController: UITableViewController {
     @objc func loadFavoriteRecipes() {
         updateState(.loading)
 
-        print("RecipesTableViewController.loadFavoriteRecipes")
         Task {
             do {
                 guard let favoriteRecipes = try await FavoriteRecipes.shared.getAll() else {
@@ -58,7 +51,6 @@ class RecipesTableViewController: UITableViewController {
                     return
                 }
 
-                print("RecipesTableViewController.loadFavoriteRecipes OK")
                 recipes = favoriteRecipes
                 tableView.reloadData()
 
@@ -78,18 +70,19 @@ class RecipesTableViewController: UITableViewController {
     func setTableViewBackgroundMessage(_ message: String, isError: Bool = false) {
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
         messageLabel.text = message
-        messageLabel.textColor = isError ? UIColor.red : UIColor(named: "TextColor")
-        messageLabel.numberOfLines = 0
+        messageLabel.font = UIFont.systemFont(ofSize: 20)
+//        messageLabel.textColor = isError ? UIColor.red : UIColor(named: "TextColor")
+        messageLabel.textColor = UIColor(named: "TextColor")
         messageLabel.textAlignment = .center
-        messageLabel.font = UIFont(name: "TrebuchetMS", size: 20)
+        messageLabel.numberOfLines = 0
         messageLabel.sizeToFit()
 
         tableView.backgroundView = messageLabel
     }
 
+    // MARK: - Initialization
+    
     override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear")
-
         if isFavoriteRecipesTab {
             loadFavoriteRecipes()
         }
@@ -98,9 +91,6 @@ class RecipesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("RecipesTableViewController.viewDidLoad")
-
-//        initActivityIndicator()
         indicator = ControllerHelper.addTableViewActivityIndicator(to: tableView)
 
         isFavoriteRecipesTab = navigationController!.tabBarItem.tag == TabBarItemTag.favorites.rawValue
@@ -111,16 +101,8 @@ class RecipesTableViewController: UITableViewController {
 
             updateState(.loading)
         } else {
-            updateState(.normal)
+            recipes.isEmpty ? updateState(.empty) : updateState(.normal)
         }
-        
-//        tableView.allowsSelection = false
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -146,55 +128,12 @@ class RecipesTableViewController: UITableViewController {
         performSegue(withIdentifier: "SegueFromRecipesToRecipe", sender: recipes[indexPath.row])
     }
 
+    // MARK: - Navigation
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SegueFromRecipesToRecipe" {
             let recipeVC = segue.destination as! RecipeViewController
             recipeVC.recipe = sender as? Recipe
         }
     }
-
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-         // Return false if you do not want the specified item to be editable.
-         return true
-     }
-     */
-
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-         if editingStyle == .delete {
-             // Delete the row from the data source
-             tableView.deleteRows(at: [indexPath], with: .fade)
-         } else if editingStyle == .insert {
-             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-         }
-     }
-     */
-
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-     }
-     */
-
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-         // Return false if you do not want the item to be re-orderable.
-         return true
-     }
-     */
-
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-     }
-     */
 }

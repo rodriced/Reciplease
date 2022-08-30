@@ -28,7 +28,7 @@ class IdsStore: IdsStoreProto {
     func addListener(_ snapshotHandler: @escaping ([String]?) -> Void) {
         store.collection(collectionName).addSnapshotListener {
             (querySnapshot, error) in
-            print("IdsStore -> listener")
+//            print("IdsStore -> listener")
             if let error = error {
                 print("IdsStore listener error : \(String(describing: error))")
                 return
@@ -54,7 +54,6 @@ class IdsStore: IdsStoreProto {
     }
     
     func remove(_ id: String) async throws {
-//        print("IdsStore.remove \(id)")
         try await store.collection(collectionName).document(id).delete()
     }
 }

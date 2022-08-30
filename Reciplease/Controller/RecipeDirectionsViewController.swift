@@ -24,15 +24,8 @@ class RecipeDirectionsViewController: UIViewController, WKUIDelegate {
 
         let myRequest = URLRequest(url: directionsUrl)
         webView.load(myRequest)
+//        webView.backgroundColor = UIColor(named: "BackgroundColor")
+        navigationController?.navigationBar.backgroundColor = UIColor(named: "BackgroundColor")
+        tabBarController?.tabBar.barTintColor = UIColor(named: "BackgroundColor")
     }
-
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-     }
-     */
 }

@@ -9,6 +9,9 @@ import SDWebImage
 import UIKit
 
 class RecipeTableViewCell: UITableViewCell {
+    
+    // MARK: View components
+    
     @IBOutlet var recipeImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel! {
@@ -30,21 +33,14 @@ class RecipeTableViewCell: UITableViewCell {
         set {}
     }
 
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//    }
-
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
-
+    // MARK: Initialization
+    
     func configure(recipe: Recipe) {
         ControllerHelper.addBottomGradient(to: recipeImageView)
 
         let foodsString = recipe.foods.map { $0.firstUppercased }.joined(separator: ", ")
+        let foodsCountString = String(recipe.foods.count)
+        
         recipeImageView.sd_setImage(with: URL(string: recipe.image)!, placeholderImage: UIImage(named: "RecipePlaceholder"))
         titleLabel.text = recipe.label
         subtitleLabel.text = foodsString
@@ -53,12 +49,7 @@ class RecipeTableViewCell: UITableViewCell {
 
         accessibilityLabel = recipe.label + "."
             + (recipeInfosView.accessibilityText.isEmpty ? "" : " \(recipeInfosView.accessibilityText).")
-            + (foodsString.isEmpty ? "" : " Ingrdients: \(foodsString)")
-        accessibilityHint = "Activate to see detailed ingredients"
-
-//        let recipeInfoVC = UIStoryboard(name: "RecipeInfoViewController", bundle: nil).instantiateInitialViewController()! as! RecipeInfoViewController
-//        recipeInfoVC.recipe = recipe
-//        recipeInfoVC.view.frame = recipeInfosView.bounds
-//        recipeInfosView.addSubview(recipeInfoVC.view)
+            + (foodsString.isEmpty ? "" : " \(foodsCountString) ingrdients: \(foodsString)")
+        accessibilityHint = "Activate to see details"
     }
 }

@@ -9,6 +9,8 @@ import SnapKit
 import UIKit
 
 class RecipeInfosBoxView: UIView {
+    //
+    // InfoContainer for each line
     struct InfoContainer {
         let view: UIView
         let labelView: UILabel
@@ -47,6 +49,8 @@ class RecipeInfosBoxView: UIView {
         }
     }
     
+    // Formatting stuff
+    
     static let maxNumberOfInfos = 2
 
     static var totalTimeFormatter: DateComponentsFormatter {
@@ -70,10 +74,7 @@ class RecipeInfosBoxView: UIView {
         return formatter
     }
 
-    static func convertToHoursMinutes(timeInMinutes: Float) -> String? {
-        return totalTimeFormatter.string(from: TimeInterval(timeInMinutes * 60.0))
-    }
-
+    
     var stackView: UIStackView!
     var infoContainers = [InfoContainer]()
     
@@ -103,7 +104,6 @@ class RecipeInfosBoxView: UIView {
 
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
-//        stackView.spacing = 5
         stackView.alignment = .fill
 
         addSubview(stackView)

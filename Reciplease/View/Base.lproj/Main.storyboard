@@ -133,24 +133,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlY-hq-OrX" userLabel="Add View">
-                                <rect key="frame" x="0.0" y="88" width="414" height="104.5"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="105.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="HnN-pa-Jxy">
-                                        <rect key="frame" x="10" y="10" width="394" height="84.5"/>
+                                        <rect key="frame" x="10" y="10" width="394" height="85.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's in your fridge ?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="04e-3g-uIZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="394" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="394" height="21.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="B6P-G7-1ks">
-                                                <rect key="frame" x="0.0" y="50.5" width="394" height="34"/>
+                                                <rect key="frame" x="0.0" y="51.5" width="394" height="34"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lemon, cheese, sausages..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Igt-gt-mgY">
                                                         <rect key="frame" x="0.0" y="0.0" width="340" height="34"/>
                                                         <accessibility key="accessibilityConfiguration" hint="Enter an ingredient" label="Field for adding an ingrdient"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uG1-JZ-x4Y">
@@ -181,7 +181,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1n8-c8-IVn" userLabel="Ingredients Stack View">
-                                <rect key="frame" x="10" y="192.5" width="394" height="34"/>
+                                <rect key="frame" x="10" y="193.5" width="394" height="34"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your ingredients:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NwC-v2-PuC">
                                         <rect key="frame" x="0.0" y="0.0" width="340" height="34"/>
@@ -214,17 +214,17 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IngredientCell" textLabel="dan-zo-nr5" rowHeight="28" style="IBUITableViewCellStyleDefault" id="78c-gN-7hz">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="28"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IngredientCell" textLabel="dan-zo-nr5" rowHeight="20" style="IBUITableViewCellStyleDefault" id="78c-gN-7hz">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="20"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="78c-gN-7hz" id="PNX-EA-Dev">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="28"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="- chiken" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dan-zo-nr5" userLabel="Ingredient">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="28"/>
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="20"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -346,7 +346,7 @@
             </objects>
             <point key="canvasLocation" x="433" y="456"/>
         </scene>
-        <!--Favorites recipes-->
+        <!--Favorite recipes-->
         <scene sceneID="bLM-yb-0mC">
             <objects>
                 <tableViewController id="pAx-tJ-Gta" customClass="RecipesTableViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
@@ -418,7 +418,7 @@
                             <outlet property="delegate" destination="pAx-tJ-Gta" id="OkF-QN-xXH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Favorites recipes" id="NXm-fg-3gg">
+                    <navigationItem key="navigationItem" title="Favorite recipes" id="NXm-fg-3gg">
                         <barButtonItem key="backBarButtonItem" title="Back" id="wV3-IV-rWZ"/>
                     </navigationItem>
                     <connections>

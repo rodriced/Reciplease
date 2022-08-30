@@ -8,13 +8,12 @@
 import Foundation
 
 class Config {
-    
     static func readPListFile(ressource: String) -> [String: String]? {
         let configUrl = Bundle.main.url(forResource: ressource, withExtension: "plist")!
         let data = try! Data(contentsOf: configUrl)
         return try? PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as? [String: String]
     }
-    
+
     static func getAlamofireConfig() -> [String: String]? {
         readPListFile(ressource: "Alamofire-Info")
     }

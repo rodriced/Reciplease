@@ -10,7 +10,8 @@ import UIKit
 class RecipeViewController: UIViewController {
     var recipe: Recipe!
     
-//    var recipeInfoVC: RecipeInfoViewController!
+    // MARK: - View components
+
     @IBOutlet var recipeInfosBoxView: RecipeInfosBoxView!
     
     @IBOutlet var titleLabel: UILabel!
@@ -22,45 +23,49 @@ class RecipeViewController: UIViewController {
     var activityFakeButton: UIBarButtonItem!
     var activityIndicator: UIActivityIndicatorView!
     
+    // MARK: - View actions
+
     @IBAction func favoriteButtonTapped(_ sender: Any) {
-//        let oldFavoriteState = recipe.isFavorite
-//        print("favoriteButtonTapped")
-        updateFavoriteButtonState(loading: true)
-        Task {
-//            do {
-            try await recipe.toggleFavorite()
-            
-            DispatchQueue.main.async {
-//                // To prevent a bad state if firestore network connexion is lost
-//                let isLoadingBecauseOfFirestoreResponseDelay = self.recipe.isFavorite == oldFavoriteState
-//
-//                self.updateFavoriteButtonState(loading: isLoadingBecauseOfFirestoreResponseDelay)
-                
-                self.updateFavoriteButtonState()
-            }
-//            } catch {
-//                print("favoriteButtonTapped : \(error)")
-//            }
-        }
+        toggleFavoriteState()
     }
     
     @IBAction func directionsButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "SegueFromRecipeToDirections", sender: nil)
     }
 
+    // MARK: - Navigation
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "SegueFromRecipeToDirections":
+        if segue.identifier == "SegueFromRecipeToDirections" {
             let directionsVC = segue.destination as! RecipeDirectionsViewController
             directionsVC.directionsUrl = URL(string: recipe.url)!
-//        case "SegueFromRecipeToRecipeInfos":
-//            recipeInfoVC = (segue.destination as! RecipeInfoViewController)
-//            recipeInfoVC.recipe = recipe
-        default:
-            return
         }
     }
         
+    // MARK: - Logic
+    
+    func toggleFavoriteState() {
+        //        let oldFavoriteState = recipe.isFavorite
+        //        print("favoriteButtonTapped")
+                updateFavoriteButtonState(loading: true)
+                Task {
+        //            do {
+                    try await recipe.toggleFavorite()
+                    
+                    DispatchQueue.main.async {
+        //                // To prevent a bad state if firestore network connexion is lost
+        //                let isLoadingBecauseOfFirestoreResponseDelay = self.recipe.isFavorite == oldFavoriteState
+        //
+        //                self.updateFavoriteButtonState(loading: isLoadingBecauseOfFirestoreResponseDelay)
+                        
+                        self.updateFavoriteButtonState()
+                    }
+        //            } catch {
+        //                print("favoriteButtonTapped : \(error)")
+        //            }
+                }
+    }
+
     @objc func updateFavoriteButtonState(loading: Bool = false) {
         if loading {
             navigationItem.setRightBarButton(activityFakeButton, animated: true)
@@ -74,7 +79,7 @@ class RecipeViewController: UIViewController {
                 favoriteButton.accessibilityValue = "Selected"
             } else {
                 favoriteButton.image = UIImage(systemName: "star")
-                favoriteButton.accessibilityValue = ""
+                favoriteButton.accessibilityValue = "Deselected"
             }
         }
     }
@@ -89,8 +94,6 @@ class RecipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        recipeInfoVC.view.frame = recipeInfosBoxView.bounds
         
         recipeInfosBoxView.setupWithRecipe(recipe)
         
@@ -107,20 +110,9 @@ class RecipeViewController: UIViewController {
         ingredientsTextView.text = recipe.ingredientLines.joined(separator: "\n")
 
         titleLabel.accessibilityLabel = recipe.label + "."
-        + (recipeInfosBoxView.accessibilityText.isEmpty ? "" : " \(recipeInfosBoxView.accessibilityText).")
+            + (recipeInfosBoxView.accessibilityText.isEmpty ? "" : " \(recipeInfosBoxView.accessibilityText).")
         recipeInfosBoxView.isAccessibilityElement = false
         recipeInfosBoxView.accessibilityElements = []
         imageView.isAccessibilityElement = false
-        // Do any additional setup after loading the view.
     }
-    
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-     }
-     */
 }

@@ -14,7 +14,6 @@ class LoadRecipeAPITestCase: XCTestCase {
     static let requestInputDataOK = FakeData.loadRecipeResultOK.id
 
     override func setUp() {
-//        FavoriteRecipes.shared.idsStore = MockIdsStore()
         Task {
             try await FavoriteRecipes.shared.setIdsStore(MockIdsStore())
         }
@@ -33,31 +32,6 @@ class LoadRecipeAPITestCase: XCTestCase {
             expectedResultData: FakeData.loadRecipeResultOK
         )
     }
-
-//    func testSearchRecipesFailureWhenMissingApiKey() {
-//        let apiRequest = TranslationRequest(subscriptionKey: nil)
-//        let loader = TestsHelper.buildTestLoader(apiRequest)
-//
-//        await TestsHelper.testLoadRecipeWithExpectedResultData(
-//            loader,
-//            requestInputData: Self.requestInputDataOK,
-//            responseData: Self.fakeResponseData.dataOK,
-//            response: Self.fakeResponseData.responseOK,
-//            expectedResultData: nil
-//        )
-//    }
-
-//    func testSearchRecipesFailureWhenInputParameterHasMissingValue() async {
-//        let loader = TestsHelper.buildRecipeAPIServiceMock()
-//
-//        await TestsHelper.testLoadRecipeWithExpectedResultData(
-//            loader,
-//            requestInputData: Self.requestInputDataWithMissingValue,
-//            responseData: Self.fakeResponseData.dataOK,
-//            response: Self.fakeResponseData.responseOK,
-//            expectedResultData: nil
-//        )
-//    }
 
     func testSearchRecipesFailureWhenResponseDataHasMissingField() async {
         let loader = TestsHelper.buildRecipeAPIServiceMock()

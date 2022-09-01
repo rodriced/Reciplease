@@ -12,15 +12,14 @@ import XCTest
 
 class TestsHelper {
     static func initFavoriteRecipesWithIdsStoreMock(recipes: [Recipe]) async throws {
-        try await initFavoriteRecipesWithIdsStoreMock(data: Set(recipes.map {$0.id}))
+        try await initFavoriteRecipesWithIdsStoreMock(data: Set(recipes.map { $0.id }))
     }
-    
+
     static func initFavoriteRecipesWithIdsStoreMock(data: Set<String> = Set()) async throws {
         let store = MockIdsStore()
         store.data = data
         try await FavoriteRecipes.shared.setIdsStore(store)
     }
-
 
     // Creating an RecipesAPIService with fake Session for testing without using network access
     static func buildRecipeAPIServiceMock() -> RecipesAPIService {
@@ -28,27 +27,6 @@ class TestsHelper {
         configuration.protocolClasses = [MockURLProtocol.self]
         return RecipesAPIService(configuration: configuration)
     }
-    
-     // Reusable loader test functions
-
-//    static func testSearchRecipesWithExpectedResultData(
-//        _ loader: RecipesAPIService,
-//        requestInputData: [String],
-//        responseData: Data,
-//        response: HTTPURLResponse,
-//        expectedResultData: [Recipe]?
-//    ) -> XCTestExpectation {
-//        MockURLProtocol.requestHandler = { _ in
-//            (response, responseData)
-//        }
-//
-//        let expectation = XCTestExpectation(description: "response")
-//        loader.searchRecipes(ingredients: requestInputData) { result in
-//            XCTAssertEqual(result, expectedResultData)
-//            expectation.fulfill()
-//        }
-//        return expectation
-//    }
 
     static func testSearchRecipesWithExpectedResultData(
         _ loader: RecipesAPIService,
@@ -74,7 +52,7 @@ class TestsHelper {
         MockURLProtocol.requestHandler = { _ in
             (response, responseData)
         }
-        
+
         let mustThrownError = true
         do {
             _ = try await loader.searchRecipes(ingredients: requestInputData)
@@ -126,7 +104,7 @@ class TestsHelper {
         MockURLProtocol.requestHandler = { _ in
             (response, responseData)
         }
-        
+
         let mustThrownError = true
         do {
             _ = try await loader.loadRecipe(id: requestInputData)

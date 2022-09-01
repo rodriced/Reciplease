@@ -26,22 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        print("AppDelegate")
-//        Self.firebaseApp = Self.firebaseApp ?? FirebaseAppService()
-//        Self.firebaseApp.configure()
-//
-//        Self.favoriteRecipes = Self.favoriteRecipes ?? FavoriteRecipes.shared
-//
         if !Self.isTestRun() {
             FirebaseApp.configure()
-//            FavoriteRecipes.shared.idsStore = IdsStore("favorites")
+
             Task {
                 try await FavoriteRecipes.shared.setIdsStore(IdsStore("favorites"))
             }
-
-//            Task {
-//                try await FavoriteRecipes.shared.syncWithStore()
-//            }
         }
         return true
     }

@@ -25,7 +25,7 @@ class FavoriteRecipes {
         self.idsStore = idsStore
 
         idsStore.addListener { ids in
-            print("favoriteRecipesChanged : \(String(describing: ids))")
+//            print("favoriteRecipesChanged : \(String(describing: ids))")
 //            guard let ids = ids else { return }
 
             if let ids = ids { self.updateCache(with: ids) }

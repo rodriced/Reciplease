@@ -21,7 +21,6 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1cB-23-Sax">
                                 <rect key="frame" x="0.0" y="88" width="414" height="276"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="414" id="0Y0-mq-2HG"/>
                                     <constraint firstAttribute="width" secondItem="1cB-23-Sax" secondAttribute="height" multiplier="3:2" id="sCc-gi-qFZ"/>
                                 </constraints>
                             </imageView>
@@ -206,9 +205,8 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="A0m-6I-sq8">
-                                <rect key="frame" x="0.0" y="231" width="414" height="514"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="A0m-6I-sq8">
+                                <rect key="frame" x="0.0" y="229" width="414" height="516"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IngredientCell" textLabel="dan-zo-nr5" rowHeight="20" style="IBUITableViewCellStyleDefault" id="78c-gN-7hz">
@@ -253,12 +251,16 @@
                         <constraints>
                             <constraint firstItem="xlY-hq-OrX" firstAttribute="trailing" secondItem="Pmb-KA-vQD" secondAttribute="trailing" id="2uT-7L-GEJ"/>
                             <constraint firstItem="1n8-c8-IVn" firstAttribute="top" secondItem="xlY-hq-OrX" secondAttribute="bottom" id="31b-e3-4I9"/>
+                            <constraint firstItem="A0m-6I-sq8" firstAttribute="trailing" secondItem="Pmb-KA-vQD" secondAttribute="trailing" id="4ls-Dw-puN"/>
+                            <constraint firstItem="A0m-6I-sq8" firstAttribute="top" secondItem="1n8-c8-IVn" secondAttribute="bottom" id="5mS-CK-RAZ"/>
                             <constraint firstItem="Pmb-KA-vQD" firstAttribute="trailing" secondItem="1n8-c8-IVn" secondAttribute="trailing" constant="10" id="CfB-G3-GZB"/>
                             <constraint firstItem="x8P-kd-U6w" firstAttribute="centerX" secondItem="Ahe-gP-ZKm" secondAttribute="centerX" id="MWf-yc-K5z"/>
                             <constraint firstItem="xlY-hq-OrX" firstAttribute="top" secondItem="Pmb-KA-vQD" secondAttribute="top" id="QTF-kz-HRG"/>
                             <constraint firstItem="Pmb-KA-vQD" firstAttribute="bottom" secondItem="x8P-kd-U6w" secondAttribute="bottom" constant="20" id="ac6-8x-wRP"/>
+                            <constraint firstItem="A0m-6I-sq8" firstAttribute="leading" secondItem="Pmb-KA-vQD" secondAttribute="leading" id="gdW-z7-P2L"/>
                             <constraint firstItem="1n8-c8-IVn" firstAttribute="leading" secondItem="Pmb-KA-vQD" secondAttribute="leading" constant="10" id="k2z-1d-9X8"/>
                             <constraint firstItem="xlY-hq-OrX" firstAttribute="leading" secondItem="Pmb-KA-vQD" secondAttribute="leading" id="lm3-jb-Lve"/>
+                            <constraint firstItem="x8P-kd-U6w" firstAttribute="top" secondItem="A0m-6I-sq8" secondAttribute="bottom" constant="17" id="mdf-jd-j1b"/>
                             <constraint firstItem="1d9-fX-0Nv" firstAttribute="width" secondItem="uG1-JZ-x4Y" secondAttribute="width" id="v0i-Ia-Qlt"/>
                         </constraints>
                     </view>

@@ -104,7 +104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WgP-gk-epk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2315.9420289855075" y="454.6875"/>
+            <point key="canvasLocation" x="2132" y="463"/>
         </scene>
         <!--Directions-->
         <scene sceneID="Zae-Fg-PkX">
@@ -122,7 +122,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VfE-kZ-C68" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3261" y="455"/>
+            <point key="canvasLocation" x="2999" y="463"/>
         </scene>
         <!--Searching recipes-->
         <scene sceneID="naF-By-eXn">
@@ -344,7 +344,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0C-pX-Vsx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="433" y="456"/>
+            <point key="canvasLocation" x="433" y="463"/>
         </scene>
         <!--Favorite recipes-->
         <scene sceneID="bLM-yb-0mC">
@@ -431,7 +431,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="caD-kw-mOn"/>
+        <segue reference="VYf-yo-xfF"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>

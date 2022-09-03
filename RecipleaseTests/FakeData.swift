@@ -40,4 +40,16 @@ class FakeData {
     static let loadRecipeResultOK = (try! decoder.decode(LoadRecipeResultData.self, from: loadRecipeResultDataOK)).recipe
 
     static let loadRecipeResultDataKOWithMissingField = FakeData.dataFromRessource("LoadRecipeResultDataKO")!
+
+    typealias RecipeResultDataDict = [String: (data: Data, recipe: Recipe)]
+
+    static let loadFavoriteRecipeResultDataDictOK: RecipeResultDataDict = {
+        let jsonObject = (try! JSONSerialization.jsonObject(with: searchRecipesResultDataOK)) as! [String: Any]
+        let jsonHits = jsonObject["hits"] as! [Any]
+        return jsonHits.reduce(into: RecipeResultDataDict()) { dict, recipeJsonObject in
+            let recipeData = try! JSONSerialization.data(withJSONObject: recipeJsonObject)
+            let recipe = (try! decoder.decode(LoadRecipeResultData.self, from: recipeData)).recipe
+            dict[recipe.id] = (data: recipeData, recipe: recipe)
+        }
+    }()
 }

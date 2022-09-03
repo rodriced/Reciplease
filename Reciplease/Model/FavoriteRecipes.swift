@@ -14,8 +14,6 @@ class FavoriteRecipes {
     private(set) var recipesCache = [String: Recipe?]()
     private(set) var idsStore: IdsStoreProto?
 
-    var isReady: Bool { idsStore != nil }
-
     func setIdsStore(_ idsStore: IdsStoreProto) async throws {
         self.idsStore = nil
 
@@ -33,6 +31,11 @@ class FavoriteRecipes {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "favoriteRecipesChanged"), object: nil)
         }
     }
+    
+    func reset() {
+        self.idsStore = nil
+        recipesCache = [String: Recipe?]()
+    }
 
     private func updateCache(with ids: [String]) {
         var newRecipesCache = [String: Recipe?]()
@@ -46,14 +49,15 @@ class FavoriteRecipes {
         recipesCache[recipe.id] != nil
     }
 
-    func getAll() async throws -> [Recipe]? {
-        guard isReady else { return nil }
+    func getAll(loader: RecipesAPIService = RecipesAPIService.shared) async throws -> [Recipe]? {
+        guard let _ = idsStore else { return nil }
 
         return try await recipesCache.concurrentMap { id, recipe in
             if let recipe = recipe {
+                // Cache hit
                 return recipe
             }
-            let recipe = try await RecipesAPIService.shared.loadRecipe(id: id)
+            let recipe = try await loader.loadRecipe(id: id)
             self.recipesCache[id] = recipe
             return recipe
         }

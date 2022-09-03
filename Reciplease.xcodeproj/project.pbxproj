@@ -13,7 +13,7 @@
 		DC27F9CA28838835000A5504 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC27F9C828838835000A5504 /* Main.storyboard */; };
 		DC27F9CC28838839000A5504 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC27F9CB28838839000A5504 /* Assets.xcassets */; };
 		DC27F9CF28838839000A5504 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC27F9CD28838839000A5504 /* LaunchScreen.storyboard */; };
-		DC27F9DA28838839000A5504 /* RecipeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27F9D928838839000A5504 /* RecipeTests.swift */; };
+		DC27F9DA28838839000A5504 /* FavoriteRecipesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27F9D928838839000A5504 /* FavoriteRecipesTests.swift */; };
 		DC637B5B28BD73E400D25959 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC637B5A28BD73E400D25959 /* TabBarController.swift */; };
 		DC6F59D528B6593900859A63 /* FavoriteRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F59D428B6593900859A63 /* FavoriteRecipes.swift */; };
 		DC80366C2889AA9D00AC678D /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = DC80366B2889AA9D00AC678D /* FirebaseFirestoreCombine-Community */; };
@@ -44,7 +44,7 @@
 		DCE1BD8F28A1739F00A83EA0 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE1BD8E28A1739F00A83EA0 /* StoreService.swift */; };
 		DCE1BD9128A1A27C00A83EA0 /* MockStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE1BD9028A1A27C00A83EA0 /* MockStoreService.swift */; };
 		DCE1BD9328A1D84100A83EA0 /* RecipesAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE1BD9228A1D84100A83EA0 /* RecipesAPIService.swift */; };
-		DCE1BD9828A51D7400A83EA0 /* ConcurrecyUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE1BD9728A51D7400A83EA0 /* ConcurrecyUtil.swift */; };
+		DCE1BD9828A51D7400A83EA0 /* ConcurrencyUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE1BD9728A51D7400A83EA0 /* ConcurrencyUtil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,7 +67,7 @@
 		DC27F9CE28838839000A5504 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC27F9D028838839000A5504 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Reciplease/Supporting files/Info.plist"; sourceTree = SOURCE_ROOT; };
 		DC27F9D528838839000A5504 /* RecipleaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC27F9D928838839000A5504 /* RecipeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTests.swift; sourceTree = "<group>"; };
+		DC27F9D928838839000A5504 /* FavoriteRecipesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipesTests.swift; sourceTree = "<group>"; };
 		DC27F9F628838A93000A5504 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DC637B5A28BD73E400D25959 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DC6F59D428B6593900859A63 /* FavoriteRecipes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteRecipes.swift; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		DCE1BD8E28A1739F00A83EA0 /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
 		DCE1BD9028A1A27C00A83EA0 /* MockStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStoreService.swift; sourceTree = "<group>"; };
 		DCE1BD9228A1D84100A83EA0 /* RecipesAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesAPIService.swift; sourceTree = "<group>"; };
-		DCE1BD9728A51D7400A83EA0 /* ConcurrecyUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrecyUtil.swift; sourceTree = "<group>"; };
+		DCE1BD9728A51D7400A83EA0 /* ConcurrencyUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrencyUtil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,7 +163,7 @@
 				DCE1BD8628A1084F00A83EA0 /* SearchRecipesAPITestCase.swift */,
 				DCDCB66B28A64581007C895A /* LoadRecipeAPITestCase.swift */,
 				DCE1BD9028A1A27C00A83EA0 /* MockStoreService.swift */,
-				DC27F9D928838839000A5504 /* RecipeTests.swift */,
+				DC27F9D928838839000A5504 /* FavoriteRecipesTests.swift */,
 			);
 			path = RecipleaseTests;
 			sourceTree = "<group>";
@@ -197,7 +197,7 @@
 				DC80367D288F2C4500AC678D /* Recipe.swift */,
 				DC6F59D428B6593900859A63 /* FavoriteRecipes.swift */,
 				DCE1BD9228A1D84100A83EA0 /* RecipesAPIService.swift */,
-				DCE1BD9728A51D7400A83EA0 /* ConcurrecyUtil.swift */,
+				DCE1BD9728A51D7400A83EA0 /* ConcurrencyUtil.swift */,
 				DCE1BD7E289DE1E200A83EA0 /* Config.swift */,
 				DCE1BD8E28A1739F00A83EA0 /* StoreService.swift */,
 			);
@@ -350,7 +350,7 @@
 				DCE1BD9328A1D84100A83EA0 /* RecipesAPIService.swift in Sources */,
 				DCE1BD7F289DE1E200A83EA0 /* Config.swift in Sources */,
 				DC803684288FC07D00AC678D /* ControllerHelper.swift in Sources */,
-				DCE1BD9828A51D7400A83EA0 /* ConcurrecyUtil.swift in Sources */,
+				DCE1BD9828A51D7400A83EA0 /* ConcurrencyUtil.swift in Sources */,
 				DC80368F2895DA9C00AC678D /* RecipeDirectionsViewController.swift in Sources */,
 				DC803680288F5D2700AC678D /* RecipesTableViewController.swift in Sources */,
 				DC27F9C528838835000A5504 /* SceneDelegate.swift in Sources */,
@@ -369,7 +369,7 @@
 				DCE1BD8528A0246D00A83EA0 /* FakeData.swift in Sources */,
 				DCE1BD8728A1084F00A83EA0 /* SearchRecipesAPITestCase.swift in Sources */,
 				DCE1BD9128A1A27C00A83EA0 /* MockStoreService.swift in Sources */,
-				DC27F9DA28838839000A5504 /* RecipeTests.swift in Sources */,
+				DC27F9DA28838839000A5504 /* FavoriteRecipesTests.swift in Sources */,
 				DCE1BD7B289BCCB300A83EA0 /* MockURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -82,6 +82,7 @@
 		DC8036882892012E00AC678D /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		DC80368E2895DA9C00AC678D /* RecipeDirectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDirectionsViewController.swift; sourceTree = "<group>"; };
 		DC9148D6296D94CC0053598B /* StringFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringFormat.swift; sourceTree = "<group>"; };
+		DC9148DD296DE9740053598B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DCC12DA028B8E5C9009D5ADA /* RecipeInfosBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfosBoxView.swift; sourceTree = "<group>"; };
 		DCDCB66B28A64581007C895A /* LoadRecipeAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadRecipeAPITests.swift; sourceTree = "<group>"; };
 		DCDCB66D28A6A77D007C895A /* LoadRecipeResultDataKO.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoadRecipeResultDataKO.json; sourceTree = "<group>"; };
@@ -125,6 +126,7 @@
 		DC27F9B628838835000A5504 = {
 			isa = PBXGroup;
 			children = (
+				DC9148DD296DE9740053598B /* README.md */,
 				DC27F9F628838A93000A5504 /* .gitignore */,
 				DC27F9C128838835000A5504 /* Reciplease */,
 				DC27F9D828838839000A5504 /* RecipleaseTests */,

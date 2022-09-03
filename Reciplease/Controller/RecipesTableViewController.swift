@@ -81,7 +81,7 @@ class RecipesTableViewController: UITableViewController {
     }
 
     // MARK: - Initialization
-    
+
     override func viewWillAppear(_ animated: Bool) {
         if isFavoriteRecipesTab {
             loadFavoriteRecipes()

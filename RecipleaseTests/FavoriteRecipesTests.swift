@@ -1,6 +1,6 @@
 //
 //  FavoriteRecipesTests.swift
-//  RecipeTests
+//  RecipleaseTests
 //
 //  Created by Rodolphe Desruelles on 08/08/2022.
 //
@@ -12,7 +12,7 @@ class FavoriteRecipesTests: XCTestCase {
     override func setUp() {
         FavoriteRecipes.shared.reset()
     }
-    
+
     func testLoadFavoritesSuccess() async throws {
         try await TestsHelper.initFavoriteRecipesWithIdsStoreMock(recipes: FakeData.searchRecipesResultOK)
         XCTAssertTrue(FavoriteRecipes.shared.contains(FakeData.searchRecipesResultOK[1]))
@@ -44,7 +44,7 @@ class FavoriteRecipesTests: XCTestCase {
         let favoriteUnsetResult: ()? = try? await recipe.toggleFavorite()
         XCTAssertNil(favoriteUnsetResult)
     }
-    
+
     func testFavoriteRecipesWithUndefinedIdsStore() async throws {
         let recipe = FakeData.searchRecipesResultOK[0]
 
@@ -59,9 +59,9 @@ class FavoriteRecipesTests: XCTestCase {
 
     func testConcurrentGetAllFavoriteRecipesSuccess() async throws {
         // Init API Servie Mock
-        
+
         let recipeAPIServiceMock = TestsHelper.buildRecipeAPIServiceMock()
-        
+
         MockURLProtocol.requestHandler = { request in
             let id = request.url!.path.split(separator: "/").last!
             let response = FakeData.httpResponseOK
@@ -70,7 +70,7 @@ class FavoriteRecipesTests: XCTestCase {
         }
 
         // Init favorite recipes Store Mock
-        
+
         try await FavoriteRecipes.shared.setIdsStore(MockIdsStore())
 
         // Random choosing recipes to be favorite recipes
@@ -78,9 +78,9 @@ class FavoriteRecipesTests: XCTestCase {
             (1 ... 10).randomElement()! < 5
         }
         try await TestsHelper.initFavoriteRecipesWithIdsStoreMock(recipes: favoriteRecipesDict.map { $1.recipe })
-        
+
         // Testing
-        
+
         let loadedFavoriteRecipes = (try await FavoriteRecipes.shared.getAll(loader: recipeAPIServiceMock))!
 
         XCTAssertNotNil(loadedFavoriteRecipes)
@@ -88,13 +88,13 @@ class FavoriteRecipesTests: XCTestCase {
         let originalFavoritesRecipes = favoriteRecipesDict.values.map { $0.recipe }
 
         // We nees to sort before testing because concurrent loading doesn't guarantee the final order, and original dictionnary is not ordered
-        let recpipeComparator: (Recipe, Recipe) -> Bool = {$0.id > $1.id}
+        let recpipeComparator: (Recipe, Recipe) -> Bool = { $0.id > $1.id }
         let sortedOriginalFavoriteRecipes: [Recipe] = originalFavoritesRecipes.sorted(by: recpipeComparator)
-        
+
         XCTAssertEqual(loadedFavoriteRecipes.sorted(by: recpipeComparator), sortedOriginalFavoriteRecipes)
-        
+
         let favoriteRecipesFromCache = (try await FavoriteRecipes.shared.getAll(loader: recipeAPIServiceMock))!
-        
+
         XCTAssertEqual(favoriteRecipesFromCache.sorted(by: recpipeComparator), sortedOriginalFavoriteRecipes)
     }
 }

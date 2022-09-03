@@ -27,7 +27,7 @@ class IdsStore: IdsStoreProto {
     
     func addListener(_ snapshotHandler: @escaping ([String]?) -> Void) {
         store.collection(collectionName).addSnapshotListener {
-            (querySnapshot, error) in
+            querySnapshot, error in
 //            print("IdsStore -> listener")
             if let error = error {
                 print("IdsStore listener error : \(String(describing: error))")

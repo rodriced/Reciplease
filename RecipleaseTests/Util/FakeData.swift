@@ -1,8 +1,8 @@
 //
-//  FakeResponseData.swift
-//  LeBaluchonTests
+//  FakeData.swift
+//  RecipleaseTests
 //
-//  Created by Rodolphe Desruelles on 29/06/2022.
+//  Created by Rodolphe Desruelles on 03/08/2022.
 //
 
 @testable import Reciplease
@@ -17,9 +17,15 @@ class FakeData {
         let url = bundle.url(forResource: resource, withExtension: "json")!
         return try? Data(contentsOf: url)
     }
+    
+    static let decoder = JSONDecoder()
+    
+    static let error = FakeDataError()
+
+    // MARK: - Responses
 
     static let badJsondata = "bad json".data(using: .utf8)!
-
+    
     static let httpResponseOK = httpResponse(statusCode: 200)
     static let httpResponseKO = httpResponse(statusCode: 500)
 
@@ -27,19 +33,21 @@ class FakeData {
         HTTPURLResponse(url: URL(string: "https://openclassrooms.com")!, statusCode: statusCode, httpVersion: nil, headerFields: ["Content-Type": contentType])!
     }
 
-    static let error = FakeDataError()
-
-    static let decoder = JSONDecoder()
+    // MARK: - SearchRecipes results
 
     static let searchRecipesResultDataOK = FakeData.dataFromRessource("SearchRecipesResultDataOK")!
     static let searchRecipesResultOK = (try! decoder.decode(SearchRecipesResultData.self, from: searchRecipesResultDataOK)).recipes
 
     static let searchRecipesResultDataKOWithMissingField = FakeData.dataFromRessource("SearchRecipesResultDataKO")!
 
+    // MARK: - loadRecipes results
+
     static let loadRecipeResultDataOK = FakeData.dataFromRessource("LoadRecipeResultDataOK")!
     static let loadRecipeResultOK = (try! decoder.decode(LoadRecipeResultData.self, from: loadRecipeResultDataOK)).recipe
 
     static let loadRecipeResultDataKOWithMissingField = FakeData.dataFromRessource("LoadRecipeResultDataKO")!
+
+    // MARK: - loadFavoriteRecipe results
 
     typealias RecipeResultDataDict = [String: (data: Data, recipe: Recipe)]
 

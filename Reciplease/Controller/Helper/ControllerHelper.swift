@@ -60,10 +60,3 @@ enum ControllerHelper {
         view.layer.addSublayer(gradient)
     }
 }
-
-extension String {
-    var firstUppercased: String {
-        guard let firstLetter = first?.uppercased() else { return self }
-        return firstLetter + suffix(from: index(startIndex, offsetBy: 1))
-    }
-}

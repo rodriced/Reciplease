@@ -1,5 +1,5 @@
 //
-//  Recipes.swift
+//  RecipesAPIService.swift
 //  Reciplease
 //
 //  Created by Rodolphe Desruelles on 25/07/2022.
@@ -56,7 +56,7 @@ class RecipesAPIService {
     }
 
     func searchRecipes(ingredients: [String]) async throws -> [Recipe]? {
-        return try await withCheckedThrowingContinuation() { continuation in
+        return try await withCheckedThrowingContinuation { continuation in
             var parameters = baseParameters
             parameters["q"] = ingredients.joined(separator: ",")
 
@@ -79,7 +79,7 @@ class RecipesAPIService {
     }
 
     func loadRecipe(id: String) async throws -> Recipe {
-        return try await withCheckedThrowingContinuation() { continuation in
+        return try await withCheckedThrowingContinuation { continuation in
             let url = "\(baseUrl)/\(id)"
 
             session.request(url, parameters: baseParameters, headers: headers)

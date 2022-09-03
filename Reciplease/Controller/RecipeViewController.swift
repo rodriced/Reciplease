@@ -47,23 +47,23 @@ class RecipeViewController: UIViewController {
     func toggleFavoriteState() {
         //        let oldFavoriteState = recipe.isFavorite
         //        print("favoriteButtonTapped")
-                updateFavoriteButtonState(loading: true)
-                Task {
-        //            do {
-                    try await recipe.toggleFavorite()
+        updateFavoriteButtonState(loading: true)
+        Task {
+            //            do {
+            try await recipe.toggleFavorite()
                     
-                    DispatchQueue.main.async {
-        //                // To prevent a bad state if firestore network connexion is lost
-        //                let isLoadingBecauseOfFirestoreResponseDelay = self.recipe.isFavorite == oldFavoriteState
-        //
-        //                self.updateFavoriteButtonState(loading: isLoadingBecauseOfFirestoreResponseDelay)
+            DispatchQueue.main.async {
+                //                // To prevent a bad state if firestore network connexion is lost
+                //                let isLoadingBecauseOfFirestoreResponseDelay = self.recipe.isFavorite == oldFavoriteState
+                //
+                //                self.updateFavoriteButtonState(loading: isLoadingBecauseOfFirestoreResponseDelay)
                         
-                        self.updateFavoriteButtonState()
-                    }
-        //            } catch {
-        //                print("favoriteButtonTapped : \(error)")
-        //            }
-                }
+                self.updateFavoriteButtonState()
+            }
+            //            } catch {
+            //                print("favoriteButtonTapped : \(error)")
+            //            }
+        }
     }
 
     @objc func updateFavoriteButtonState(loading: Bool = false) {

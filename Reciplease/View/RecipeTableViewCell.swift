@@ -9,9 +9,9 @@ import SDWebImage
 import UIKit
 
 class RecipeTableViewCell: UITableViewCell {
-    
+
     // MARK: View components
-    
+
     @IBOutlet var recipeImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel! {
@@ -34,13 +34,13 @@ class RecipeTableViewCell: UITableViewCell {
     }
 
     // MARK: Initialization
-    
+
     func configure(recipe: Recipe) {
         ControllerHelper.addBottomGradient(to: recipeImageView)
 
         let foodsString = recipe.foods.map { $0.firstUppercased }.joined(separator: ", ")
         let foodsCountString = String(recipe.foods.count)
-        
+
         recipeImageView.sd_setImage(with: URL(string: recipe.image)!, placeholderImage: UIImage(named: "RecipePlaceholder"))
         titleLabel.text = recipe.label
         subtitleLabel.text = foodsString

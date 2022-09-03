@@ -1,5 +1,5 @@
 //
-//  Recipes.swift
+//  Recipe.swift
 //  Reciplease
 //
 //  Created by Rodolphe Desruelles on 25/07/2022.

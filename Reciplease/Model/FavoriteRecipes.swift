@@ -31,9 +31,9 @@ class FavoriteRecipes {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "favoriteRecipesChanged"), object: nil)
         }
     }
-    
+
     func reset() {
-        self.idsStore = nil
+        idsStore = nil
         recipesCache = [String: Recipe?]()
     }
 

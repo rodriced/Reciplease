@@ -5,9 +5,9 @@
 //  Created by Rodolphe Desruelles on 17/07/2022.
 //
 
-import UIKit
 import FirebaseCore
 import FirebaseFirestoreSwift
+import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,11 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            FavoriteRecipes.shared = FavoriteRecipes(idsDb: MockIdsDb())
 //        }
 //    }()
-    
-    static private func isTestRun() -> Bool {
+
+    private static func isTestRun() -> Bool {
         return NSClassFromString("XCTest") != nil
     }
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if !Self.isTestRun() {
@@ -50,6 +49,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
 }
-

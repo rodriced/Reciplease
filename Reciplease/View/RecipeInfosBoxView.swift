@@ -8,6 +8,8 @@
 import SnapKit
 import UIKit
 
+// Little box with some informations displayed about the associated recipe, such as the preparation time and the number of people
+// Used in recipe list and in recipe detail view
 class RecipeInfosBoxView: UIView {
     //
     // InfoContainer for each line
@@ -74,7 +76,6 @@ class RecipeInfosBoxView: UIView {
         return formatter
     }
 
-    
     var stackView: UIStackView!
     var infoContainers = [InfoContainer]()
     

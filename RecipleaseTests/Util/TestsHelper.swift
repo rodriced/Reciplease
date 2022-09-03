@@ -7,7 +7,6 @@
 
 @testable import Reciplease
 
-import Alamofire
 import XCTest
 
 class TestsHelper {

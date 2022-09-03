@@ -1,5 +1,5 @@
 //
-//  LoadRecipeAPITestCase.swift
+//  SearchRecipesAPITests.swift
 //  RecipleaseTests
 //
 //  Created by Rodolphe Desruelles on 08/08/2022.
@@ -9,9 +9,9 @@
 
 import XCTest
 
-class LoadRecipeAPITestCase: XCTestCase {
+class SearchRecipesAPITests: XCTestCase {
     // Data for tests
-    static let requestInputDataOK = FakeData.loadRecipeResultOK.id
+    static let requestInputDataOK = ["salad"]
 
     override func setUp() {
         Task {
@@ -24,22 +24,22 @@ class LoadRecipeAPITestCase: XCTestCase {
     func testSearchRecipesSuccess() async {
         let loader = TestsHelper.buildRecipeAPIServiceMock()
 
-        await TestsHelper.testLoadRecipeWithExpectedResultData(
+        await TestsHelper.testSearchRecipesWithExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataOK,
-            responseData: FakeData.loadRecipeResultDataOK,
+            responseData: FakeData.searchRecipesResultDataOK,
             response: FakeData.httpResponseOK,
-            expectedResultData: FakeData.loadRecipeResultOK
+            expectedResultData: FakeData.searchRecipesResultOK
         )
     }
 
     func testSearchRecipesFailureWhenResponseDataHasMissingField() async {
         let loader = TestsHelper.buildRecipeAPIServiceMock()
 
-        await TestsHelper.testLoadRecipeWithExpectedFailure(
+        await TestsHelper.testSearchRecipesWithExpectedFailure(
             loader,
             requestInputData: Self.requestInputDataOK,
-            responseData: FakeData.loadRecipeResultDataKOWithMissingField,
+            responseData: FakeData.searchRecipesResultDataKOWithMissingField,
             response: FakeData.httpResponseOK
         )
     }
@@ -47,7 +47,7 @@ class LoadRecipeAPITestCase: XCTestCase {
     func testSearchRecipesFailureWhenDataIsBadJson() async {
         let loader = TestsHelper.buildRecipeAPIServiceMock()
 
-        await TestsHelper.testLoadRecipeWithExpectedFailure(
+        await TestsHelper.testSearchRecipesWithExpectedFailure(
             loader,
             requestInputData: Self.requestInputDataOK,
             responseData: FakeData.badJsondata,
@@ -58,10 +58,10 @@ class LoadRecipeAPITestCase: XCTestCase {
     func testSearchRecipesFailureWhenHTTPResponseStatusCodeIsNot200() async {
         let loader = TestsHelper.buildRecipeAPIServiceMock()
 
-        await TestsHelper.testLoadRecipeWithExpectedFailure(
+        await TestsHelper.testSearchRecipesWithExpectedFailure(
             loader,
             requestInputData: Self.requestInputDataOK,
-            responseData: FakeData.loadRecipeResultDataOK,
+            responseData: FakeData.searchRecipesResultDataOK,
             response: FakeData.httpResponseKO
         )
     }
@@ -69,7 +69,7 @@ class LoadRecipeAPITestCase: XCTestCase {
     func testSearchRecipesFailureWhenErrorIsThrownDuringLoading() async throws {
         let loader = TestsHelper.buildRecipeAPIServiceMock()
 
-        try await TestsHelper.testLoadRecipeExpectedFailureWhenErrorIsThrownDuringLoading(
+        try await TestsHelper.testSearchRecipesExpectedFailureWhenErrorIsThrownDuringLoading(
             loader,
             requestInputData: Self.requestInputDataOK,
             thrownError: FakeData.error
